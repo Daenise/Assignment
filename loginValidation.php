@@ -7,18 +7,24 @@ if(isset($_POST['submit']))
  $password = "";
  $dbname = "helpfit";
  $con = new mysqli($servername, $username, $password, $dbname);
+ if (!$con) {
+  die("Could not connect to database.");
+  }
+ echo "Database connected."."</br>";
 
- $name=$_POST['username'];
+
+ $username = $_POST['username'];
+ $password = $_POST['password'];
 
 
- if($name!='')
+ if($username!='')
  {
-   $sql = "select * from user WHERE name='$name'";
+   $sql = "select * from members WHERE username='$username' and password='$password'";
    $result = mysqli_query($con, $sql);
 
    if (mysqli_num_rows($result) > 0)
    {
-    $_SESSION['name']=$name;
+    $_SESSION['user']=$username;
     header('location:welcome.php');
 
    }
@@ -32,5 +38,7 @@ if(isset($_POST['submit']))
   echo 'Enter both username and password.';
  }
 }
+
+mysqli_close($con);
 
 ?>
