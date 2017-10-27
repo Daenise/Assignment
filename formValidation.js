@@ -72,8 +72,8 @@ function registerAccount() {
   var pwd2 = document.forms["registerMember"]["confirmPswd"].value;
   if (pwd != pwd2){
     alert("Your two password entries are not the same.");
-    document.forms["registerMember"]["confirmPswd"].focus();
-    document.forms["registerMember"]["confirmPswd"].select();
+    document.forms["registerMember"]["inputPswd"].focus();
+    document.forms["registerMember"]["inputPswd"].select();
     return false
   }
 }
