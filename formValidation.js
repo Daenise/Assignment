@@ -68,12 +68,17 @@ function updateForm() {
 }
 
 function registerAccount() {
-  var pwd = document.forms["registerUser"]["inputPswd"].value;
-  var pwd2 = document.forms["registerUser"]["confirmPswd"].value;
-  if (pwd != pwd2){
+  var pwd = document.forms["registerMember"]["inputPswd"].value;
+  var pwd2 = document.forms["registerMember"]["confirmPswd"].value;
+  var pwd3 = document.forms["registerTrainer"]["inputPswd"].value;
+  var pwd4 = document.forms["registerTrainer"]["confirmPswd"].value;
+
+  if ((pwd != pwd2) || (pwd3 != pwd4)) {
     alert("Your two password entries are not the same.");
-    document.forms["registerUser"]["confirmPswd"].focus();
-    document.forms["registerUser"]["confirmPswd"].select();
+    document.forms["registerMember"]["confirmPswd"].focus();
+    document.forms["registerMember"]["confirmPswd"].select();
+    document.forms["registerTrainer"]["confirmPswd"].focus();
+    document.forms["registerTrainer"]["confirmPswd"].select();
     return false
   }
 }
