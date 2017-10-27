@@ -5,7 +5,7 @@ if(isset($_POST['submit']))
  $servername = "localhost";
  $username = "root";
  $password = "";
- $dbname = "user";
+ $dbname = "helpfit";
  $con = new mysqli($servername, $username, $password, $dbname);
 
  $name=$_POST['username'];
@@ -13,7 +13,7 @@ if(isset($_POST['submit']))
 
  if($name!='')
  {
-   $sql = "select * from user WHERE name='$name' and email='$email'";
+   $sql = "select * from user WHERE name='$name'";
    $result = mysqli_query($con, $sql);
 
    if (mysqli_num_rows($result) > 0)
@@ -24,12 +24,12 @@ if(isset($_POST['submit']))
    }
    else
    {
-    echo'You entered username or password is incorrect';
+    echo 'Your username or password is incorrect.';
    }
  }
  else
  {
-  echo'Enter both username and password';
+  echo 'Enter both username and password.';
  }
 }
 
