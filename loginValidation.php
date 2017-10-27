@@ -12,12 +12,11 @@ if(isset($_POST['submit']))
   }
  echo "Database connected."."</br>";
 
-
  $username = $_POST['username'];
  $password = $_POST['password'];
 
 
- if($username!='')
+ if(!empty($username))
  {
    $sql = "select * from members WHERE username='$username' and password='$password'";
    $result = mysqli_query($con, $sql);
@@ -38,7 +37,5 @@ if(isset($_POST['submit']))
   echo 'Enter both username and password.';
  }
 }
-
-mysqli_close($con);
 
 ?>
