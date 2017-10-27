@@ -13,7 +13,7 @@
  $specialty=$_POST['specialty'];
 
 
- $sql = "INSERT INTO  trainer (username,password,fullName,email,specialty)
+ $sql = "INSERT INTO  trainers (username,password,fullName,email,specialty)
          VALUES ('$username','$password','$fullName','$email','$specialty')";
 
 if (mysqli_query($con, $sql)) {

@@ -13,7 +13,7 @@
  $level=$_POST['level'];
 
 
- $sql = "INSERT INTO  member (username,password,fullName,email,level)
+ $sql = "INSERT INTO  members (username,password,fullName,email,level)
          VALUES ('$username','$password','$fullName','$email','$level')";
 
 if (mysqli_query($con, $sql)) {
