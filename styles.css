@@ -1,0 +1,34 @@
+/* styles.css */
+
+header{background-color:#ffffff;}
+/*nav background*/
+.nav-pills{background-color:#d50000;
+           font-weight: bold;}
+/*initial nav color words */
+.nav-pills a{color:#ffffff;
+              border-right : 1px solid #ffffff;}
+/*black colour words when hover */
+.nav-pills a:hover{color:#000000;
+                  background-color:#000000;}
+
+.nav-pills .active a:hover{color:#000000;}
+/* nav active color and background color */
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus {color: #000000;
+                                                              background-color: #ff8a80;}
+/* */
+.nav-pills > li.active > a:hover {background-color: #eeeeee;
+                                  color:#000000;}
+
+.pull-right {margin-top: 5px; margin-right:3px;}
+
+a:hover {text-decoration: none}
+
+footer{background-color:#ffffff;
+      color:#000000;
+      text-decoration:none;
+      font-size: 12pt;
+      margin-top: 10px;}
+
+.footerNav{text-align: right;}
+.footNav{list-style:none;
+            color:#000000;}

@@ -1,0 +1,58 @@
+/* indexStyles.css */
+
+header{background-color:#ffffff;}
+.main{background-color:#e0e0e0;}
+.item{width:100%;
+      height:100%;
+      margin:auto;}
+.carousel-inner{width:100%;
+                height:80%;
+                margin:auto;}
+.carousel-caption{color:#e6e6e6;
+                  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                  margin:auto;}
+
+ol.carousel-indicators li {
+  background: transparent;
+  border-color: #3A3434;
+}
+
+ol.carousel-indicators li.active {
+  background: #0E0D0D;
+}
+
+.formContent{background-color:#fafafa;
+            color:#000000;}
+#img1, #img2 {width:600px;
+    height:400px;
+    margin:auto;
+    padding:10px;}
+.section-divider {margin-top:10px}
+.img-overlay {
+        position: absolute;
+        top: 310;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+.img-overlay:before {
+  content: ' ';
+  display: block;
+  width: 50%;
+  height: 50%;
+}
+.button-style { background-color: black;
+            color: white;
+            font-weight: bold;
+          }
+.button-style:hover {
+  background-color: #eeeeee;
+  color: black;
+}
+
+footer {padding:10px}
+
+@media only screen and (max-width:768px){
+	#myCarousel { display: none; }
+}

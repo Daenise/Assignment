@@ -1,0 +1,250 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href ="css/bootstrap-social.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title> Training History </title>
+    <style>
+      .pull-right {margin: 5px;}
+      .container {border: 1px solid black; margin-top: 30px; margin-bottom: 30px; padding: 10px}
+    </style>
+  </head>
+
+  <body class="main">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+
+    <header>
+      <div class="row">
+        <div class="col-xs-8 col-md-9 col-lg-10">
+          <a href="welcomeMember.html">
+            <img src="images/helpfitLogo.png" alt="HELPFit Logo" width="350" height="90">
+          </a>
+        </div>
+          <br />
+
+          <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
+            <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-user"></span> John Tan
+              <b class="caret"></b>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="displayMemberProfile.html">View profile</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a class="dropdown-item" href="index.html" onclick="return logOut()">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <ul class="nav nav-pills nav-justified">
+            <li><a href="welcomeMember.html"> Home </a></li>
+            <li class="active"><a href="registerSession.html"> Training Session </a></li>
+            <li><a href="memberTrainingHist.html"> Training History </a></li>
+            <li><a href="reviewTrainer.html"> Review Trainer </a></li>
+          </ul>
+          </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2 align="center">Available Training Sessions</h2>
+
+      <div class="row">
+        <div class="form-group">
+          <div class="col-xs-5 col-sm-3 pull-right">
+            <select class="form-control">
+              <option value="Sort by" selected disabled>Sort by</option>
+              <option value="sessionID">Session ID</option>
+              <option value="Date">Date</option>
+              <option value="Class Type">Class Type</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="table-responsive">
+        <table class="table table-hover table-condensed table-bordered">
+          <tr class="success">
+            <th>Choose <br />Session(s)</th>
+            <th>SessionID</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Fee </th>
+            <th>Class <br />Type</th>
+            <th>Status</th>
+            <th>Trainer's Name </th>
+            <th>Trainer's Specialty </th>
+            <th>Trainer's Review </th>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S102</td>
+            <td>Personal Zumba + Yoga Session </td>
+            <td>2017-10-07</td>
+            <td>4:00 PM</td>
+            <td>RM 0.00</td>
+            <td>Personal</td>
+            <td>Available</td>
+            <td>Ben Lee </td>
+            <td>Sport</td>
+            <td>4.5</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value="" ></td>
+            <td>S103</td>
+            <td>Light Exercise with Trainer Tina </td>
+            <td>2017-11-01</td>
+            <td>2:00 PM</td>
+            <td>RM 25.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td>Tina Wong </td>
+            <td>Dance</td>
+            <td>4.8</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S104</td>
+            <td>MMA class </td>
+            <td>2017-11-03</td>
+            <td>9:00 PM</td>
+            <td>RM 60.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td>Bryan Tan </td>
+            <td>MMA</td>
+            <td>4.0</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S105</td>
+            <td>Latin </td>
+            <td>2017-11-05</td>
+            <td>6:30 PM</td>
+            <td>RM 50.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td>John Lee </td>
+            <td>Dance</td>
+            <td>4.8</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S106</td>
+            <td>Cycle Fun </td>
+            <td>2017-11-09</td>
+            <td>9:00 AM</td>
+            <td>RM 30.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td>Michelle Tey </td>
+            <td>Sport</td>
+            <td>4.7</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value="" ></td>
+            <td>S107</td>
+            <td>Zumba </td>
+            <td>2017-11-01</td>
+            <td>10:00 AM</td>
+            <td>RM 50.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td>John Lee </td>
+            <td>Dance</td>
+            <td>no rating yet</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S108</td>
+            <td>Hot Yoga </td>
+            <td>2017-11-15</td>
+            <td>9:00 AM</td>
+            <td>RM 35.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td>Ben Lee </td>
+            <td>Sport</td>
+            <td>4.5</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S109</td>
+            <td>Body Pump </td>
+            <td>2017-11-16</td>
+            <td>9:00 AM</td>
+            <td>RM 35.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td>Bryan Tan </td>
+            <td>MMA</td>
+            <td>4.0</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S110</td>
+            <td>Body Built Up </td>
+            <td>2017-10-17</td>
+            <td>10:00 AM</td>
+            <td>RM 25.00</td>
+            <td>Personal</td>
+            <td>Available</td>
+            <td>Johnson Lee </td>
+            <td>Body Builder</td>
+            <td>4.0</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="checkbox" value=""></td>
+            <td>S111</td>
+            <td>Zumba Party </td>
+            <td>2017-10-20</td>
+            <td>10:00 AM</td>
+            <td>RM 0.00</td>
+            <td>Group</td>
+            <td>Available</td>
+            <td> Zoey Lim </td>
+            <td>Dance</td>
+            <td>5.0 </td>
+          </tr>
+        </table>
+      </div>
+      <br />
+
+      <div class="col-xs-12 col-md-11 pull-right">
+          <button type="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <div align="center">
+        Copyright &copy; HELPFIT 2017
+      </div><br />
+      <div align="center">
+          <a class="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/"> <span class="fa fa-linkedin"></span></a>
+          <a class="btn btn-social-icon btn-facebook" href="https://www.facebook.com/"> <span class="fa fa-facebook"></span></a>
+          <a class="btn btn-social-icon btn-instagram" href="https://www.instagram.com/"> <span class="fa fa-instagram"></span></a>
+          <a class="btn btn-social-icon btn-twitter" href="https://twitter.com/"> <span class="fa fa-twitter"></span></a>
+      </div></br />
+      <div align="center">
+      <nav>
+        <a class="footNav" href="welcomeMember.html">Home</a>&nbsp; &#9474; &nbsp;
+        <a class="footNav" href="registerSession.html">Register Session</a>&nbsp;  &#9474; &nbsp;
+        <a class="footNav" href="memberTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
+        <a class="footNav" href="reviewTrainer.html">Review Trainer</a>
+      </nav>
+      </div>
+    </footer>
+
+  </body>
+</html>
