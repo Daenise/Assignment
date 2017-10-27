@@ -68,12 +68,12 @@ function updateForm() {
 }
 
 function registerAccount() {
-  var pwd = document.forms["registerMember"]["inputPswd"].value;
-  var pwd2 = document.forms["registerMember"]["confirmPswd"].value;
+  var pwd = document.forms["registerUser"]["inputPswd"].value;
+  var pwd2 = document.forms["registerUser"]["confirmPswd"].value;
   if (pwd != pwd2){
     alert("Your two password entries are not the same.");
-    document.forms["registerMember"]["confirmPswd"].focus();
-    document.forms["registerMember"]["confirmPswd"].select();
+    document.forms["registerUser"]["confirmPswd"].focus();
+    document.forms["registerUser"]["confirmPswd"].select();
     return false
   }
 }
