@@ -25,6 +25,7 @@
 
   if ($result_registerM) {
     echo "Member ".$username. " successfully added.";
+    header("Location: index.html");
   }
   else {
      echo "Error adding member : " . mysqli_error($con);
