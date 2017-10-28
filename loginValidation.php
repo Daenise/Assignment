@@ -1,12 +1,15 @@
 <?php
 session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "helpfit";
+$con = new mysqli($servername, $username, $password, $dbname);
+
 if(isset($_POST['submit']))
 {
- $servername = "localhost";
- $username = "root";
- $password = "";
- $dbname = "helpfit";
- $con = new mysqli($servername, $username, $password, $dbname);
+
  if (!$con) {
   die("Could not connect to database.");
   }
@@ -18,7 +21,7 @@ if(isset($_POST['submit']))
 
  if(!empty($username))
  {
-   $sql = "select * from members WHERE username='$username' and password='$password'";
+   $sql = "SELECT * FROM members WHERE username='$username' and password='$password'";
    $result = mysqli_query($con, $sql);
 
    if (mysqli_num_rows($result) > 0)
