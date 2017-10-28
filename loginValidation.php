@@ -1,15 +1,12 @@
 <?php
 session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "helpfit";
-$con = new mysqli($servername, $username, $password, $dbname);
-
 if(isset($_POST['submit']))
 {
-
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "helpfit";
+ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
@@ -19,20 +16,15 @@ if(isset($_POST['submit']))
  $password = $_POST['password'];
 
 
- if(!empty($username))
+ if($username!='')
  {
-   $sql = "SELECT * FROM members WHERE username='$username' and password='$password'";
+   $sql = "select * from members WHERE username='$username' and password='$password'";
    $result = mysqli_query($con, $sql);
 
    if (mysqli_num_rows($result) > 0)
    {
     $_SESSION['user']=$username;
-<<<<<<< HEAD
-    header('LOCATION:welcome.php');
-=======
-    header('Location:welcome.php');
-
->>>>>>> d8f691da655ba0dd44dfd62c6a62e9775ca3c387
+    header("Location: welcome.php");
    }
    else
    {
@@ -42,7 +34,7 @@ if(isset($_POST['submit']))
  else
  {
   echo 'Enter both username and password.';
- }
+}
 }
 
 ?>
