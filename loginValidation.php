@@ -19,16 +19,13 @@ if(isset($_POST['submit']))
  if($username!='')
  {
    $sql = "select * from members WHERE username='$username' and password='$password'";
+   $sql = "select * from trainers WHERE username='$username' and password='$password'";
    $result = mysqli_query($con, $sql);
 
    if (mysqli_num_rows($result) > 0)
    {
     $_SESSION['user']=$username;
-<<<<<<< HEAD
-    header("Location: welcome.php");
-=======
-    header('Location: welcome.php');
->>>>>>> 223fca3987afc234faa1487c5101164fad90de89
+     header("Location: welcome.php");
    }
    else
    {
