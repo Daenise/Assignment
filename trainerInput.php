@@ -24,7 +24,9 @@
    $result_registerT = mysqli_query($con, $sql_registerT);
 
   if ($result_registerT) {
-    echo "Trainer ".$username. " successfully added.";
+    echo "Trainer ".$username. " successfully registered.<br>";
+    echo "Redirecting back to login page...";
+    header("Refresh: 5; url= index.html");
   }
   else {
      echo "Error adding trainer : " . mysqli_error($con);

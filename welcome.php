@@ -6,7 +6,7 @@
 ?>
 <html>
 <body>
-  <a href="SIGNOUT.php">
+  <a href="signOut.php">
   click here to log out (add session_destroy();)</a>
 </body>
 </html>

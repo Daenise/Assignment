@@ -82,10 +82,12 @@ function registerAccount() {
     return false
   }
 
-  var level = document.forms["registerMember"]["level"].value;
-  if (level === "Choose your level"){
-    alert("Level must be either Beginner, Advanced, or Expert.");
-    document.forms["registerMember"]["level"].focus();
-    return false;
+  if (document.getElementById('registerMember') == true){
+    var level = document.forms["registerMember"]["level"].value;
+    if (level === "Choose your level"){
+      alert("Level must be either Beginner, Advanced, or Expert.");
+      document.forms["registerMember"]["level"].focus();
+      return false;
+    }
   }
 }

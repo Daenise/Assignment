@@ -19,7 +19,7 @@ if(isset($_POST['submit']))
  $password = $_POST['password'];
 
 
- if(!empty($username))
+ if(!(empty($username) || empty($password)))
  {
    $sql = "SELECT * FROM members WHERE username='$username' and password='$password'";
    $sql2 = "SELECT * FROM trainers WHERE username='$username' and password='$password'";
@@ -29,11 +29,15 @@ if(isset($_POST['submit']))
    if (mysqli_num_rows($result) > 0)
    {
     $_SESSION['user']=$username;
-    header('Location: welcome.php');
+    header('Location: welcomeMember.html');
    }
-   else
+   else if (mysqli_num_rows($result2) > 0)
    {
-    echo 'Your username or password is incorrect.';
+     $_SESSION['user']=$username;
+     header('Location: welcomeTrainer.html');
+   }
+   else {
+     echo 'Your username or password is incorrect.';
    }
  }
  else

@@ -24,7 +24,7 @@
    $result_registerM = mysqli_query($con, $sql_registerM);
 
   if ($result_registerM) {
-    echo "Member ".$username. " successfully registered.";
+    echo "Member ".$username. " successfully registered.<br>";
     echo "Redirecting back to login page...";
     header("Refresh: 5; url= index.html");
   }
