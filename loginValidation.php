@@ -22,7 +22,9 @@ if(isset($_POST['submit']))
  if(!empty($username))
  {
    $sql = "SELECT * FROM members WHERE username='$username' and password='$password'";
+   $sql2 = "SELECT * FROM trainers WHERE username='$username' and password='$password'";
    $result = mysqli_query($con, $sql);
+   $result2 = mysqli_query($con, $sql2);
 
    if (mysqli_num_rows($result) > 0)
    {
