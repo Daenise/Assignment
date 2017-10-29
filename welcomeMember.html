@@ -139,22 +139,26 @@
         </div>
       </footer>
   </body>
-<script type="text/javascript">
-    var myDate = new Date();
-    var time = myDate.getHours();
-    var greet;
-    if (time < 12)
+  <script type="text/javascript">
+      var myDate = new Date();
+      var time = myDate.getHours();
+      var greet;
+      if (time >= 5 && time < 12)
       {
-      greet='Good morning';
+        greet = 'Good morning';
       }
-    else if(time > 12)
+      else if (time > 12 && time < 18)
       {
-      greet='Good afternoon';
+        greet = 'Good afternoon';
       }
-      else{
+      else if (time >= 18)
+      {
+        greet = 'Good evening';
+      }
+      else
+      {
         greet='Good day';
       }
-   document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, John Tan';
-
-    </script>
+     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, John Tan';
+  </script>
 </html>
