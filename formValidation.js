@@ -82,7 +82,7 @@ function registerAccount() {
     return false
   }
 
-  if (document.activeElement.id == 'registerMBtn'){
+  if (document.activeElement.id == "registerMBtn"){
     var level = document.forms["registerMember"]["level"].value;
     if (level === "Choose your level"){
       alert("Level must be either Beginner, Advanced, or Expert.");
