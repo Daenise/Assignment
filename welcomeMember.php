@@ -42,7 +42,8 @@
       <br>
       <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
           <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-user"></span> John Tan
+            <span class="glyphicon glyphicon-user"></span>
+              &nbsp;<label id="memberName"></label>
             <b class="caret"></b>
           </button>
           <ul class="dropdown-menu">
@@ -139,6 +140,11 @@
         </div>
       </footer>
   </body>
+
+  <?php
+           session_start();
+           $username=$_SESSION['user'];
+  ?>
   <script type="text/javascript">
       var myDate = new Date();
       var time = myDate.getHours();
@@ -159,6 +165,8 @@
       {
         greet='Good day';
       }
-     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, John Tan';
+      var username = "<?php echo $username; ?>";
+     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, ' + username;
+     document.getElementById('memberName').innerHTML = username;
   </script>
 </html>

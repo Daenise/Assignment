@@ -29,7 +29,7 @@ if(isset($_POST['submit']))
    if (mysqli_num_rows($result) > 0)
    {
     $_SESSION['user']=$username;
-    header('Location: welcomeMember.html');
+    header('Location: welcomeMember.php');
    }
    else if (mysqli_num_rows($result2) > 0)
    {
