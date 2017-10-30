@@ -153,7 +153,7 @@
           <div class="reviewTrainer_1">
 
             <div class="FormContent">
-              <form name="review1" onsubmit="return writeReview()" action="review.php" method="post">
+              <form name="review1" action="inputReview.php" method="post">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h3 class="modal-title" align="center">Write a Review</h3>
@@ -281,7 +281,7 @@
                         <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
                         <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
                         <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5">
+                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5" required>
                         <br />
                         &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
                       </div>
@@ -294,7 +294,7 @@
                     <div class="form-group">
                       <label class="col-xs-5 col-sm-4">Comments :</label>
                       <div class="col-xs-6 col-sm-6">
-                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
+                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments" required></textarea>
                       </div>
                     </div>
                   </div>

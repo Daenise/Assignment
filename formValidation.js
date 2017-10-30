@@ -91,22 +91,3 @@ function updateSession() {
       alert("Session updated successfully !");
     }
 }
-
-function writeReview(){
-  var rating = document.forms["review1"]["trainerRating"].value;
-  var comments = document.forms["review1"]["reviewComments"].value;
-
-  if (rating === "") {
-    alert("Rating cannot be blank.");
-    document.forms["review1"]["trainerRating"].focus();
-    return false;
-  }
-  else if (comments === "") {
-    alert("Comments cannot be blank.");
-    document.forms["review1"]["reviewComments"].focus();
-    return false;
-  }
-  else {
-    alert("Review submitted successfully!")
-  }
-}
