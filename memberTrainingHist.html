@@ -25,6 +25,7 @@
     </script>
     <script src="js/bootstrap.min.js"></script>
     <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+    <script type = "text/javascript"  src = "formValidation.js"></script>
 
     <header>
       <div class="row">
@@ -152,160 +153,162 @@
           <div class="reviewTrainer_1">
 
             <div class="FormContent">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title" align="center">Write a Review</h3>
-              </div>
+              <form name="review1" onsubmit="return writeReview()" action="review.php" method="post">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title" align="center">Write a Review</h3>
+                </div>
 
-              <div class="modal-body" align="right">
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Session ID :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      S100
+                <div class="modal-body" align="right">
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Session ID :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        S100
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Title :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Be a Good Sport with Cross Country!
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Title :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        Be a Good Sport with Cross Country!
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Date :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      2017-09-30
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Date :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        2017-09-30
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Time :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      6:00 PM
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Time :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        6:00 PM
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Fee (RM):</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      RM 10
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Fee (RM):</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        RM 10
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Status :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Completed
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Status :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        Completed
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Class type :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Group (Sport)
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Class type :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        Group (Sport)
+                      </div>
                     </div>
                   </div>
-                </div>
 
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Max participants :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      10
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Max participants :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        10
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Trainer's name :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Ben Lee
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Trainer's name :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        Ben Lee
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Trainer's specialty :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Sport
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Trainer's specialty :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        Sport
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="formDivider"></div>
+                  <div class="formDivider"></div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Rating :</label>
-                    <div class="col-xs-6 col-sm-8" align="left">
-                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
-                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
-                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
-                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5">
-                      <br />
-                      &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Rating :</label>
+                      <div class="col-xs-6 col-sm-8" align="left">
+                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
+                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
+                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
+                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
+                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5">
+                        <br />
+                        &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Comments :</label>
-                    <div class="col-xs-6 col-sm-6">
-                      <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-5 col-sm-4">Comments :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
+                  <br />
 
-                <div class="row">
-                  <div class="col-xs-12 col-md-12">
-                    <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
+                  <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                      <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
+                    </div>
                   </div>
-                </div>
 
-              </div>
+                </div>
+              </form>
             </div>
 
           </div>
