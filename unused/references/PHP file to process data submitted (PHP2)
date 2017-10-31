@@ -1,0 +1,25 @@
+<?php
+	session_start();
+	
+	if(isset($_POST['submit3'])){ 
+	$servername= "localhost";
+	$username= "root";
+	$password= "";
+	$dbname= "helpuni";
+	$con= new mysqli ($servername, $username, $password, $dbname);
+	
+	$rowID=$_POST['hidden'];
+	$status=$_POST['status']; 
+	$sql="UPDATE onlineapp SET status='$status' WHERE rowID='$_POST[hidden]'";
+			
+	mysqli_query($con,$sql);
+	
+	echo '<script language="javascript">';
+	echo 'alert("Update Successfully!")
+		   window.location="a2_admin.php"';
+	echo '</script>';
+	
+	
+}
+
+?>

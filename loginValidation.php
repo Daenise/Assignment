@@ -31,13 +31,12 @@ if(isset($_POST['submit']))
    if (mysqli_num_rows($r_member) > 0)
    {
     $_SESSION['user'] = $username;
-    // trying not working
+    
     while ($row = mysqli_fetch_assoc($r_member))
     {
       $_SESSION['fullName'] = $row["fullName"];
     }
 
-    //
     header('Location: welcomeMember.php');
    }
    else if (mysqli_num_rows($r_trainer) > 0)

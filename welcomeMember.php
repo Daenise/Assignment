@@ -143,7 +143,6 @@
 
   <?php
            session_start();
-           $username = $_SESSION['user'];
            $fullName = $_SESSION['fullName'];
   ?>
   <script type="text/javascript">

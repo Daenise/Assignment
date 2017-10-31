@@ -1,0 +1,43 @@
+<?php
+					$sql2="SELECT * FROM onlineapp";
+					
+					$result2= mysqli_query ($con, $sql2);
+					
+					if (mysqli_num_rows($result2) > 0){
+					
+							echo "<table class='table'>
+							";
+							echo "<tr>";
+								echo "<th>Username</th>";
+								echo "<th>NRIC</th>";
+								echo "<th></th>";
+							echo "</tr>";
+							
+						while($row2 = mysqli_fetch_array($result2)){
+								
+								echo "<form action='another.php' method='post'><tr>";
+								echo "<td>" . $row2['fullname'] . "</td>";
+								echo "<td>" . $row2['nric'] . "</td>";
+								echo "<td> 
+										<select name='status' id='option' >
+										<option  value='pending' active>Pending</option>
+										<option  value='accept'>Accept</option>
+										<option  value='reject'>Reject</option>
+									</select>
+									 </td>";
+								
+								echo "<td><input type=hidden name=hidden value=".$row2["rowID"]."</td>";
+								echo "<td><input type='submit' name='submit3' class='btn pull-right' value='Update'></td>";
+								echo "</tr>";
+								echo '</form>';
+						
+						}
+							
+						echo "</table>";
+						echo "<hr>";
+					}
+					else{
+						echo "No records matching your query were found.";
+					}
+					mysqli_close($con);	
+					?>
