@@ -20,9 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </script>
   <script src="js/bootstrap.min.js"></script>
-  <script type = "text/javascript"  src = "formValidation.js"></script>
+  <script type = "text/javascript"  src = "validateSession.js"></script>
   <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
-
   <header>
     <div class="row">
       <div class="col-xs-8 col-md-9 col-lg-10">
@@ -54,7 +53,7 @@
 
     <div class="container">
       <h2> Add Personal Training Session </h2><br />
-       <form name="myForm" onsubmit="return validateForm()" method="post">
+       <form name="addSession" onsubmit="return addPSession()" action="inputPersonalTraining.php" method="post">
             <div class="form-group">
               <div class="table-responsive">
                 <table class="table table-bordered">
@@ -70,13 +69,13 @@
                 <tr>
                   <th>Date : </th>
                   <td><input type="date" name="sessionDate" class="form-control input-lg" id="sessionDate"
-                    min="2017-10-03" max="2100-12-31" id="date" placeholder="Enter Date (e.g. DD-MM-YYY)"></td>
+                    min="2017-10-03" max="2100-12-31" id="date" placeholder="Enter Date (e.g. YYYY-MM-DD)"></td>
                 </tr>
 
                 <tr>
                   <th>Time : </th>
                   <td><input type="time" name="sessionTime" class="form-control input-lg" id="sessionTime" id="time"
-                    placeholder="Enter Time (e.g. 10:00 AM)"></td>
+                    placeholder="Enter Time (e.g. 10:00 AM)" ></td>
                 </tr>
 
                 <tr>

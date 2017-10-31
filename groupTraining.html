@@ -18,8 +18,8 @@
 
 <body class="main">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  </script>
   <script src="js/bootstrap.min.js"></script>
+    <script type = "text/javascript"  src = "validateSession.js"></script>
   <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
 
   <header>
@@ -53,14 +53,16 @@
 
     <div class="container">
       <h2> Add Group Training Session </h2><br />
-    <div class="form-group">
+
+      <form name= "addGSession" onsubmit="return checkClassType()" action="inputGroupTraining.php" method="post">
+      <div class="form-group" >
       <div class="table-responsive">
         <table class="table table-bordered">
 
         <tr>
           <th>Title : </th>
           <td><input type="text" name="title" placeholder="Enter Title"
-            class="form-control input-lg"></td>
+            class="form-control input-lg" required></td>
         </tr>
 
         <script type="text/javascript" src="date.js"></script>
@@ -68,43 +70,46 @@
         <tr>
           <th>Date : </th>
           <td><input type="date" name="sessionDate" class="form-control input-lg" id="sessionDate"
-            min="2017-10-03" max="2100-12-31" placeholder="Enter Date (e.g. DD-MM-YYY)"></td>
+            min="2017-10-31" max="2100-12-31" placeholder="Enter Date (e.g. DD-MM-YYY)" required></td>
         </tr>
 
         <tr>
           <th>Time : </th>
           <td><input type="time" name="sessionTime" class="form-control input-lg" id="sessionTime"
-            placeholder="Enter Time (e.g. 10:00 AM)"></td>
+            placeholder="Enter Time (e.g. 10:00 AM)" required></td>
         </tr>
 
         <tr>
           <th>Fee (RM): </th>
           <td class="row">
-            <input type="number" name="fee" class="form-control input-lg" placeholder="Enter Fee">
+            <input type="number" name="sessionFee" class="form-control input-lg" placeholder="Enter Fee" min="0" required>
           </td>
         </tr>
 
         <tr>
           <th>Max Participants : </th>
-          <td><input type="number" name="maxPax" class="form-control input-lg" placeholder="Enter Maximum Participants"></td>
+          <td><input type="number" name="maxPax" class="form-control input-lg" placeholder="Enter Maximum Participants" min="0" required></td>
         </tr>
 
         <tr>
           <th>Class Type : </th>
-          <td><select class="form-control">
+          <td><select class="form-control" name="classTypes" id="classTypes" required>
             <option value="Choose your class type" selected disabled>Choose your class type </option>
             <option value="Sport"> Sport </option>
             <option value="Dance"> Dance </option>
             <option value="MMA"> MMA </option>
           </select></td>
+
+
         </tr>
         </table>
     </div>
   </div>
   <div class="col-xs-12 col-md-11 pull-right">
-      <button type="submit" class="btn btn-primary btn-lg pull-right"> Add Session </button>
+      <button type="submit" class="btn btn-primary btn-lg pull-right" id="submitSession"> Add Session </button>
       <a href="trainingSession.html" class="btn btn-danger btn-lg pull-right">Back</a>
   </div>
+</form>
 </div>
 
 <footer>

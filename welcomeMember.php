@@ -42,7 +42,8 @@
       <br>
       <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
           <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-user"></span> John Tan
+            <span class="glyphicon glyphicon-user"></span>
+              &nbsp;<label id="memberName"></label>
             <b class="caret"></b>
           </button>
           <ul class="dropdown-menu">
@@ -139,22 +140,34 @@
         </div>
       </footer>
   </body>
-<script type="text/javascript">
-    var myDate = new Date();
-    var time = myDate.getHours();
-    var greet;
-    if (time < 12)
+
+  <?php
+           session_start();
+           $username = $_SESSION['user'];
+           $fullName = $_SESSION['fullName'];
+  ?>
+  <script type="text/javascript">
+      var myDate = new Date();
+      var time = myDate.getHours();
+      var greet;
+      if (time >= 5 && time < 12)
       {
-      greet='Good morning';
+        greet = 'Good morning';
       }
-    else if(time > 12)
+      else if (time > 12 && time < 18)
       {
-      greet='Good afternoon';
+        greet = 'Good afternoon';
       }
-      else{
+      else if (time >= 18)
+      {
+        greet = 'Good evening';
+      }
+      else
+      {
         greet='Good day';
       }
-   document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, John Tan';
-
-    </script>
+      var fullName = <?php echo json_encode($fullName); ?>;
+     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, ' + fullName;
+     document.getElementById('memberName').innerHTML = fullName;
+  </script>
 </html>
