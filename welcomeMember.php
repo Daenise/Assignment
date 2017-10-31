@@ -167,7 +167,7 @@
         greet='Good day';
       }
       var fullName = <?php echo json_encode($fullName); ?>;
-     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, ' + fullname;
+     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, ' + fullName;
      document.getElementById('memberName').innerHTML = fullName;
   </script>
 </html>
