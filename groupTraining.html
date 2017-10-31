@@ -54,7 +54,8 @@
     <div class="container">
       <h2> Add Group Training Session </h2><br />
 
-      <form name= "addGSession" onsubmit="return checkClassType()" action="inputGroupTraining.php" method="post">
+      <form name= "addGSession" onsubmit="return checkClassType()" action="trainingSessions.php" method="post">
+      <input type="hidden" name="type" value="Group">
       <div class="form-group" >
       <div class="table-responsive">
         <table class="table table-bordered">

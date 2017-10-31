@@ -1,4 +1,5 @@
 <?php
+  session_start();
    // Connect to database
    $servername = "localhost";
    $username = "root";
@@ -17,13 +18,15 @@
    $sessionTime=$_POST['sessionTime'];
    $sessionFee=$_POST['sessionFee'];
    $maxPax=$_POST['maxPax'];
-   $classType= $_POST['classType'];
+   $classType= $_POST['classTypes'];
+   $theTrainer = $_SESSION['user'];
 
    //to convert the time from am/pm to 24hours time format to store in database
    $sessionTime= date("G:i", strtotime($sessionTime));
 
    // Add record
-   $sql_addGroupTraining = "INSERT INTO groupsessions(title,sessionDate,sessionTime,sessionFee,maxPax,classType) VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$classType')";
+   $sql_addGroupTraining = "INSERT INTO groupsessions(title,sessionDate,sessionTime,sessionFee,maxPax,classType, sessionTrainer)
+   VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$classType', '$theTrainer')";
 
    $result_addGroupTraining = mysqli_query($con, $sql_addGroupTraining);
 

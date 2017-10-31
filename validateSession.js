@@ -7,7 +7,7 @@ if (document.activeElement.id == 'submitSession'){
     document.forms["addGSession"]["classTypes"].focus();
     return false;
   }
-}
+  }
 }
 
 function addPSession() {
