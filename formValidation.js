@@ -61,3 +61,31 @@ function updateSession() {
       alert("Session updated successfully !");
     }
 }
+
+/*
+function searchTrainingHist() {
+  var searchInput = document.getElementById("searchInput");
+  var val = searchInput.value.toLowerCase();
+  var rows = document.getElementsByTagName("tr");
+  var on = 0;
+  for (var i = 0; i < rows.length; i++) {
+    var result = rows[i].getElementsByTagName("td");
+    result = result[0].innerHTML.toLowerCase();
+    if (result) {
+        if (val.length == 0 || (val.length < 3 && result.indexOf(val) == 0) || (val.length >= 3 && result.indexOf(val) > -1 ) ) {
+        rows[i].style.display = "";
+        on++;
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  }
+  var n = document.getElementById("noResults");
+  if ( on == 0 && n ) {
+    n.style.display = "";
+    document.getElementById("userInput").innerHTML = searchInput.value;
+  } else {
+    n.style.display = "none";
+  }
+}
+*/

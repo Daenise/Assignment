@@ -144,6 +144,7 @@
   <?php
            session_start();
            $username = $_SESSION['user'];
+           $fullName = $_SESSION['fullName'];
   ?>
   <script type="text/javascript">
       var myDate = new Date();
@@ -165,7 +166,7 @@
       {
         greet='Good day';
       }
-      var fullName = "<?php echo $_SESSION['fullName']; ?>";
+      var fullName = <?php echo json_encode($fullName); ?>;
      document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, ' + fullname;
      document.getElementById('memberName').innerHTML = fullName;
   </script>

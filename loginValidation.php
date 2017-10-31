@@ -32,10 +32,11 @@ if(isset($_POST['submit']))
    {
     $_SESSION['user'] = $username;
     // trying not working
-    while ($row = mysqli_fetch_field($r_member))
+    while ($row = mysqli_fetch_assoc($r_member))
     {
-      $_SESSION['fullName'] = $row-> fullName;
+      $_SESSION['fullName'] = $row["fullName"];
     }
+
     //
     header('Location: welcomeMember.php');
    }
