@@ -18,22 +18,30 @@ if(isset($_POST['submit']))
  $username = $_POST['username'];
  $password = $_POST['password'];
 
-
  if(!(empty($username) || empty($password)))
  {
-   $sql = "SELECT * FROM members WHERE username='$username' and password='$password'";
-   $sql2 = "SELECT * FROM trainers WHERE username='$username' and password='$password'";
-   $result = mysqli_query($con, $sql);
-   $result2 = mysqli_query($con, $sql2);
+   // Queries
+   $q_member = "SELECT * FROM members WHERE username='$username' and password='$password'";
+   $q_trainer = "SELECT * FROM trainers WHERE username='$username' and password='$password'";
 
-   if (mysqli_num_rows($result) > 0)
+   // Results
+   $r_member = mysqli_query($con, $q_member);
+   $r_trainer = mysqli_query($con, $q_trainer);
+
+   if (mysqli_num_rows($r_member) > 0)
    {
-    $_SESSION['user']=$username;
+    $_SESSION['user'] = $username;
+    // trying not working
+    while ($row = mysqli_fetch_field($r_member))
+    {
+      $_SESSION['fullName'] = $row-> fullName;
+    }
+    //
     header('Location: welcomeMember.php');
    }
-   else if (mysqli_num_rows($result2) > 0)
+   else if (mysqli_num_rows($r_trainer) > 0)
    {
-     $_SESSION['user']=$username;
+     $_SESSION['user'] = $username;
      header('Location: welcomeTrainer.html');
    }
    else {

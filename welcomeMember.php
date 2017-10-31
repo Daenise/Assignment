@@ -143,7 +143,7 @@
 
   <?php
            session_start();
-           $username=$_SESSION['user'];
+           $username = $_SESSION['user'];
   ?>
   <script type="text/javascript">
       var myDate = new Date();
@@ -165,8 +165,8 @@
       {
         greet='Good day';
       }
-      var username = "<?php echo $username; ?>";
-     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, ' + username;
-     document.getElementById('memberName').innerHTML = username;
+      var fullName = "<?php echo $_SESSION['fullName']; ?>";
+     document.getElementById('greeting').innerHTML ='<b>' + greet + '</b>, ' + fullname;
+     document.getElementById('memberName').innerHTML = fullName;
   </script>
 </html>
