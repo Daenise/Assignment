@@ -31,7 +31,7 @@ if(isset($_POST['submit']))
    if (mysqli_num_rows($r_member) > 0)
    {
     $_SESSION['user'] = $username;
-    
+
     while ($row = mysqli_fetch_assoc($r_member))
     {
       $_SESSION['fullName'] = $row["fullName"];
@@ -42,7 +42,12 @@ if(isset($_POST['submit']))
    else if (mysqli_num_rows($r_trainer) > 0)
    {
      $_SESSION['user'] = $username;
-     header('Location: welcomeTrainer.html');
+     while ($row = mysqli_fetch_assoc($r_trainer))
+     {
+       $_SESSION['fullName'] = $row["fullName"];
+     }
+
+     header('Location: welcomeTrainer.php');
    }
    else {
      echo 'Your username or password is incorrect.';

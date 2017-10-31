@@ -19,6 +19,8 @@
    $sessionFee=$_POST['sessionFee'];
    $type=$_POST['type'];
    $theTrainer = $_SESSION['user'];
+   $status = "Available";
+   $notes = "";
 
    //to convert the time from am/pm to 24hours time format to store in database
    $sessionTime= date("G:i", strtotime($sessionTime));
@@ -26,13 +28,13 @@
    // Add record
    if ($type == "Personal") {
      $maxPax = 1;
-     $classType = "";
+     $classType = "-";
    } else {
      $maxPax=$_POST['maxPax'];
      $classType= $_POST['classTypes'];
    }
-   $sql_addTrainingSession = "INSERT INTO trainingsessions(title,sessionDate,sessionTime,sessionFee,maxPax,type,classType, sessionTrainer)
-   VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$type','$classType', '$theTrainer')";
+   $sql_addTrainingSession = "INSERT INTO trainingsessions(title,sessionDate,sessionTime,sessionFee,maxPax,type,classType,status,notes)
+   VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$type','$classType','$status','$notes')";
 
    $result_addTrainingSession = mysqli_query($con, $sql_addTrainingSession);
 
