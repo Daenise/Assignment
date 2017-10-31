@@ -17,14 +17,13 @@
    $sessionTime=$_POST['sessionTime'];
    $sessionFee=$_POST['sessionFee'];
    $maxPax=$_POST['maxPax'];
-   $classType=$_POST['classType'];
+   $classType= $_POST['classType'];
 
    //to convert the time from am/pm to 24hours time format to store in database
    $sessionTime= date("G:i", strtotime($sessionTime));
 
-
    // Add record
-   $sql_addGroupTraining = "INSERT INTO  groupsessions (title,sessionDate,sessionTime,sessionFee,maxPax,classType) VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$classType')";
+   $sql_addGroupTraining = "INSERT INTO groupsessions(title,sessionDate,sessionTime,sessionFee,maxPax,classType) VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$classType')";
 
    $result_addGroupTraining = mysqli_query($con, $sql_addGroupTraining);
 
