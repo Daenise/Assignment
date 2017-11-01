@@ -1,41 +1,3 @@
-<?php
-  session_start();
-
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "helpfit";
-  $con = new mysqli($servername, $username, $password, $dbname);
-
-  if (!$con) {
-    die("Could not connect to database.");
-  }
-  echo "Database connected."."</br>";
-
-  $theTrainer = $_SESSION ['user'];
-
-   // Queries
-   $q_pSession = "SELECT * FROM personalsessions WHERE sessionTrainer='$theTrainer'";
-   $q_gSession = "SELECT * FROM groupsessions WHERE sessionTrainer='$theTrainer'";
-
-   // Results
-   $r_pSession = mysqli_query($con, $q_pSession);
-   $r_gSession = mysqli_query($con, $q_gSession);
-
-   if (mysqli_num_rows($r_pSession) > 0)
-   {
-      while ($row = mysqli_fetch_assoc($r_pSession))
-      {
-        echo $row["sessionID"] . $row["title"] . $row["date"] . $row["time"];
-      }
-   }
-   else if (mysqli_num_rows($r_gSession) > 0)
-   {
-
-   }
-
-  mysqli_close($con);
-?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -121,63 +83,87 @@
       </div>
 
       <br />
+      <?php
+        session_start();
 
-      <div class="table-responsive">
-        <table class="table table-hover table-condensed table-bordered">
-          <tr class="success">
-            <th>SessionID</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Class Type</th>
-            <th>Update Record</th>
-          </tr>
-          <tr>
-            <td class="info"><a data-toggle="modal" data-target="#viewRecord1">S100</a></td>
-            <td>Be a Good Sport with Cross Country!</td>
-            <td>2017-09-30</td>
-            <td>6:00 PM</td>
-            <td class="warning">Group (Sport)</td>
-            <td><a data-toggle="modal" data-target="#updateRecord1">Update session</a></td>
-          </tr>
-          <tr>
-            <td class="info">S101</td>
-            <td>Build Up Your Skills with Trainer Ben</td>
-            <td>2017-10-05</td>
-            <td>10:00 AM</td>
-            <td class="danger">Personal</td>
-          </tr>
-          <tr>
-            <td class="info">S102</td>
-            <td>Personal Zumba + Yoga Session</td>
-            <td>2017-10-07</td>
-            <td>4:00 PM</td>
-            <td class="danger">Personal</td>
-          </tr>
-          <tr>
-            <td colspan="6" align="center">
-              <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-      </div>
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "helpfit";
+        $con = new mysqli($servername, $username, $password, $dbname);
 
-      <br />
+        if (!$con) {
+          die("Could not connect to database.");
+        }
+        echo "Database connected."."</br>";
 
-      <div class="col-xs-12 col-md-11 pull-right">
-        <a href="updateRecord.html">
-          <button type="submit" class="btn btn-primary btn-lg pull-right">Update Training Record</button>
-        </a>
-      </div>
-    </div>
+        $theTrainer = $_SESSION ['user'];
+
+         // Queries
+         $q_sessions = "SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer'";
+
+         // Results
+         $r_sessions = mysqli_query($con, $q_sessions);
+
+         if (mysqli_num_rows($r_sessions) > 0)
+         {
+           echo "<div class='table-responsive'>" .
+                   "<table class='table table-hover table-condensed table-bordered'>" .
+                     "<tr class='success'>
+                       <th>SessionID</th>
+                       <th>Title</th>
+                       <th>Date</th>
+                       <th>Time</th>
+                       <th>Class Type</th>
+                       <th>Update Record</th>
+                     </tr>";
+            while ($row = mysqli_fetch_assoc($r_sessions))
+            {
+              if ($row['type'] == "Personal") {
+                $displayType = $row['type'];
+              } else {
+                $displayType = $row['type'] . " (" . $row['classType'] . ")";
+              }
+
+                echo   "<tr>
+                          <td class='info'><a data-toggle='modal' data-target='#viewRecord1'> S" . $row['sessionID'] . "</a></td>
+
+                          <td>" . $row['title'] . "</td>
+                          <td>" . $row['sessionDate'] . "</td>
+                          <td>" . $row['sessionTime'] . "</td>
+                          <td class='warning'>" . $displayType . "</td>
+                          <td><a data-toggle='modal' data-target='#updateRecord1'>Update session</a></td>
+                        </tr>";
+
+            }
+              echo "<tr>
+                      <td colspan='6' align='center'>
+                        <ul class='pagination'>
+                          <li><a href='#'>&laquo;</a></li>
+                          <li><a href='#'>1</a></li>
+                          <li><a href='#'>2</a></li>
+                          <li><a href='#'>3</a></li>
+                          <li><a href='#'>4</a></li>
+                          <li><a href='#'>5</a></li>
+                          <li><a href='#'>&raquo;</a></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </div>" .
+
+                "<br />
+              </div>";
+         }
+         else
+         {
+           echo "No training history to show.";
+         }
+
+        mysqli_close($con);
+      ?>
+
+
 
     <!-- Pop-up overlay to view record for session S100-->
     <div class="container2">
