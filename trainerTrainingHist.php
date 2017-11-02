@@ -121,8 +121,10 @@
             {
               if ($row['type'] == "Personal") {
                 $displayType = $row['type'];
+                $displayTypeRecord = $row['type'];
               } else {
                 $displayType = $row['type'] . " (" . $row['classType'] . ")";
+                $displayTypeRecord = $row['type'];
               }
 
                 echo   "<tr>
@@ -132,7 +134,7 @@
                           <td>" . $row['sessionDate'] . "</td>
                           <td>" . $row['sessionTime'] . "</td>
                           <td class='warning'>" . $displayType . "</td>
-                          <td><a data-toggle='modal' data-target='#updateRecord1'>Update session</a></td>
+                          <td><a data-toggle='modal' data-target='#updateRecord1'>Update</a></td>
                         </tr>";
 
             }
@@ -154,6 +156,128 @@
 
                 "<br />
               </div>";
+
+              /* Pop-up overlay to view record for each respective session */
+              echo '<div class="container2">
+                <div class="modal fade" id="viewRecord1" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="viewRecord_1">
+
+                      <div class="FormContent">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h2 class="modal-title" align="center">' . $displayTypeRecord . ' Training Record</h2>
+                        </div>
+
+                        <div class="modal-body" align="right">
+                          <div class="row">
+                            <div class="form-group">
+                              <label class="col-xs-5 col-sm-4">Title :</label>
+                              <div class="col-xs-6 col-sm-6" align="left">' .
+                                $row['title'] .
+                              '</div>
+                            </div>
+                          </div>
+
+                          <br />
+// editable
+                          <div class="row">
+                            <div class="form-group">
+                              <label class="col-xs-5 col-sm-4">Date :</label>
+                              <div class="col-xs-6 col-sm-6" align="left">' .
+                                $row['sessionDate'] .
+                              '</div>
+                            </div>
+                          </div>
+
+                          <br />
+
+                          <div class="row">
+                            <div class="form-group">
+                              <label class="col-xs-5 col-sm-4">Time :</label>
+                              <div class="col-xs-6 col-sm-6" align="left">' .
+                                $row['sessionTime'] .
+                              '</div>
+                            </div>
+                          </div>
+
+                          <br />
+
+                          <div class="row">
+                            <div class="form-group">
+                              <label class="col-xs-5 col-sm-4">Fee (RM):</label>
+                              <div class="col-xs-6 col-sm-6" align="left">' .
+                                $row['sessionFee'] .
+                              '</div>
+                            </div>
+                          </div>
+
+                          <br />
+
+                          <div class="row">
+                            <div class="form-group">
+                              <label class="col-xs-5 col-sm-4">Status :</label>
+                              <div class="col-xs-6 col-sm-6" align="left">' .
+                                $row['status'] .
+                              '</div>
+                            </div>
+                          </div>';
+
+                          if ($row['type'] == "Group") {
+                            echo '<br />
+  // group editable
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Class type :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">' .
+                                  $row['classType'] .
+                                '</div>
+                              </div>
+                            </div>
+// ..end group editable
+                            <br />
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Max participants :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">' .
+                                  $row['maxPax'] .
+                                '</div>
+                              </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Num participants :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">' .
+                                  $row['numPax'] .
+                                '</div>
+                              </div>
+                            </div>';
+                          } else {
+                            echo '<br />
+  // personal editable
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Notes :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">' .
+                                  $row['notes'] .
+                                '</div>
+                              </div>
+                            </div>';
+                          }
+// ..end personal editable
+
+                        echo '</div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>';
+
          }
          else
          {
@@ -162,6 +286,15 @@
 
         mysqli_close($con);
       ?>
+
+
+
+
+
+
+
+
+
 
 
 
