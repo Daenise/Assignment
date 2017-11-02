@@ -57,7 +57,7 @@
     <div class="row">
       <ul class="nav nav-pills nav-justified">
         <li class="active"><a href="welcomeMember.html"> Home </a></li>
-        <li><a href="registerSession.html"> Training Session </a></li>
+        <li><a href="registerSession.php"> Training Session </a></li>
         <li><a href="memberTrainingHist.html"> Training History </a></li>
         <li><a href="reviewTrainer.html"> Review Trainer </a></li>
       </ul>

@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "helpfit";
+$con = new mysqli($servername, $username, $password, $dbname);
+
+ if (!$con) {
+  die("Could not connect to database.");
+  }
+ echo "Database connected."."</br>";
+
+ $sql_getSession = "SELECT * FROM trainingSessions WHERE status='Available' ";
+
+ $query = mysqli_query($con, $sql_getSession);
+
+ if(!$query){
+   die("Error : " . mysqli_error($con));
+ }
+ ?>
+
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -86,7 +110,30 @@
             <th>Trainer's Specialty </th>
             <th>Trainer's Review </th>
           </tr>
-          <tr>
+
+            <?php
+            while($row = mysqli_fetch_array($query))
+            {
+
+              echo '
+              <tr>
+              <td><input type="checkbox" class="checkbox" value="checkSession"></td>';
+              echo '
+              <td> '.$row['sessionID']. ' </td>
+              <td> '.$row['title']. '</td>
+              <td> '.$row['sessionDate']. '</td>
+              <td> '.$row['sessionTime']. '</td>
+              <td> '.$row['sessionFee']. '</td>
+              <td> '.$row['type']. '</td>
+              <td> '.$row['status']. '</td>
+              <td> '.$row['sessionTrainer']. '</td>
+              </tr>
+              ';
+
+            }
+            ?>
+
+            <!--
             <td><input type="checkbox" class="checkbox" value=""></td>
             <td>S102</td>
             <td>Personal Zumba + Yoga Session </td>
@@ -216,6 +263,7 @@
             <td>Dance</td>
             <td>5.0 </td>
           </tr>
+        -->
         </table>
       </div>
       <br />
