@@ -50,7 +50,7 @@
               <li><a href="welcomeTrainer.php"> Home </a></li>
               <li><a href="trainingSession.html"> Record Training Session </a></li>
               <li class="active"><a href="trainerTrainingHist.php"> Training History </a></li>
-               
+
             </ul>
         </div>
       </div>
@@ -377,8 +377,7 @@
       <nav>
         <a class="footNav" href="welcomeTrainer.php">Home</a>&nbsp; &#9474; &nbsp;
         <a class="footNav" href="trainingSession.html">Record Training Session</a>&nbsp;  &#9474; &nbsp;
-        <a class="footNav" href="trainerTrainingHist.php">Training History</a>&nbsp; &#9474; &nbsp;
-        <a class="footNav" href="updateRecord.html">Update Training Record</a>
+        <a class="footNav" href="trainerTrainingHist.php">Training History</a>
       </nav>
       </div>
     </footer>

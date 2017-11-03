@@ -62,7 +62,6 @@
         <li class="active"><a href="welcomeMember.php"> Home </a></li>
         <li><a href="registerSession.php"> Training Session </a></li>
         <li><a href="memberTrainingHist.html"> Training History </a></li>
-        <li><a href="reviewTrainer.html"> Review Trainer </a></li>
       </ul>
       </div>
      <div>
