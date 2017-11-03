@@ -1,3 +1,8 @@
+<?php
+         session_start();
+         $fullName = $_SESSION['fullName'];
+?>
+
 <html>
   <head>
     <meta charset="utf-8">

@@ -58,7 +58,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
           <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $theMember?></label>
+              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>
               <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
@@ -104,14 +104,13 @@ $con = new mysqli($servername, $username, $password, $dbname);
           <div align="center">
             <div class="form-group col-xs-12 col-sm-5 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Username :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail" ><?php echo $row['username'] ?></label>
-              <input type="hidden" name="username" id="username" value="<?php echo $row['username'] ?>">
+              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail" name="username" id="username" ><?php echo $row['username'] ?></label>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Password :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="password" name="inputPswd" class="form-text input-lg" id="inputPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
+                <input type="password" name="inputPswd" class="form-text input-lg" id="inputPswd" value="<?php echo $row['password']?>" placeholder="Enter Password" required>
               </div>
             </div>
 
@@ -119,21 +118,21 @@ $con = new mysqli($servername, $username, $password, $dbname);
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Confirm Password :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="password" name="confirmPswd" class="form-text input-lg" id="confirmPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
+                <input type="password" name="confirmPswd" class="form-text input-lg" id="confirmPswd" value="<?php echo $row['password']?>" placeholder="Confirm password" required >
               </div>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Full Name :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="text" name="fullName" class="form-text input-lg" id="fullName" value="<?php echo $row['fullName']?>" placeholder="<?php echo $row['fullName']?>" >
+                <input type="text" name="fullName" class="form-text input-lg" id="fullName" value="<?php echo $row['fullName']?>" placeholder="Enter your Full Name" required>
               </div>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Email :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="email" name="email" class="form-text input-lg" id="email" value="<?php echo $row['email']?>" placeholder="<?php echo $row['email']?>" >
+                <input type="email" name="email" class="form-text input-lg" id="email" value="<?php echo $row['email']?>" placeholder="Enter your email" required>
               </div>
             </div>
 

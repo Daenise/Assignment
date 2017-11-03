@@ -45,6 +45,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
     </script>
     <script src="js/bootstrap.min.js"></script>
     <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+    <script type = "text/javascript"  src = "updateValidation.js"></script>
 
     <header>
       <div class="row">
@@ -57,11 +58,11 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
           <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> Ben Lee
+                            <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>
               <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="displayTrainerProfile.html">View profile</a></li>
+              <li><a class="dropdown-item" href="displayTrainerProfile.php">View profile</a></li>
               <li role="separator" class="divider"></li>
               <li><a class="dropdown-item" href="signOut.php" onclick="return logOut()">Logout</a></li>
             </ul>
@@ -71,7 +72,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
         <div class="row">
           <ul class="nav nav-pills nav-justified">
             <li><a href="welcomeTrainer.php"> Home </a></li>
-            <li><a href="trainingSession.html"> Record Training Session </a></li>
+            <li><a href="trainingSession.php"> Record Training Session </a></li>
             <li><a href="trainerTrainingHist.php"> Training History </a></li>
 
           </ul>
@@ -104,13 +105,13 @@ $con = new mysqli($servername, $username, $password, $dbname);
           <div align="center">
             <div class="form-group col-xs-12 col-sm-5 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Username :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">benlee123</label>
+              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail" name="username" id="username" ><?php echo $row['username'] ?></label>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Password :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="password" name="inputPswd" class="form-text input-lg" id="inputPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
+                <input type="password" name="inputPswd" class="form-text input-lg" id="inputPswd" value="<?php echo $row['password']?>" placeholder="Enter password" required>
               </div>
             </div>
 
@@ -118,21 +119,21 @@ $con = new mysqli($servername, $username, $password, $dbname);
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Confirm Password :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="password" name="confirmPswd" class="form-text input-lg" id="confirmPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
+                <input type="password" name="confirmPswd" class="form-text input-lg" id="confirmPswd" value="<?php echo $row['password']?>" placeholder="Confirm Password " required>
               </div>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Full Name :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="text" name="fullName" class="form-text input-lg" id="fullName" value="<?php echo $row['fullName']?>" placeholder="<?php echo $row['fullName']?>" >
+                <input type="text" name="fullName" class="form-text input-lg" id="fullName" value="<?php echo $row['fullName']?>" placeholder="Enter your Full Name" required>
               </div>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Email :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="email" name="email" class="form-text input-lg" id="email" value="<?php echo $row['email']?>" placeholder="<?php echo $row['email']?>" >
+                <input type="email" name="email" class="form-text input-lg" id="email" value="<?php echo $row['email']?>" placeholder="Enter your Email" required>
               </div>
             </div>
 
@@ -141,19 +142,19 @@ $con = new mysqli($servername, $username, $password, $dbname);
               <div class="col-xs-3">
               </div>
               <div class="col-xs-6 col-sm-8 col-lg-8">
-                <input type="text" name="specialty" class="form-text input-lg" id="specialty" value="<?php echo $row['specialty']?>" placeholder="<?php echo $row['specialty']?>" >
+                <input type="text" name="specialty" class="form-text input-lg" id="specialty" value="<?php echo $row['specialty']?>" placeholder="Enter your Specialty" required>
               </div>
             </div>
 
           </div>
-        </form>
+
 
         </div><br />
         <div class="col-xs-12 col-md-11">
           <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
-          <a href="displayTrainerProfile.html" class="btn btn-danger btn-lg pull-right">Cancel</a>
+          <a href="displayTrainerProfile.php" class="btn btn-danger btn-lg pull-right">Cancel</a>
         </div><br />
-
+      </form>
       </div>
 
       <footer>
@@ -169,7 +170,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
         <div align="center">
         <nav>
           <a class="footNav" href="welcomeTrainer.php">Home</a>&nbsp; &#9474; &nbsp;
-          <a class="footNav" href="trainingSession.html">Record Training Session</a>&nbsp;  &#9474; &nbsp;
+          <a class="footNav" href="trainingSession.php">Record Training Session</a>&nbsp;  &#9474; &nbsp;
           <a class="footNav" href="trainerTrainingHist.php">Training History</a>
         </nav>
         </div>

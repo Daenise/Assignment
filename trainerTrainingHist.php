@@ -1,3 +1,8 @@
+<?php
+         session_start();
+         $fullName = $_SESSION['fullName'];
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -34,11 +39,10 @@
 
           <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> Ben Lee
-              <b class="caret"></b>
+              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>              <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="displayTrainerProfile.html">View profile</a></li>
+              <li><a class="dropdown-item" href="displayTrainerProfile.php">View profile</a></li>
               <li role="separator" class="divider"></li>
               <li><a class="dropdown-item" href="signOut.php" onclick="return logOut()">Logout</a></li>
             </ul>
@@ -48,7 +52,7 @@
         <div class="row">
             <ul class="nav nav-pills nav-justified">
               <li><a href="welcomeTrainer.php"> Home </a></li>
-              <li><a href="trainingSession.html"> Record Training Session </a></li>
+              <li><a href="trainingSession.php"> Record Training Session </a></li>
               <li class="active"><a href="trainerTrainingHist.php"> Training History </a></li>
 
             </ul>
@@ -376,7 +380,7 @@
       <div align="center">
       <nav>
         <a class="footNav" href="welcomeTrainer.php">Home</a>&nbsp; &#9474; &nbsp;
-        <a class="footNav" href="trainingSession.html">Record Training Session</a>&nbsp;  &#9474; &nbsp;
+        <a class="footNav" href="trainingSession.php">Record Training Session</a>&nbsp;  &#9474; &nbsp;
         <a class="footNav" href="trainerTrainingHist.php">Training History</a>
       </nav>
       </div>

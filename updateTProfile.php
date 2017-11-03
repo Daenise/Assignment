@@ -19,7 +19,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
   $specialty = $_POST['specialty'];
 
 $updateT= "UPDATE trainers SET password = '$pwd', fullName = '$fullName',
-email = '$email', specialty='$specialty' WHERE username = '$theMember'" ;
+email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
   $result = mysqli_query($con, $updateT);
 
   if ($result) {

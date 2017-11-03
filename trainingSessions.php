@@ -41,7 +41,7 @@
   if ($result_addTrainingSession) {
     echo "Training session : ".$title. " successfully added.<br>";
     echo "Redirecting back to training session page...";
-    header("Refresh: 5; url= trainingSession.html");
+    header("Refresh: 5; url= trainingSession.php");
   }
   else {
      echo "Error adding a training session : " . mysqli_error($con);

@@ -45,12 +45,11 @@
       <br>
       <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
           <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-user"></span>
-              &nbsp;<label id="memberName"></label>
+              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>
             <b class="caret"></b>
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="displayMemberProfile.html">View profile</a></li>
+            <li><a class="dropdown-item" href="displayMemberProfile.php">View profile</a></li>
             <li role="separator" class="divider"></li>
             <li><a class="dropdown-item" href="signOut.php" onclick="return logOut()">Logout</a></li>
           </ul>
