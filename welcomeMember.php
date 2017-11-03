@@ -137,8 +137,7 @@
         <nav>
           <a class="footNav" href="welcomeMember.php">Home</a>&nbsp; &#9474; &nbsp;
           <a class="footNav" href="registerSession.php">Register Session</a>&nbsp;  &#9474; &nbsp;
-          <a class="footNav" href="memberTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
-          <a class="footNav" href="reviewTrainer.html">Review Trainer</a>
+          <a class="footNav" href="memberTrainingHist.html">Training History</a>
         </nav>
         </div>
       </footer>

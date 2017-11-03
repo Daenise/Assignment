@@ -58,7 +58,7 @@
         <li class="active"><a href="welcomeTrainer.php"> Home </a></li>
         <li><a href="trainingSession.html"> Record Training Session </a></li>
         <li><a href="trainerTrainingHist.php"> Training History </a></li>
-        <li><a href="updateRecord.html"> Update Training Record </a></li>
+         
       </ul>
     </div>
      <div>
