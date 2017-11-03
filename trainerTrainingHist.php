@@ -105,6 +105,9 @@
          // Results
          $r_sessions = mysqli_query($con, $q_sessions);
 
+         // initialize counter for pop-up/modal reference
+         $trainingRecordNo = "1";
+
          if (mysqli_num_rows($r_sessions) > 0)
          {
            echo "<div class='table-responsive'>" .
@@ -115,7 +118,6 @@
                        <th>Date</th>
                        <th>Time</th>
                        <th>Class Type</th>
-                       <th>Update Record</th>
                      </tr>";
             while ($row = mysqli_fetch_assoc($r_sessions))
             {
@@ -127,21 +129,23 @@
                 $displayTypeRecord = $row['type'];
               }
 
+              // Convert time to String to print AM/PM
+              $timeStr = $row['sessionTime'];
+              $timeDisplay = date('h:i A', strtotime($timeStr));
+
                 echo   "<tr>
-                          <td class='info'><a data-toggle='modal' data-target='#viewRecord1'> S" . $row['sessionID'] . "</a></td>
+                          <td class='info'><a data-toggle='modal' data-target='#updateTRecord" . $trainingRecordNo . "'> S" . $row['sessionID'] . "</a></td>
 
                           <td>" . $row['title'] . "</td>
                           <td>" . $row['sessionDate'] . "</td>
-                          <td>" . $row['sessionTime'] . "</td>
+                          <td>" . $timeDisplay . "</td>
                           <td class='warning'>" . $displayType . "</td>
-                          <td><a data-toggle='modal' data-target='#updateRecord1'>Update</a></td>
                         </tr>";
 
-                /* Pop-up overlay to view record for each respective session */
+                /* Pop-up overlay to view and update record for each respective session */
                 echo '<div class="container2">
-                  <div class="modal fade" id="viewRecord1" role="dialog">
+                  <div class="modal fade" id="updateTRecord' . $trainingRecordNo . '" role="dialog">
                     <div class="modal-dialog">
-                      <div class="viewRecord_1">
 
                         <div class="FormContent">
                           <div class="modal-header">
@@ -176,7 +180,7 @@
                               <div class="form-group">
                                 <label class="col-xs-5 col-sm-4">Time :</label>
                                 <div class="col-xs-6 col-sm-6" align="left">' .
-                                  $row['sessionTime'] .
+                                  $timeDisplay .
                                 '</div>
                               </div>
                             </div>
@@ -253,10 +257,11 @@
                           echo '</div>
                         </div>
 
-                      </div>
                     </div>
                   </div>
                 </div>';
+
+                $trainingRecordNo++;
 
             }
               echo "<tr>
@@ -298,123 +303,7 @@
 
 
 
-    <!-- Pop-up overlay to view record for session S100-->
-    <div class="container2">
-      <div class="modal fade" id="viewRecord1" role="dialog">
-        <div class="modal-dialog">
-          <div class="viewRecord_1">
 
-            <div class="FormContent">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title" align="center">Group Training Record</h2>
-              </div>
-
-              <div class="modal-body" align="right">
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Session ID :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      S100
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Title :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Be a Good Sport with Cross Country!
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Date :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      2017-09-30
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Time :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      6:00 PM
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Fee (RM):</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      RM 10
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Status :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Completed
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Class type :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Sport
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Max participants :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      10
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-5 col-sm-4">Num participants :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      7
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Pop-up overlay to update record for session S100-->
     <div class="container3">
