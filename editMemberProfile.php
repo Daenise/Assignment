@@ -10,7 +10,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
- echo "Database connected."."</br>";
 
 $con = new mysqli($servername, $username, $password, $dbname);
 
@@ -23,8 +22,7 @@ $row = mysqli_fetch_array($query);
 
 <html>
   <head>
-    <meta charset="$con = new mysqli($servername, $username, $password, $dbname);
-utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -46,6 +44,7 @@ utf-8">
     </script>
     <script src="js/bootstrap.min.js"></script>
     <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+    <script type = "text/javascript"  src = "updateValidation.js"></script>
 
     <header>
       <div class="row">
@@ -83,7 +82,7 @@ utf-8">
     <div class="container">
       <h2 align="center">Member Profile</h2>
         <br />
-        <form name = "updateMProfile" method="post" action="updateMProfile.php">
+        <form name = "updateMProfile" onsubmit="return editMProfile()" method="post" action="updateMProfile.php">
         <div class="row">
           <div class="col-xs-12 col-sm-5 col-md-2 col-md-offset-1 col-lg-4" align="center">
             <br />
