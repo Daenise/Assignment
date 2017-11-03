@@ -23,8 +23,8 @@ email = '$email', level='$level' WHERE username = '$theMember'" ;
   $result = mysqli_query($con, $updateM);
 
   if ($result) {
-    echo "Member Profile : ".$theMember. " is successfully updated.";
-    echo "Redirecting back to member profile page";
+    echo "Member Profile : ".$theMember. " is successfully updated.<br>";
+    echo "Redirecting back to member profile page...";
     header("Refresh: 5; url= displayMemberProfile.php");
   }
   else {

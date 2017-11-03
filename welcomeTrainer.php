@@ -1,3 +1,7 @@
+<?php
+         session_start();
+         $fullName = $_SESSION['fullName'];
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -31,7 +35,7 @@
   <header>
     <div class="row">
       <div class="col-xs-8 col-md-9 col-lg-10">
-        <a href="welcomeTrainer.html">
+        <a href="welcomeTrainer.php">
           <img src="images/helpfitLogo.png" alt="HELPFit Logo" width="350" height="90">
         </a>
       </div>
@@ -51,10 +55,10 @@
     </div>
     <div class="row">
       <ul class="nav nav-pills nav-justified">
-        <li class="active"><a href="welcomeTrainer.html"> Home </a></li>
+        <li class="active"><a href="welcomeTrainer.php"> Home </a></li>
         <li><a href="trainingSession.html"> Record Training Session </a></li>
-        <li><a href="trainerTrainingHist.html"> Training History </a></li>
-        <li><a href="updateRecord.html"> Update Training Record </a></li>
+        <li><a href="trainerTrainingHist.php"> Training History </a></li>
+
       </ul>
     </div>
      <div>
@@ -109,19 +113,13 @@
         </div></br />
         <div align="center">
         <nav>
-          <a class="footNav" href="welcomeTrainer.html">Home</a>&nbsp; &#9474; &nbsp;
+          <a class="footNav" href="welcomeTrainer.php">Home</a>&nbsp; &#9474; &nbsp;
           <a class="footNav" href="trainingSession.html">Record Training Session</a>&nbsp;  &#9474; &nbsp;
-          <a class="footNav" href="trainerTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
-          <a class="footNav" href="updateRecord.html">Update Training Record</a>
+          <a class="footNav" href="trainerTrainingHist.php">Training History</a>
         </nav>
         </div>
       </footer>
   </body>
-
-  <?php
-           session_start();
-           $fullName = $_SESSION['fullName'];
-  ?>
     <script type="text/javascript">
         var myDate = new Date();
         var time = myDate.getHours();

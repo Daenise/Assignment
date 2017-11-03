@@ -7,9 +7,8 @@
     <link href ="css/bootstrap-social.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <title> Review Trainer </title>
+    <title> Update Training Record </title>
     <style>
-      .pull-right {margin-top: 5px; margin-right:3px;}
       .container {border: 1px solid black; margin-top: 30px; margin-bottom: 30px; padding: 10px}
       .input-group {margin-right: 25px; }
       table {border: 1px solid black; margin:30px; margin-top: 15px}
@@ -17,9 +16,6 @@
       .session-group {border-bottom: 1px solid black;}
       .formContent{background-color:#fafafa;
                   color:#000000;}
-      .formDivider{position: relative;
-                  border-bottom: 1px solid lightgray;
-                  margin-top: 10px; }
 
     </style>
   </head>
@@ -28,12 +24,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </script>
     <script src="js/bootstrap.min.js"></script>
-    <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+    <script type = "text/javascript"  src = "formValidation.js" ></script>
+    <script type = "text/javascript"  src = "logoutConfirmation.js" ></script>
 
     <header>
       <div class="row">
         <div class="col-xs-8 col-md-9 col-lg-10">
-          <a href="welcomeMember.html">
+          <a href="welcomeTrainer.php">
             <img src="images/helpfitLogo.png" alt="HELPFit Logo" width="350" height="90">
           </a>
         </div>
@@ -41,11 +38,11 @@
 
           <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> John Tan
+              <span class="glyphicon glyphicon-user"></span> Ben Lee
               <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="displayMemberProfile.php">View profile</a></li>
+              <li><a class="dropdown-item" href="displayTrainerProfile.html">View profile</a></li>
               <li role="separator" class="divider"></li>
               <li><a class="dropdown-item" href="signOut.php" onclick="return logOut()">Logout</a></li>
             </ul>
@@ -53,18 +50,18 @@
         </div>
 
         <div class="row">
-          <ul class="nav nav-pills nav-justified">
-            <li ><a href="welcomeMember.html"> Home </a></li>
-            <li><a href="registerSession.php"> Training Session </a></li>
-            <li><a href="memberTrainingHist.html"> Training History </a></li>
-            <li class="active"><a href="reviewTrainer.html"> Review Trainer </a></li>
-          </ul>
-          </div>
+            <ul class="nav nav-pills nav-justified">
+              <li><a href="welcomeTrainer.php"> Home </a></li>
+              <li><a href="trainingSession.html"> Record Training Session </a></li>
+              <li><a href="trainerTrainingHist.php"> Training History </a></li>
+              <li class="active"><a href="updateRecord.html"> Update Training Record </a></li>
+            </ul>
+        </div>
       </div>
     </header>
 
     <div class="container">
-      <h2 align="center">Review Trainer</h2>
+      <h2 align="center">Update Training Record</h2>
       <br />
 
       <div class="row">
@@ -86,7 +83,8 @@
             <td align="left">
               <h4>Session ID: S100</h4>
               <h5>Title: Be a Good Sport with Cross Country!</h5>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#session1">Choose session</button>
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewRecord1">View details</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateRecord1">Update session</button>
             </td>
           </tr>
           <tr class="col-xs-12 session-group" align="center">
@@ -94,39 +92,34 @@
             <td align="left">
               <h4>Session ID: S101</h4>
               <h5>Title: Build Up Your Skills with Trainer Ben</h5>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#session2">Choose session</button>
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewRecord2">View details</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateRecord2">Update session</button>
             </td>
           </tr>
-          <tr class="col-xs-12 session-group" align="center">
+          <tr class="col-xs-12" align="center">
             <td><img src="images/session3.jpg" class="img-circle" alt="Session 3 Picture" width="140" height="120"></td>
             <td align="left">
               <h4>Session ID: S102</h4>
               <h5>Title: Personal Zumba + Yoga Session &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#session3">Choose session</button>
-            </td>
-          </tr>
-          <tr class="col-xs-12" align="center">
-            <td><img src="images/session4.jpg" class="img-circle" alt="Session 4 Picture" width="160" height="125"></td>
-            <td align="left">
-              <h4>Session ID: S103</h4>
-              <h5>Title: Light Exercise with Trainer Tina &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#session4">Choose session</button>
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewRecord3">View details</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateRecord3">Update session</button>
             </td>
           </tr>
         </div>
       </table>
+
     </div>
 
-      <!-- Pop-up overlay for session S100 -->
+      <!-- Pop-up overlay to view record and update record for session S100-->
       <div class="container2">
-        <div class="modal fade" id="session1" role="dialog">
+        <div class="modal fade" id="viewRecord1" role="dialog">
           <div class="modal-dialog">
-            <div class="reviewTrainer_1">
+            <div class="viewRecord_1">
 
               <div class="FormContent">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h3 class="modal-title" align="center">Write a Review</h3>
+                  <h2 class="modal-title" align="center">Group Training Record</h2>
                 </div>
 
                 <div class="modal-body" align="right">
@@ -200,11 +193,10 @@
                     <div class="form-group">
                       <label class="col-xs-5 col-sm-4">Class type :</label>
                       <div class="col-xs-6 col-sm-6" align="left">
-                        Group (Sport)
+                        Sport
                       </div>
                     </div>
                   </div>
-
 
                   <br />
 
@@ -221,59 +213,10 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's name :</label>
+                      <label class="col-xs-5 col-sm-4">Num participants :</label>
                       <div class="col-xs-6 col-sm-6" align="left">
-                        Ben Lee
+                        7
                       </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's specialty :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Sport
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="formDivider"></div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Rating :</label>
-                      <div class="col-xs-6 col-sm-8" align="left">
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5">
-                        <br />
-                        &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Comments :</label>
-                      <div class="col-xs-6 col-sm-6">
-                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                      <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
                     </div>
                   </div>
 
@@ -285,16 +228,137 @@
         </div>
       </div>
 
-      <!-- Pop-up overlay for session S101-->
       <div class="container3">
-        <div class="modal fade" id="session2" role="dialog">
+        <div class="modal fade" id="updateRecord1" role="dialog">
           <div class="modal-dialog">
-            <div class="reviewTrainer_2">
+            <div class="updateRecord_1">
+
+              <form name="updateSession" onsubmit="return updateSession()" method="post">
 
               <div class="FormContent">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h2 class="modal-title" align="center">Write a Review</h2>
+                  <h2 class="modal-title" align="center">Update Group Training Record</h2>
+                </div>
+
+                <div class="modal-body" align="right">
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Session ID :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        S100
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Title :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        Be a Good Sport with Cross Country!
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <script type="text/javascript" src="date.js"></script>
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Date :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <input type="date" name="sessionDate" class="form-control input-md" id="sessionDate"
+                        min="2017-10-03" max="2100-12-31" placeholder="Enter Date (e.g. DD-MM-YYY)" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Time :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <input type="time" name="sessionTime" class="form-control input-lg" id="sessionTime"
+                          placeholder="Enter Time (e.g. 10:00 AM)" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Fee (RM):</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <input type="number" name="sessionFee" class="form-control input-md" id="sessionFee" placeholder="RM" min="0" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Status :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <select class="form-control" id="sessionStatus" required>
+                          <option value="Choose status" selected disabled>Choose status</option>
+                          <option value="Cancelled">Cancelled</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Available">Available</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Class type :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <select class="form-control" id="sessionType" required>
+                          <option value="Choose class type" selected disabled>Choose class type</option>
+                          <option value="Sport">Sport</option>
+                          <option value="Dance">Dance</option>
+                          <option value="MMA">MMA</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                      <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pop-up overlay to view record and update record for session S101-->
+      <div class="container4">
+        <div class="modal fade" id="viewRecord2" role="dialog">
+          <div class="modal-dialog">
+            <div class="viewRecord_2">
+
+              <div class="FormContent">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title" align="center">Personal Training Record</h2>
                 </div>
 
                 <div class="modal-body" align="right">
@@ -377,39 +441,37 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's name :</label>
+                      <label class="col-xs-5 col-sm-4">Member :</label>
                       <div class="col-xs-6 col-sm-6" align="left">
-                        Ben Lee
+                        &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <br />
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="container5">
+        <div class="modal fade" id="updateRecord2" role="dialog">
+          <div class="modal-dialog">
+            <div class="updateRecord_2">
+
+              <div class="FormContent">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title" align="center">Update Personal Training Record</h2>
+                </div>
+
+                <div class="modal-body" align="right">
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's specialty :</label>
+                      <label class="col-xs-3 col-sm-4">Session ID :</label>
                       <div class="col-xs-6 col-sm-6" align="left">
-                        Sport
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="formDivider"></div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Rating :</label>
-                      <div class="col-xs-6 col-sm-8" align="left">
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5">
-                        <br />
-                        &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
+                        S101
                       </div>
                     </div>
                   </div>
@@ -418,9 +480,69 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Comments :</label>
+                      <label class="col-xs-3 col-sm-4">Title :</label>
+                      <div class="col-xs-6 col-sm-6" align="left">
+                        Build Up Your Skills with Trainer Ben
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Date :</label>
                       <div class="col-xs-6 col-sm-6">
-                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
+                        <input type="date" name="sessionDate" class="form-control input-md" id="sessionDate" min="2017-10-03" max="2100-12-31">
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Time :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <input type="time" name="sessionTime" class="form-control input-md" id="sessionTime">
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Fee (RM):</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <input type="number" name="sessionFee" class="form-control input-md" id="sessionFee" placeholder="RM" min="0">
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Status :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <select class="form-control">
+                          <option value="Choose status" selected disabled>Choose status</option>
+                          <option value="Cancelled">Cancelled</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Available">Available</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-xs-3 col-sm-4">Notes :</label>
+                      <div class="col-xs-6 col-sm-6">
+                        <input type="text" name="notes" class="form-control input-md" id="notes" placeholder="Enter notes">
                       </div>
                     </div>
                   </div>
@@ -429,7 +551,7 @@
 
                   <div class="row">
                     <div class="col-xs-12 col-md-12">
-                      <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
+                      <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
                     </div>
                   </div>
 
@@ -441,16 +563,16 @@
         </div>
       </div>
 
-      <!-- Pop-up overlay for session S102 (date of training has not passed)-->
-      <div class="container4">
-        <div class="modal fade" id="session3" role="dialog">
+      <!-- Pop-up overlay to view record and update record for session S102-->
+      <div class="container6">
+        <div class="modal fade" id="viewRecord3" role="dialog">
           <div class="modal-dialog">
-            <div class="reviewTrainer_3">
+            <div class="viewRecord_3">
 
               <div class="FormContent">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h2 class="modal-title" align="center">Write a Review</h2>
+                  <h2 class="modal-title" align="center">Personal Training Record</h2>
                 </div>
 
                 <div class="modal-body" align="right">
@@ -533,220 +655,12 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's name :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Ben Lee
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's specialty :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Sport
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="formDivider"></div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Rating :</label>
-                      <div class="col-xs-6 col-sm-8" align="left">
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5">
-                        <br />
-                        &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Comments :</label>
-                      <div class="col-xs-6 col-sm-6">
-                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                      <button type="submit" id="s102" class="btn btn-primary btn-md pull-right">Submit</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pop-up overlay for session S103 (date of training has not passed)-->
-      <div class="container5">
-        <div class="modal fade" id="session4" role="dialog">
-          <div class="modal-dialog">
-            <div class="reviewTrainer_4">
-
-              <div class="FormContent">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h2 class="modal-title" align="center">Write a Review</h2>
-                </div>
-
-                <div class="modal-body" align="right">
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Session ID :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        S103
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Title :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Light Exercise with Trainer Tina
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <script type="text/javascript" src="date.js"></script>
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Date :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        2017-11-01
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Time :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        2:00 PM
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Fee (RM):</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        RM 25
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Status :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Available
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Notes :</label>
+                      <label class="col-xs-5 col-sm-4">Member :</label>
                       <div class="col-xs-6 col-sm-6" align="left">
                         -
                       </div>
                     </div>
                   </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's name :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Tina Wong
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's specialty :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Dance
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="formDivider"></div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Rating :</label>
-                      <div class="col-xs-6 col-sm-8" align="left">
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5">
-                        <br />
-                        &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Comments :</label>
-                      <div class="col-xs-6 col-sm-6">
-                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                      <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
-                    </div>
-                  </div>
-
                 </div>
               </div>
 
@@ -754,12 +668,6 @@
           </div>
         </div>
       </div>
-
-
-
-
-
-
 
       <div class="container7">
         <div class="modal fade" id="updateRecord3" role="dialog">
@@ -775,7 +683,7 @@
                 <div class="modal-body" align="right">
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-12 col-sm-3">Session ID :</label>
+                      <label class="col-xs-3 col-sm-4">Session ID :</label>
                       <div class="col-xs-6 col-sm-6" align="left">
                         S102
                       </div>
@@ -786,7 +694,7 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-12 col-sm-3">Title :</label>
+                      <label class="col-xs-3 col-sm-4">Title :</label>
                       <div class="col-xs-6 col-sm-6" align="left">
                         Personal Zumba + Yoga Session
                       </div>
@@ -797,7 +705,7 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-12 col-sm-3">Date :</label>
+                      <label class="col-xs-3 col-sm-4">Date :</label>
                       <div class="col-xs-6 col-sm-6">
                         <input type="date" name="sessionDate" class="form-control input-md" id="sessionDate" min="2017-10-03" max="2100-12-31">
                       </div>
@@ -808,7 +716,7 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-12 col-sm-3">Time :</label>
+                      <label class="col-xs-3 col-sm-4">Time :</label>
                       <div class="col-xs-6 col-sm-6">
                         <input type="time" name="sessionTime" class="form-control input-md" id="sessionTime">
                       </div>
@@ -819,7 +727,7 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-12 col-sm-3">Fee (RM):</label>
+                      <label class="col-xs-3 col-sm-4">Fee (RM):</label>
                       <div class="col-xs-6 col-sm-6">
                         <input type="number" name="sessionFee" class="form-control input-md" id="sessionFee" placeholder="RM" min="0">
                       </div>
@@ -830,7 +738,7 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-12 col-sm-3">Status :</label>
+                      <label class="col-xs-3 col-sm-4">Status :</label>
                       <div class="col-xs-6 col-sm-6">
                         <select class="form-control">
                           <option value="Choose status" selected disabled>Choose status</option>
@@ -846,7 +754,7 @@
 
                   <div class="row">
                     <div class="form-group">
-                      <label class="col-xs-12 col-sm-3">Notes :</label>
+                      <label class="col-xs-3 col-sm-4">Notes :</label>
                       <div class="col-xs-6 col-sm-6">
                         <input type="text" name="notes" class="form-control input-md" id="notes" placeholder="Enter notes">
                       </div>
@@ -881,10 +789,10 @@
         </div></br />
         <div align="center">
         <nav>
-          <a class="footNav" href="welcomeMember.html">Home</a>&nbsp; &#9474; &nbsp;
-          <a class="footNav" href="registerSession.html">Register Session</a>&nbsp;  &#9474; &nbsp;
-          <a class="footNav" href="memberTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
-          <a class="footNav" href="reviewTrainer.html">Review Trainer</a>
+          <a class="footNav" href="welcomeTrainer.php">Home</a>&nbsp; &#9474; &nbsp;
+          <a class="footNav" href="trainingSession.html">Record Training Session</a>&nbsp;  &#9474; &nbsp;
+          <a class="footNav" href="trainerTrainingHist.php">Training History</a>&nbsp; &#9474; &nbsp;
+          <a class="footNav" href="updateRecord.html">Update Training Record</a>
         </nav>
         </div>
       </footer>

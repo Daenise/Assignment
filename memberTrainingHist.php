@@ -30,7 +30,7 @@
     <header>
       <div class="row">
         <div class="col-xs-8 col-md-9 col-lg-10">
-          <a href="welcomeMember.html">
+          <a href="welcomeMember.php">
             <img src="images/helpfitLogo.png" alt="HELPFit Logo" width="350" height="90">
           </a>
         </div>
@@ -38,7 +38,7 @@
 
           <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> John Tan
+              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>
               <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
@@ -51,10 +51,9 @@
 
         <div class="row">
           <ul class="nav nav-pills nav-justified">
-            <li><a href="welcomeMember.html"> Home </a></li>
+            <li><a href="welcomeMember.php"> Home </a></li>
             <li><a href="registerSession.php"> Training Session </a></li>
-            <li class="active"><a href="memberTrainingHist.html"> Training History </a></li>
-            <li><a href="reviewTrainer.html"> Review Trainer </a></li>
+            <li class="active"><a href=" memberTrainingHist.php"> Training History </a></li>
           </ul>
           </div>
       </div>
@@ -141,13 +140,23 @@
               </ul>
             </td>
           </tr>
-          <tr style="display: none;" id="noResults">
-            <td>No results for "<span id="userInput"></span>"</td>
-          </tr>
         </table>
       </div>
 
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Pop-up overlay to write a review for session S100 -->
     <div class="container2">
@@ -346,10 +355,9 @@
       </div></br />
       <div align="center">
       <nav>
-        <a class="footNav" href="welcomeMember.html">Home</a>&nbsp; &#9474; &nbsp;
-        <a class="footNav" href="registerSession.html">Register Session</a>&nbsp;  &#9474; &nbsp;
-        <a class="footNav" href="memberTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
-        <a class="footNav" href="reviewTrainer.html">Review Trainer</a>
+        <a class="footNav" href="welcomeMember.php">Home</a>&nbsp; &#9474; &nbsp;
+        <a class="footNav" href="registerSession.php">Register Session</a>&nbsp;  &#9474; &nbsp;
+        <a class="footNav" href=" memberTrainingHist.php">Training History</a>
       </nav>
       </div>
     </footer>
