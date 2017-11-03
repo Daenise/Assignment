@@ -49,7 +49,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
     <header>
       <div class="row">
         <div class="col-xs-8 col-md-9 col-lg-10">
-          <a href="welcomeMember.html">
+          <a href="welcomeMember.php">
             <img src="images/helpfitLogo.png" alt="HELPFit Logo" width="350" height="90">
           </a>
         </div>
@@ -70,7 +70,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
         </div>
         <div class="row">
             <ul class="nav nav-pills nav-justified">
-              <li><a href="welcomeMember.html"> Home </a></li>
+              <li><a href="welcomeMember.php"> Home </a></li>
               <li><a href="registerSession.html"> Training Session </a></li>
               <li><a href="memberTrainingHist.html"> Training History </a></li>
               <li><a href="reviewTrainer.html"> Review Trainer </a></li>
@@ -145,7 +145,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
         </div></br />
         <div align="center">
         <nav>
-          <a class="footNav" href="welcomeMember.html">Home</a>&nbsp; &#9474; &nbsp;
+          <a class="footNav" href="welcomeMember.php">Home</a>&nbsp; &#9474; &nbsp;
           <a class="footNav" href="registerSession.html">Register Session</a>&nbsp;  &#9474; &nbsp;
           <a class="footNav" href="memberTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
           <a class="footNav" href="reviewTrainer.html">Review Trainer</a>
