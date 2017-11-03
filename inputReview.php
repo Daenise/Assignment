@@ -27,8 +27,8 @@
 
  if ($result_addReview) {
    echo "Review successfully added. <br>";
-   echo "Redirecting back to training history page";
-   header("Refresh: 5; url= memberTrainingHist.html");
+   echo "Redirecting back to training history page...";
+   header("Refresh: 5; url=  memberTrainingHist.php");
  }
  else {
     echo "Error submitting a review : " . mysqli_error($con);

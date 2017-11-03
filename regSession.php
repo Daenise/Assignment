@@ -20,9 +20,9 @@ $regSession= "INSERT INTO members (regSess) VALUES ('$regSess')";
 $query = mysqli_query($con, $regSession);
 
   if ($query) {
-    echo "The Session : ".$sessionID. " is successfully registered.";
-    echo "Redirecting back to training history page";
-    header("Refresh: 5; url= memberTrainingHist.html");
+    echo "The Session : ".$sessionID. " is successfully registered.<br>";
+    echo "Redirecting back to training history page...";
+    header("Refresh: 5; url=  memberTrainingHist.php");
   }
   else {
      echo "Error updating member profile : " . mysqli_error($con);

@@ -61,7 +61,7 @@
       <ul class="nav nav-pills nav-justified">
         <li class="active"><a href="welcomeMember.php"> Home </a></li>
         <li><a href="registerSession.php"> Training Session </a></li>
-        <li><a href="memberTrainingHist.html"> Training History </a></li>
+        <li><a href=" memberTrainingHist.php"> Training History </a></li>
       </ul>
       </div>
      <div>
@@ -136,7 +136,7 @@
         <nav>
           <a class="footNav" href="welcomeMember.php">Home</a>&nbsp; &#9474; &nbsp;
           <a class="footNav" href="registerSession.php">Register Session</a>&nbsp;  &#9474; &nbsp;
-          <a class="footNav" href="memberTrainingHist.html">Training History</a>
+          <a class="footNav" href=" memberTrainingHist.php">Training History</a>
         </nav>
         </div>
       </footer>

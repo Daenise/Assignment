@@ -30,8 +30,8 @@
    $result_addGroupTraining = mysqli_query($con, $sql_addGroupTraining);
 
   if ($result_addGroupTraining) {
-    echo "Training session : ".$title. " successfully added.";
-    echo "Redirecting back to training session page";
+    echo "Training session : ".$title. " successfully added.<br>";
+    echo "Redirecting back to training session page...";
     header("Refresh: 5; url= trainingSession.html");
   }
   else {
