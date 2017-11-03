@@ -10,7 +10,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
- echo "Database connected."."</br>";
 
  $sql_getSession = "SELECT * FROM trainingSessions JOIN trainers
   ON sessionTrainer = username  WHERE status='Available'";

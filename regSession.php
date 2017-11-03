@@ -10,7 +10,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
- echo "Database connected."."</br>";
 
 //to update member profile
   $theMember = $_SESSION['user'];

@@ -95,7 +95,6 @@
         if (!$con) {
           die("Could not connect to database.");
         }
-        echo "Database connected."."</br>";
 
         $theTrainer = $_SESSION ['user'];
 

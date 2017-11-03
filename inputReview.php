@@ -12,7 +12,6 @@
   if (!$con) {
    die("Could not connect to database.");
    }
-  echo "Database connected."."</br>";
 
   // Store values from user input in review form
   $rating = $_POST['trainerRating'];

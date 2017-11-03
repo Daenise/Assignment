@@ -9,7 +9,6 @@
    if (!$con) {
     die("Could not connect to database.");
     }
-   echo "Database connected."."</br>";
 
    // Query
    $username=$_POST['username'];

@@ -13,7 +13,6 @@ if(isset($_POST['submit']))
  if (!$con) {
   die("Could not connect to database.");
   }
- echo "Database connected."."</br>";
 
  $username = $_POST['username'];
  $password = $_POST['password'];
