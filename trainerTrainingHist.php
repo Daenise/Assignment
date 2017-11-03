@@ -163,13 +163,13 @@
                             </div>
 
                             <br />
-  // editable
+
                             <div class="row">
                               <div class="form-group">
                                 <label class="col-xs-5 col-sm-4">Date :</label>
-                                <div class="col-xs-6 col-sm-6" align="left">' .
-                                  $row['sessionDate'] .
-                                '</div>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                <input type="date" name="sessionDate" class="form-control input-md" id="sessionDate" placeholder="Enter Date (e.g. DD-MM-YYY)" value="' . $row['sessionDate'] . '" required>
+                                </div>
                               </div>
                             </div>
 
@@ -178,9 +178,10 @@
                             <div class="row">
                               <div class="form-group">
                                 <label class="col-xs-5 col-sm-4">Time :</label>
-                                <div class="col-xs-6 col-sm-6" align="left">' .
-                                  $timeDisplay .
-                                '</div>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                  <input type="time" name="sessionTime" class="form-control input-md" id="sessionTime"
+                                    placeholder="Enter Time (e.g. 10:00 AM)" value="' . $row['sessionTime'] . '" required>
+                                </div>
                               </div>
                             </div>
 
@@ -189,9 +190,9 @@
                             <div class="row">
                               <div class="form-group">
                                 <label class="col-xs-5 col-sm-4">Fee (RM):</label>
-                                <div class="col-xs-6 col-sm-6" align="left">' .
-                                  $row['sessionFee'] .
-                                '</div>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                  <input type="number" name="sessionFee" class="form-control input-md" id="sessionFee" min="0" placeholder="Enter fee" value="' . $row['sessionFee'] .'" required>
+                                </div>
                               </div>
                             </div>
 
@@ -200,24 +201,66 @@
                             <div class="row">
                               <div class="form-group">
                                 <label class="col-xs-5 col-sm-4">Status :</label>
-                                <div class="col-xs-6 col-sm-6" align="left">' .
-                                  $row['status'] .
-                                '</div>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                  <select class="form-control" id="sessionStatus" required>
+                                    <option value="Choose status" selected disabled>Choose status</option>
+                                    <option value="Cancelled" ';
+
+                                    if ($row['status'] == "Cancelled")
+                                      echo 'selected ';
+
+                                    echo '>Cancelled</option>
+
+                                    <option value="Completed" ';
+
+                                    if ($row['status'] == "Completed")
+                                      echo 'selected ';
+
+                                    echo '>Completed</option>
+                                    <option value="Available" ';
+
+                                    if ($row['status'] == "Available")
+                                      echo 'selected ';
+
+                                    echo '>Available</option>
+                                  </select>
+                                </div>
                               </div>
                             </div>';
 
                             if ($row['type'] == "Group") {
                               echo '<br />
-    // group editable
                               <div class="row">
                                 <div class="form-group">
                                   <label class="col-xs-5 col-sm-4">Class type :</label>
-                                  <div class="col-xs-6 col-sm-6" align="left">' .
-                                    $row['classType'] .
+                                  <div class="col-xs-6 col-sm-6" align="left">
+                                    <select class="form-control" id="sessionType" required>
+                                      <option value="Choose class type" selected disabled>Choose class type</option>
+                                      <option value="Cancelled" ';
+
+                                      if ($row['classType'] == "Sport")
+                                        echo 'selected ';
+
+                                      echo '>Sport</option>
+
+                                      <option value="Dance" ';
+
+                                      if ($row['classType'] == "Dance")
+                                        echo 'selected ';
+
+                                      echo '>Completed</option>
+                                      <option value="Available" ';
+
+                                      if ($row['classType'] == "MMA")
+                                        echo 'selected ';
+
+                                      echo '>MMA</option>
+                                    </select>' .
+
                                   '</div>
                                 </div>
                               </div>
-  // ..end group editable
+
                               <br />
 
                               <div class="row">
@@ -241,17 +284,22 @@
                               </div>';
                             } else {
                               echo '<br />
-    // personal editable
                               <div class="row">
                                 <div class="form-group">
                                   <label class="col-xs-5 col-sm-4">Notes :</label>
-                                  <div class="col-xs-6 col-sm-6" align="left">' .
-                                    $row['notes'] .
-                                  '</div>
+                                  <div class="col-xs-6 col-sm-6" align="left">
+                                    <input type="text" name="notes" class="form-control input-md" id="notes" placeholder="Enter notes" value="' . $row['notes'] . '">
+                                  </div>
                                 </div>
                               </div>';
                             }
-  // ..end personal editable
+
+                            echo'<br />
+                            <div class="row">
+                              <div class="col-xs-12 col-md-12">
+                                <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
+                              </div>
+                            </div>';
 
                           echo '</div>
                         </div>
@@ -304,122 +352,11 @@
 
 
 
-    <!-- Pop-up overlay to update record for session S100-->
-    <div class="container3">
-      <div class="modal fade" id="updateRecord1" role="dialog">
-        <div class="modal-dialog">
-          <div class="updateRecord_1">
 
-            <form name="updateSession" onsubmit="return updateSession()" method="post">
 
-            <div class="FormContent">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title" align="center">Update Group Training Record</h2>
-              </div>
 
-              <div class="modal-body" align="right">
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-3 col-sm-4">Session ID :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      S100
-                    </div>
-                  </div>
-                </div>
 
-                <br />
 
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-3 col-sm-4">Title :</label>
-                    <div class="col-xs-6 col-sm-6" align="left">
-                      Be a Good Sport with Cross Country!
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <script type="text/javascript" src="date.js"></script>
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-3 col-sm-4">Date :</label>
-                    <div class="col-xs-6 col-sm-6">
-                      <input type="date" name="sessionDate" class="form-control input-md" id="sessionDate"
-                      min="2017-10-03" max="2100-12-31" placeholder="Enter Date (e.g. DD-MM-YYY)" required>
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-3 col-sm-4">Time :</label>
-                    <div class="col-xs-6 col-sm-6">
-                      <input type="time" name="sessionTime" class="form-control input-lg" id="sessionTime"
-                        placeholder="Enter Time (e.g. 10:00 AM)" required>
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-3 col-sm-4">Fee (RM):</label>
-                    <div class="col-xs-6 col-sm-6">
-                      <input type="number" name="sessionFee" class="form-control input-md" id="sessionFee" placeholder="RM" min="0" required>
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-3 col-sm-4">Status :</label>
-                    <div class="col-xs-6 col-sm-6">
-                      <select class="form-control" id="sessionStatus" required>
-                        <option value="Choose status" selected disabled>Choose status</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Available">Available</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="form-group">
-                    <label class="col-xs-3 col-sm-4">Class type :</label>
-                    <div class="col-xs-6 col-sm-6">
-                      <select class="form-control" id="sessionType" required>
-                        <option value="Choose class type" selected disabled>Choose class type</option>
-                        <option value="Sport">Sport</option>
-                        <option value="Dance">Dance</option>
-                        <option value="MMA">MMA</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                  <div class="col-xs-12 col-md-12">
-                    <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            </form>
 
           </div>
         </div>
