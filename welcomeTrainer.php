@@ -1,3 +1,7 @@
+<?php
+         session_start();
+         $fullName = $_SESSION['fullName'];
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -117,11 +121,6 @@
         </div>
       </footer>
   </body>
-
-  <?php
-           session_start();
-           $fullName = $_SESSION['fullName'];
-  ?>
     <script type="text/javascript">
         var myDate = new Date();
         var time = myDate.getHours();
