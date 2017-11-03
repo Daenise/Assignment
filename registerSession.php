@@ -114,6 +114,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
             while($row = mysqli_fetch_array($query) )
             {
+              $timeStr = $row['sessionTime'];
+              $timeDisplay = date('h:i A', strtotime($timeStr));
               echo '
               <tr>
               <td align="center">
@@ -123,7 +125,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
               <td align="center"> '.$row['sessionID']. ' </td>
               <td> '.$row['title']. '</td>
               <td align="center"> '.$row['sessionDate']. '</td>
-              <td align="center"> '.$row['sessionTime']. '</td>
+              <td align="center"> '.$timeDisplay. '</td>
               <td align="center"> '.$row['sessionFee']. '</td>
               <td align="center"> '.$row['type']. '</td>
               <td align="center"> '.$row['status']. '</td>

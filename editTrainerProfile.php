@@ -1,3 +1,26 @@
+<?php
+session_start();
+//connect to database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "helpfit";
+$con = new mysqli($servername, $username, $password, $dbname);
+
+ if (!$con) {
+  die("Could not connect to database.");
+  }
+  $theTrainer = $_SESSION['user'];
+
+  $con = new mysqli($servername, $username, $password, $dbname);
+
+  $sql_getTrainer = "SELECT * FROM trainers WHERE username='$theTrainer' ";
+
+  $query = mysqli_query($con, $sql_getTrainer);
+  $row = mysqli_fetch_array($query);
+
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,13 +30,13 @@
     <link href ="css/bootstrap-social.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <title> Trainer Profile </title>
+    <title> Edit Trainer Profile </title>
 
     <style>
       .pull-right {margin-top: 5px; margin-right:3px;}
       .container {border: 1px solid black; margin-top: 30px; margin-bottom: 30px; padding: 10px}
       label {font-size: 12pt}
-      .showdetail {font-weight: normal;}
+      .showdetail {font-weight: normal}
     </style>
   </head>
 
@@ -46,12 +69,12 @@
 
         </div>
         <div class="row">
-            <ul class="nav nav-pills nav-justified">
-              <li><a href="welcomeTrainer.php"> Home </a></li>
-              <li><a href="trainingSession.html"> Record Training Session </a></li>
-              <li><a href="trainerTrainingHist.php"> Training History </a></li>
+          <ul class="nav nav-pills nav-justified">
+            <li><a href="welcomeTrainer.php"> Home </a></li>
+            <li><a href="trainingSession.html"> Record Training Session </a></li>
+            <li><a href="trainerTrainingHist.php"> Training History </a></li>
 
-            </ul>
+          </ul>
         </div>
       </div>
     </header>
@@ -68,43 +91,69 @@
             <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">
             <br />
             <br />
+            <div align="right">
+              <input type="file" name="pic" accept="image/*">
+            </div>
             <br />
             <br />
           </div>
 
           <br />
-          <br />
-          <br />
 
+          <form name = "updateTProfile" onsubmit="return editTProfile()" method="post" action="updateTProfile.php">
           <div align="center">
-            <br />
-            <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
+            <div class="form-group col-xs-12 col-sm-5 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Username :</label>
               <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">benlee123</label>
             </div>
 
-            <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
-              <label class="col-xs-12 col-sm-5 col-lg-4">Full Name :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">Ben Lee</label>
+            <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
+              <label class="col-xs-12 col-sm-4 col-lg-4">Password :</label>
+              <div class="col-xs-12 col-sm-8 col-lg-8">
+                <input type="password" name="inputPswd" class="form-text input-lg" id="inputPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
+              </div>
             </div>
 
-            <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
-              <label class="col-xs-12 col-sm-5 col-lg-4">Email :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">ben123@gmail.com</label>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
+              <label class="col-xs-12 col-sm-4 col-lg-4">Confirm Password :</label>
+              <div class="col-xs-12 col-sm-8 col-lg-8">
+                <input type="password" name="confirmPswd" class="form-text input-lg" id="confirmPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
+              </div>
             </div>
 
-            <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
-              <label class="col-xs-12 col-sm-5 col-lg-4">Specialty :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail"> Dance </label>
+            <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
+              <label class="col-xs-12 col-sm-4 col-lg-4">Full Name :</label>
+              <div class="col-xs-12 col-sm-8 col-lg-8">
+                <input type="text" name="fullName" class="form-text input-lg" id="fullName" value="<?php echo $row['fullName']?>" placeholder="<?php echo $row['fullName']?>" >
+              </div>
             </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
+              <label class="col-xs-12 col-sm-4 col-lg-4">Email :</label>
+              <div class="col-xs-12 col-sm-8 col-lg-8">
+                <input type="email" name="email" class="form-text input-lg" id="email" value="<?php echo $row['email']?>" placeholder="<?php echo $row['email']?>" >
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
+              <label class="col-xs-12 col-sm-4 col-lg-4">Specialty :</label>
+              <div class="col-xs-3">
+              </div>
+              <div class="col-xs-6 col-sm-8 col-lg-8">
+                <input type="text" name="specialty" class="form-text input-lg" id="specialty" value="<?php echo $row['specialty']?>" placeholder="<?php echo $row['specialty']?>" >
+              </div>
+            </div>
+
           </div>
+        </form>
+
+        </div><br />
+        <div class="col-xs-12 col-md-11">
+          <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
+          <a href="displayTrainerProfile.html" class="btn btn-danger btn-lg pull-right">Cancel</a>
         </div><br />
 
-        <div class="col-xs-12 col-md-11">
-          <a href="editTrainerProfile.html">
-            <button type="submit" class="btn btn-primary btn-lg pull-right">Edit</button>
-          </a>
-        </div><br />
       </div>
 
       <footer>
