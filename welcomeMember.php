@@ -1,6 +1,15 @@
 <?php
-         session_start();
-         $fullName = $_SESSION['fullName'];
+     session_start();
+     $fullName = $_SESSION['fullName'];
+     if(!isset($fullName)) {
+       $fullName = "Guest";
+?>
+     <script type="text/javascript">
+       alert("You are not logged in as a user.");
+     </script>
+<?php
+      header("url=index.html");
+     }
 ?>
 <html>
 <head>
