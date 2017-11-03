@@ -58,7 +58,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
           <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> John Tan
+              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $theMember?></label>
               <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
@@ -72,7 +72,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
         <div class="row">
             <ul class="nav nav-pills nav-justified">
               <li><a href="welcomeMember.php"> Home </a></li>
-              <li><a href="registerSession.html"> Training Session </a></li>
+              <li><a href="registerSession.php"> Training Session </a></li>
               <li><a href="memberTrainingHist.html"> Training History </a></li>
               <li><a href="reviewTrainer.html"> Review Trainer </a></li>
             </ul>
@@ -179,7 +179,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
         <div align="center">
         <nav>
           <a class="footNav" href="welcomeMember.php">Home</a>&nbsp; &#9474; &nbsp;
-          <a class="footNav" href="registerSession.html">Register Session</a>&nbsp;  &#9474; &nbsp;
+          <a class="footNav" href="registerSession.php">Register Session</a>&nbsp;  &#9474; &nbsp;
           <a class="footNav" href="memberTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
           <a class="footNav" href="reviewTrainer.html">Review Trainer</a>
         </nav>

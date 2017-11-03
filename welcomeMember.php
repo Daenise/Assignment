@@ -1,5 +1,8 @@
+<?php
+         session_start();
+         $fullName = $_SESSION['fullName'];
+?>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,7 +83,7 @@
                 <h2> Come Join Us ! </h2>
                 <h3> Date : 20 OCTOBER 2017<br /><br />  Time : 10:00AM <br /><br />
                   Venue : STUDIO ROOM 1 <br /><br />  Fee : Free </h3> <br />
-                <a href="registerSession.html" class="btn btn-default btn-lg center-block col-xs-5 col-sm-5 col-md-5"> Register now! </a> <br /><br />
+                <a href="registerSession.php" class="btn btn-default btn-lg center-block col-xs-5 col-sm-5 col-md-5"> Register now! </a> <br /><br />
               </div>
 
           </div>
@@ -133,18 +136,13 @@
         <div align="center">
         <nav>
           <a class="footNav" href="welcomeMember.php">Home</a>&nbsp; &#9474; &nbsp;
-          <a class="footNav" href="registerSession.html">Register Session</a>&nbsp;  &#9474; &nbsp;
+          <a class="footNav" href="registerSession.php">Register Session</a>&nbsp;  &#9474; &nbsp;
           <a class="footNav" href="memberTrainingHist.html">Training History</a>&nbsp; &#9474; &nbsp;
           <a class="footNav" href="reviewTrainer.html">Review Trainer</a>
         </nav>
         </div>
       </footer>
   </body>
-
-  <?php
-           session_start();
-           $fullName = $_SESSION['fullName'];
-  ?>
   <script type="text/javascript">
       var myDate = new Date();
       var time = myDate.getHours();
