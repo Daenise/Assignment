@@ -44,6 +44,7 @@ $row = mysqli_fetch_array($query);
     </script>
     <script src="js/bootstrap.min.js"></script>
     <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+    <script type = "text/javascript"  src = "updateValidation.js"></script>
 
     <header>
       <div class="row">
@@ -81,7 +82,7 @@ $row = mysqli_fetch_array($query);
     <div class="container">
       <h2 align="center">Member Profile</h2>
         <br />
-        <form name = "updateMProfile" method="post" action="updateMProfile.php">
+        <form name = "updateMProfile" onsubmit="return editMProfile()" method="post" action="updateMProfile.php">
         <div class="row">
           <div class="col-xs-12 col-sm-5 col-md-2 col-md-offset-1 col-lg-4" align="center">
             <br />
