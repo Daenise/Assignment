@@ -1,4 +1,5 @@
 
+//check the user selected the class type
 function checkClassType(){
 if (document.activeElement.id == 'submitSession'){
   var classTypes = document.forms["addGSession"]["classTypes"].value;
@@ -27,19 +28,19 @@ if (document.activeElement.id == 'submitSession'){
     if(month < mm){
     alert("Date cannot be before today !");
     return false;
-
-    if (day < dd){
-      alert("Date cannot be before today !");
-      return false;
+    }
+    else if (month==mm){
+      if(day<dd){
+        alert("Date cannot be before today !");
+        return false;
+      }
+      //check if user create a session for today
+      else if (day==dd){
+        alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
+         return false;
+      }
     }
   }
-}
-//check if user create a session for today
-if (year==yyyy && month==mm && day==dd){
-  alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
-   return false;
-}
-}
 
 function addPSession() {
     var title = document.forms["addSession"]["title"].value;
@@ -90,7 +91,6 @@ function addPSession() {
       return false;
     }
     else if(date < new Date()){
-
 
       alert ("Invalid date session!");
       document.forms["addSession"]["sessionDate"].focus();

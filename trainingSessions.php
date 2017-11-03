@@ -15,7 +15,7 @@
    // Query
    $title=$_POST['title'];
    $sessionDate=$_POST['sessionDate'];
-   $sessionTime=$_POST['sessionTime'];
+   $sessionTimes=$_POST['sessionTime'];
    $sessionFee=$_POST['sessionFee'];
    $type=$_POST['type'];
    $theTrainer = $_SESSION['user'];
@@ -23,7 +23,7 @@
    $notes = "";
 
    //to convert the time from am/pm to 24hours time format to store in database
-   $sessionTime= date("G:i", strtotime($sessionTime));
+   $sessionTime= date("G:i", strtotime($sessionTimes));
 
    // Add record
    $numPax = 0;
@@ -34,8 +34,8 @@
      $maxPax=$_POST['maxPax'];
      $classType= $_POST['classTypes'];
    }
-   $sql_addTrainingSession = "INSERT INTO trainingsessions(title,sessionDate,sessionTime,sessionFee,maxPax,numPax,type,classType,status,notes,sessionTrainer)
-   VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$numPax','$type','$classType','$status','$notes','$theTrainer')";
+   $sql_addTrainingSession = "INSERT INTO trainingsessions(title,sessionDate,sessionTime,sessionFee,maxPax,type,classType,status,notes,sessionTrainer)
+   VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$type','$classType','$status','$notes','$theTrainer')";
 
    $result_addTrainingSession = mysqli_query($con, $sql_addTrainingSession);
 

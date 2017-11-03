@@ -1,6 +1,30 @@
+<?php
+session_start();
+//connect to database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "helpfit";
+$con = new mysqli($servername, $username, $password, $dbname);
+
+ if (!$con) {
+  die("Could not connect to database.");
+  }
+ echo "Database connected."."</br>";
+
+$con = new mysqli($servername, $username, $password, $dbname);
+
+$sql_getMember = "SELECT * FROM members ";
+
+$query = mysqli_query($con, $sql_getMember);
+$row = mysqli_fetch_array($query);
+
+?>
+
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="$con = new mysqli($servername, $username, $password, $dbname);
+utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -59,6 +83,7 @@
     <div class="container">
       <h2 align="center">Member Profile</h2>
         <br />
+        <form name = "updateMProfile" method="post" action="updateMProfile.php">
         <div class="row">
           <div class="col-xs-12 col-sm-5 col-md-2 col-md-offset-1 col-lg-4" align="center">
             <br />
@@ -80,13 +105,14 @@
           <div align="center">
             <div class="form-group col-xs-12 col-sm-5 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Username :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">john123</label>
+              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail" >john123</label>
+              <input type="hidden" name="username" id="username" value="<?php echo $row['username'] ?>">
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Password :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="password" name="password" class="form-text input-lg" id="inputPswd" placeholder="Enter password">
+                <input type="password" name="inputPswd" class="form-text input-lg" id="inputPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
               </div>
             </div>
 
@@ -94,21 +120,21 @@
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Confirm Password :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="password" name="password" class="form-text input-lg" id="confirmPswd" placeholder="Confirm password">
+                <input type="password" name="confirmPswd" class="form-text input-lg" id="confirmPswd" value="<?php echo $row['password']?>" placeholder="<?php echo $row['password']?>" >
               </div>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Full Name :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="text" name="fullName" class="form-text input-lg" id="fullName" placeholder="Enter your full name">
+                <input type="text" name="fullName" class="form-text input-lg" id="fullName" value="<?php echo $row['fullName']?>" placeholder="<?php echo $row['fullName']?>" >
               </div>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-4 col-lg-4">Email :</label>
               <div class="col-xs-12 col-sm-8 col-lg-8">
-                <input type="email" name="email" class="form-text input-lg" id="email" placeholder="e.g. john@gmail.com">
+                <input type="email" name="email" class="form-text input-lg" id="email" value="<?php echo $row['email']?>" placeholder="<?php echo $row['email']?>" >
               </div>
             </div>
 
@@ -117,11 +143,11 @@
               <div class="col-xs-3">
               </div>
               <div class="col-xs-6 col-sm-8 col-lg-8">
-                <select class="form-control">
+                <select class="form-control" name="level" id="level">
                   <option value="Choose your level" selected disabled>Choose your level</option>
-                  <option value="Beginner">Beginner</option>
-                  <option value="Advanced">Advanced</option>
-                  <option value="Expert">Expert</option>
+                  <option value="Beginner"<?php if($row['level'] == 'Beginner'){ echo ' selected="selected"'; } ?>>Beginner</option>
+                  <option value="Advanced"<?php if($row['level'] == 'Advanced'){ echo ' selected="selected"'; } ?>>Advanced</option>
+                  <option value="Expert"<?php if($row['level'] == 'Expert'){ echo ' selected="selected"'; } ?>>Expert</option>
                 </select>
               </div>
             </div>
@@ -132,10 +158,12 @@
         <br />
 
         <div class="col-xs-12 col-md-11">
-          <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
+          <button type="submit" name="update" class="btn btn-primary btn-lg pull-right">Update</button>
           <a href="displayMemberProfile.html" class="btn btn-danger btn-lg pull-right">Cancel</a>
         </div>
+
         <br />
+      </form>
       </div>
 
       <footer>

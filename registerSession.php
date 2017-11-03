@@ -12,7 +12,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
   }
  echo "Database connected."."</br>";
 
- $sql_getSession = "SELECT * FROM trainingSessions WHERE status='Available' ";
+ $sql_getSession = "SELECT * FROM trainingSessions JOIN trainers
+  ON sessionTrainer = username  WHERE status='Available'";
 
  $query = mysqli_query($con, $sql_getSession);
 
@@ -112,164 +113,38 @@ $con = new mysqli($servername, $username, $password, $dbname);
           </tr>
 
             <?php
-            while($row = mysqli_fetch_array($query))
-            {
 
+            while($row = mysqli_fetch_array($query) )
+            {
               echo '
               <tr>
-              <td><input type="checkbox" class="checkbox" value="checkSession"></td>';
+              <td align="center">
+              <input type="checkbox" class="checkbox" name="checkBox"
+              value="'.$regSess.'"></td>';
               echo '
-              <td> '.$row['sessionID']. ' </td>
+              <td align="center"> '.$row['sessionID']. ' </td>
               <td> '.$row['title']. '</td>
-              <td> '.$row['sessionDate']. '</td>
-              <td> '.$row['sessionTime']. '</td>
-              <td> '.$row['sessionFee']. '</td>
-              <td> '.$row['type']. '</td>
-              <td> '.$row['status']. '</td>
-              <td> '.$row['sessionTrainer']. '</td>
+              <td align="center"> '.$row['sessionDate']. '</td>
+              <td align="center"> '.$row['sessionTime']. '</td>
+              <td align="center"> '.$row['sessionFee']. '</td>
+              <td align="center"> '.$row['type']. '</td>
+              <td align="center"> '.$row['status']. '</td>
+              <td align="center"> '.$row['fullName']. '</td>
+              <td align="center"> '.$row['specialty']. '</td>
               </tr>
               ';
 
             }
             ?>
 
-            <!--
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S102</td>
-            <td>Personal Zumba + Yoga Session </td>
-            <td>2017-10-07</td>
-            <td>4:00 PM</td>
-            <td>RM 0.00</td>
-            <td>Personal</td>
-            <td>Available</td>
-            <td>Ben Lee </td>
-            <td>Sport</td>
-            <td>4.5</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value="" ></td>
-            <td>S103</td>
-            <td>Light Exercise with Trainer Tina </td>
-            <td>2017-11-01</td>
-            <td>2:00 PM</td>
-            <td>RM 25.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td>Tina Wong </td>
-            <td>Dance</td>
-            <td>4.8</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S104</td>
-            <td>MMA class </td>
-            <td>2017-11-03</td>
-            <td>9:00 PM</td>
-            <td>RM 60.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td>Bryan Tan </td>
-            <td>MMA</td>
-            <td>4.0</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S105</td>
-            <td>Latin </td>
-            <td>2017-11-05</td>
-            <td>6:30 PM</td>
-            <td>RM 50.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td>John Lee </td>
-            <td>Dance</td>
-            <td>4.8</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S106</td>
-            <td>Cycle Fun </td>
-            <td>2017-11-09</td>
-            <td>9:00 AM</td>
-            <td>RM 30.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td>Michelle Tey </td>
-            <td>Sport</td>
-            <td>4.7</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value="" ></td>
-            <td>S107</td>
-            <td>Zumba </td>
-            <td>2017-11-01</td>
-            <td>10:00 AM</td>
-            <td>RM 50.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td>John Lee </td>
-            <td>Dance</td>
-            <td>no rating yet</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S108</td>
-            <td>Hot Yoga </td>
-            <td>2017-11-15</td>
-            <td>9:00 AM</td>
-            <td>RM 35.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td>Ben Lee </td>
-            <td>Sport</td>
-            <td>4.5</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S109</td>
-            <td>Body Pump </td>
-            <td>2017-11-16</td>
-            <td>9:00 AM</td>
-            <td>RM 35.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td>Bryan Tan </td>
-            <td>MMA</td>
-            <td>4.0</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S110</td>
-            <td>Body Built Up </td>
-            <td>2017-10-17</td>
-            <td>10:00 AM</td>
-            <td>RM 25.00</td>
-            <td>Personal</td>
-            <td>Available</td>
-            <td>Johnson Lee </td>
-            <td>Body Builder</td>
-            <td>4.0</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" value=""></td>
-            <td>S111</td>
-            <td>Zumba Party </td>
-            <td>2017-10-20</td>
-            <td>10:00 AM</td>
-            <td>RM 0.00</td>
-            <td>Group</td>
-            <td>Available</td>
-            <td> Zoey Lim </td>
-            <td>Dance</td>
-            <td>5.0 </td>
-          </tr>
-        -->
         </table>
       </div>
       <br />
 
       <div class="col-xs-12 col-md-11 pull-right">
+        <form action="regSession.php" method="post">
           <button type="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
+        </form>
         </a>
       </div>
     </div>
