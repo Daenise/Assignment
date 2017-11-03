@@ -59,7 +59,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
               <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="displayMemberProfile.html">View profile</a></li>
+              <li><a class="dropdown-item" href="displayMemberProfile.php">View profile</a></li>
               <li role="separator" class="divider"></li>
               <li><a class="dropdown-item" href="signOut.php" onclick="return logOut()">Logout</a></li>
             </ul>
