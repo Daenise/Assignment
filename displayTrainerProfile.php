@@ -1,3 +1,26 @@
+<?php
+session_start();
+//connect to database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "helpfit";
+$con = new mysqli($servername, $username, $password, $dbname);
+
+ if (!$con) {
+  die("Could not connect to database.");
+  }
+  $theTrainer = $_SESSION['user'];
+
+  $con = new mysqli($servername, $username, $password, $dbname);
+
+  $sql_getTrainer = "SELECT * FROM trainers WHERE username='$theTrainer' ";
+
+  $query = mysqli_query($con, $sql_getTrainer);
+  $row = mysqli_fetch_array($query);
+
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -80,22 +103,22 @@
             <br />
             <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Username :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">benlee123</label>
+              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail"><?php echo $row['username'] ?></label>
             </div>
 
             <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Full Name :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">Ben Lee</label>
+              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail"><?php echo $row['fullName'] ?></label>
             </div>
 
             <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Email :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail">ben123@gmail.com</label>
+              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail"><?php echo $row['email'] ?></label>
             </div>
 
             <div class="form-group col-xs-12 col-sm-5 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Specialty :</label>
-              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail"> Dance </label>
+              <label class="col-xs-12 col-sm-6 col-lg-4 showdetail"> <?php echo $row['specialty'] ?> </label>
             </div>
           </div>
         </div><br />
