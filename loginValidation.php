@@ -56,6 +56,8 @@ if(isset($_POST['submit']))
  {
   echo 'Please enter both username and password.';
  }
+ echo '<br>Redirecting back to home page...';
+ header("refresh: 5; url=index.html");
 }
 
 mysqli_close($con);

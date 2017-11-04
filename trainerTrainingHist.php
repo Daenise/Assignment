@@ -112,7 +112,7 @@
          if (mysqli_num_rows($r_sessions) > 0)
          {
            echo "<div class='table-responsive'>" .
-                   "<table class='table table-hover table-condensed table-bordered'>" .
+                   "<table class='table table-hover table-condensed table-bordered table-striped'>" .
                      "<tr class='success'>
                        <th>SessionID</th>
                        <th>Title</th>
@@ -123,10 +123,10 @@
             while ($row = mysqli_fetch_assoc($r_sessions))
             {
               if ($row['type'] == "Personal") {
-                $displayType = $row['type'];
+                $displayType = "<td class='info'>" . $row['type'];
                 $displayTypeRecord = $row['type'];
               } else {
-                $displayType = $row['type'] . " (" . $row['classType'] . ")";
+                $displayType = "<td class='warning'>" . $row['type'] . " (" . $row['classType'] . ")";
                 $displayTypeRecord = $row['type'];
               }
 
@@ -135,12 +135,11 @@
               $timeDisplay = date('h:i A', strtotime($timeStr));
 
                 echo   "<tr>
-                          <td class='info'><a data-toggle='modal' data-target='#updateTRecord" . $trainingRecordNo . "'> S" . $row['sessionID'] . "</a></td>
+                          <td><a data-toggle='modal' data-target='#updateTRecord" . $trainingRecordNo . "'> S" . $row['sessionID'] . "</a></td>
 
                           <td>" . $row['title'] . "</td>
                           <td>" . $row['sessionDate'] . "</td>
-                          <td>" . $timeDisplay . "</td>
-                          <td class='warning'>" . $displayType . "</td>
+                          <td>" . $timeDisplay . "</td>" . $displayType . "</td>
                         </tr>";
 
                 /* Pop-up overlay to view and update record for each respective session */
@@ -317,7 +316,7 @@
                       <td colspan='6' align='center'>
                         <ul class='pagination'>
                           <li><a href='#'>&laquo;</a></li>
-                          <li><a href='#'>1</a></li>
+                          <li class='active'><a href='#'>1</a></li>
                           <li><a href='#'>2</a></li>
                           <li><a href='#'>3</a></li>
                           <li><a href='#'>4</a></li>
