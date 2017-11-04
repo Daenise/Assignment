@@ -13,10 +13,9 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
 //to update member profile
   $theMember = $_SESSION['user'];
-  $regSess = $_POST['sessionID']
 
 
-$regSession= "INSERT INTO members (regSess) VALUES ('$regSess')";
+
 $query = mysqli_query($con, $regSession);
 
   if ($query) {

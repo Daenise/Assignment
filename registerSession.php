@@ -7,19 +7,19 @@ $password = "";
 $dbname = "helpfit";
 $con = new mysqli($servername, $username, $password, $dbname);
 
- if (!$con) {
+if (!$con) {
   die("Could not connect to database.");
   }
 
- $sql_getSession = "SELECT * FROM trainingSessions JOIN trainers
+  $sql_getSession = "SELECT * FROM trainingSessions JOIN trainers
   ON sessionTrainer = username  WHERE status='Available'";
 
- $query = mysqli_query($con, $sql_getSession);
+  $query = mysqli_query($con, $sql_getSession);
 
- if(!$query){
-   die("Error : " . mysqli_error($con));
- }
- ?>
+  if(!$query){
+    die("Error : " . mysqli_error($con));
+  }
+  ?>
 
 
 <html>
@@ -119,7 +119,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
               echo '
               <tr>
               <td align="center">
-              <input type="checkbox" class="checkbox" name="checkBox"
+              <input type="checkbox" class="checkbox" name="regSess"
               value="'.$regSess.'"></td>';
               echo '
               <td align="center"> '.$row['sessionID']. ' </td>
@@ -133,8 +133,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
               <td align="center"> '.$row['specialty']. '</td>
               </tr>
               ';
-
             }
+
             ?>
 
         </table>
@@ -142,9 +142,24 @@ $con = new mysqli($servername, $username, $password, $dbname);
       <br />
 
       <div class="col-xs-12 col-md-11 pull-right">
-        <form action="regSession.php" method="post">
           <button type="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
-        </form>
+          <?php
+          $theMember = $_SESSION['user'];
+          $regSession= "INSERT INTO members (title) VALUES ('$regSess')";
+          $query = mysqli_query($con, $regSession);
+
+            if ($query) {
+              echo "The Session : ".$sessionID. " is successfully registered.<br>";
+              echo "Redirecting back to training history page...";
+              header("Refresh: 5; url=  memberTrainingHist.php");
+            }
+            else {
+               echo "Error updating register a session : " . mysqli_error($con);
+               mysqli_error($con);
+             }
+
+            mysqli_close($con);
+          ?>
         </a>
       </div>
     </div>

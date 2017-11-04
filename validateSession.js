@@ -19,28 +19,24 @@ if (document.activeElement.id == 'submitSession'){
   var dd = today.getDate();
   var mm = today.getMonth()+1; // Since first value is 0, add 1 to reflect January as first month
   var yyyy = today.getFullYear();
-  var flag = false;
   if(year < yyyy){
     alert("Date cannot be before today !");
     return false;
   }
-  else if (year == yyyy){
-    if(month < mm){
+  else if (month < mm){
     alert("Date cannot be before today !");
     return false;
+}
+  else if (day < dd){
+      alert("Date cannot be before today !");
+      return false;
     }
-    else if (month==mm){
-      if(day<dd){
-        alert("Date cannot be before today !");
-        return false;
-      }
-      //check if user create a session for today
-      else if (day==dd){
-        alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
-         return false;
-      }
-    }
+ //check if user create a session for today
+ if (year==yyyy && month==mm && day==dd){
+   alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
+    return false;
   }
+}
 
 function addPSession() {
     var title = document.forms["addSession"]["title"].value;
@@ -57,27 +53,23 @@ function addPSession() {
     var dd = today.getDate();
     var mm = today.getMonth()+1; // Since first value is 0, add 1 to reflect January as first month
     var yyyy = today.getFullYear();
-    var flag = false;
     if(year < yyyy){
       alert("Date cannot be before today !");
       return false;
     }
-    else if (year == yyyy){
-      if(month < mm){
+    else if (month < mm){
       alert("Date cannot be before today !");
       return false;
-
-      if (day < dd){
+  }
+    else if (day < dd){
         alert("Date cannot be before today !");
         return false;
       }
+   //check if user create a session for today
+   if (year==yyyy && month==mm && day==dd){
+     alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
+      return false;
     }
-  }
-  //check if user create a session for today
-  if (year==yyyy && month==mm && day==dd){
-    alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
-     return false;
-  }
 
   //check if user enter every field
     if (title === "") {
@@ -87,12 +79,6 @@ function addPSession() {
     }
     else if (date === ""){
       alert("Date cannot be blank.");
-      document.forms["addSession"]["sessionDate"].focus();
-      return false;
-    }
-    else if(date < new Date()){
-
-      alert ("Invalid date session!");
       document.forms["addSession"]["sessionDate"].focus();
       return false;
     }
@@ -109,4 +95,4 @@ function addPSession() {
     else{
       alert("Thank you, your session is successfully created !");
     }
-}
+  }

@@ -32,9 +32,13 @@
    } else {
      $maxPax=$_POST['maxPax'];
      $classType= $_POST['classTypes'];
+
+     if($numPax == $maxPax){
+       $status="Full";
+     }
    }
-   $sql_addTrainingSession = "INSERT INTO trainingsessions(title,sessionDate,sessionTime,sessionFee,maxPax,type,classType,status,notes,sessionTrainer)
-   VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$type','$classType','$status','$notes','$theTrainer')";
+   $sql_addTrainingSession = "INSERT INTO trainingsessions(title,sessionDate,sessionTime,sessionFee,maxPax,numPax,type,classType,status,notes,sessionTrainer)
+   VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$numPax','$type','$classType','$status','$notes','$theTrainer')";
 
    $result_addTrainingSession = mysqli_query($con, $sql_addTrainingSession);
 

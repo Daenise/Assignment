@@ -67,13 +67,13 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 training">
-          <a href="personalTraining.html">
+          <a href="personalTraining.php">
             <img src ="images/personalTraining.jpg" alt="Personal Training" class="img-responsive">
             <button type="button" class="btn btn-block record btn-lg" > Record Personal Training </button>
           </a>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 training">
-          <a href="groupTraining.html">
+          <a href="groupTraining.php">
             <img src ="images/groupTraining.jpg" alt="Group Training" class="img-responsive">
             <button type="button" class="btn btn-block record btn-lg"> Record Group Training </button><br /><br />
           </a>
