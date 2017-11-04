@@ -29,7 +29,7 @@ if(isset($_POST['submit']))
 
    if (mysqli_num_rows($r_member) > 0)
    {
-    $_SESSION['user'] = $username;
+    $_SESSION['theMember'] = $username;
 
     while ($row = mysqli_fetch_assoc($r_member))
     {
@@ -40,7 +40,7 @@ if(isset($_POST['submit']))
    }
    else if (mysqli_num_rows($r_trainer) > 0)
    {
-     $_SESSION['user'] = $username;
+     $_SESSION['theTrainer'] = $username;
      while ($row = mysqli_fetch_assoc($r_trainer))
      {
        $_SESSION['fullName'] = $row["fullName"];

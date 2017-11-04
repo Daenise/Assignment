@@ -144,7 +144,7 @@ if (!$con) {
       <div class="col-xs-12 col-md-11 pull-right">
           <button type="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
           <?php
-          $theMember = $_SESSION['user'];
+          $theMember = $_SESSION['theMember'];
           $regSession= "INSERT INTO members (title) VALUES ('$regSess')";
           $query = mysqli_query($con, $regSession);
 
