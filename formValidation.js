@@ -1,5 +1,6 @@
 // formValidation.js
 
+/* Validate when a user registers for an account (member or trainer) */
 function registerAccount() {
   var pwd = document.forms["registerMember"]["inputPswd"].value;
   var pwd2 = document.forms["registerMember"]["confirmPswd"].value;
@@ -24,7 +25,6 @@ function registerAccount() {
     }
   }
 }
-
 
 function updateSession() {
     var date = document.forms["updateSession"]["sessionDate"].value;
