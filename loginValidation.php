@@ -7,6 +7,8 @@ $password = "";
 $dbname = "helpfit";
 $con = new mysqli($servername, $username, $password, $dbname);
 
+$_SESSION['fullName'] = "Guest";
+
 if(isset($_POST['submit']))
 {
 

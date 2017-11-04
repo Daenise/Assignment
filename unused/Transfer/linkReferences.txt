@@ -12,3 +12,8 @@ https://code.tutsplus.com/tutorials/how-to-paginate-data-with-php--net-2928
 4. Mobile view
 
 5. REPORT docs
+
+if(!isset($_SESSION['fullName']))
+  $fullName = "Guest";
+else
+  $fullName = $_SESSION['fullName'];
