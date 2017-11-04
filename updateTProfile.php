@@ -23,8 +23,8 @@ email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
   $result = mysqli_query($con, $updateT);
 
   if ($result) {
-    echo "Member Profile : ".$theTrainer. " is successfully updated.";
-    echo "Redirecting back to trainer profile page";
+    echo "Member Profile : ".$theTrainer. " is successfully updated.<br>";
+    echo "Redirecting back to trainer profile page...";
     header("Refresh: 5; url= displayTrainerProfile.php");
   }
   else {
