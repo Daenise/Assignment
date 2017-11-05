@@ -10,7 +10,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
-  $theTrainer = $_SESSION['theTrainer'];
+  $theTrainer = $_SESSION['user'];
 
   $con = new mysqli($servername, $username, $password, $dbname);
 

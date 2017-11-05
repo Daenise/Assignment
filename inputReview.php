@@ -18,7 +18,7 @@
   $comments = $_POST['reviewComments'];
   $sessionID = $_POST['sessionID'];
   $sessionTrainer = $_POST['sessionTrainer'];
-  $theMember = $_SESSION['theMember'];
+  $theMember = $_SESSION['user'];
 
   // Add record
   $sql_addReview = "INSERT INTO  reviews (rating, comments, sessionID, sessionTrainer, reviewedBy) VALUES ('$rating','$comments','$sessionID', '$sessionTrainer', '$theMember')";

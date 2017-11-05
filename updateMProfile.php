@@ -12,7 +12,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
   }
 
 //to update member profile
-  $theMember = $_SESSION['theMember'];
+  $theMember = $_SESSION['user'];
   $pwd = $_POST['inputPswd'];
   $fullName = $_POST['fullName'];
   $email = $_POST['email'];

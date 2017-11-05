@@ -10,10 +10,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
-  if (!isset($_SESSION['theMember']))
-      $_SESSION['theMember'] = "Guest";
-      
-  $theMember = $_SESSION['theMember'];
+
+  $theMember = $_SESSION['user'];
   $con = new mysqli($servername, $username, $password, $dbname);
 
   $sql_getMember = "SELECT * FROM members WHERE username='$theMember'";
