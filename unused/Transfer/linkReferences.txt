@@ -9,12 +9,5 @@ https://code.tutsplus.com/tutorials/how-to-paginate-data-with-php--net-2928
         + numPax -> check if class full (numPax == maxPax)
         + registered sessions -> regID, sessionID, username(member)
 3. M & T training History pages: Pagination, search, sort by
-4. Mobile view
 
-5. REPORT docs
-
-6. GUEST/login as both M and T same time:
-if(!isset($_SESSION['fullName']))
-  $fullName = "Guest";
-else
-  $fullName = $_SESSION['fullName'];
+4. REPORT docs
