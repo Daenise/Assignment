@@ -14,8 +14,27 @@ https://code.tutsplus.com/tutorials/how-to-paginate-data-with-php--net-2928
 5. REPORT docs
 
 6. GUEST/login as both M and T same time:
-<<<<<<< HEAD
-  TO CHECK GUEST:
+  TO CHECK GUEST (Correct):
+  <?php
+  session_start();
+
+       if (!isset($_SESSION['theMember'])){
+         $fullName = "Guest";
+       } else {
+         $fullName = $_SESSION['fullName'];
+       }
+
+       if ($fullName == "Guest"){
+  ?>
+       <script type="text/javascript">
+         alert("You are not logged in as a member.");
+       </script>
+  <?php
+        header("Refresh: 0; url=index.html");
+       }
+  ?>
+
+  OLD VERSION v3:
   <?php
        session_start();
        if (!isset($_SESSION['fullName']))
@@ -44,9 +63,3 @@ https://code.tutsplus.com/tutorials/how-to-paginate-data-with-php--net-2928
     $fullName = "Guest";
   else
     $fullName = $_SESSION['fullName'];
-=======
-if(!isset($_SESSION['fullName']))
-  $fullName = "Guest";
-else
-  $fullName = $_SESSION['fullName'];
->>>>>>> parent of e9aa83c... !! COMPLETE reverting to correct version, guest updated
