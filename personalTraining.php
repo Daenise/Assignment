@@ -26,6 +26,11 @@
   <link href ="css/bootstrap-social.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type = "text/javascript"  src = "validateSession.js"></script>
+  <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
   <title> Add Personal Training Session </title>
   <style>
   h2{text-align: center;}
@@ -35,11 +40,7 @@
 </head>
 
 <body class="main">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  </script>
-  <script src="js/bootstrap.min.js"></script>
-  <script type = "text/javascript"  src = "validateSession.js"></script>
-  <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+
   <header>
     <div class="row">
       <div class="col-xs-8 col-md-9 col-lg-10">

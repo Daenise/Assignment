@@ -20,19 +20,19 @@ if (document.activeElement.id == 'submitSession'){
   var mm = today.getMonth()+1; // Since first value is 0, add 1 to reflect January as first month
   var yyyy = today.getFullYear();
   if(year < yyyy){
-    alert("Date cannot be before today !");
+    alert("Year cannot be before today !");
     return false;
   }
-  else if (month < mm){
-    alert("Date cannot be before today !");
+  if (year == yyyy && month < mm){
+    alert("Month cannot be before today !");
     return false;
-}
-  else if (day < dd){
+  }
+  if (year == yyyy && month == mm && day < dd){
       alert("Date cannot be before today !");
       return false;
     }
  //check if user create a session for today
- if (year==yyyy && month==mm && day==dd){
+ if (year == yyyy && month == mm && day == dd){
    alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
     return false;
   }
@@ -54,17 +54,17 @@ function addPSession() {
     var mm = today.getMonth()+1; // Since first value is 0, add 1 to reflect January as first month
     var yyyy = today.getFullYear();
     if(year < yyyy){
-      alert("Date cannot be before today !");
+      alert("Year cannot be before today !");
       return false;
     }
-    else if (month < mm){
-      alert("Date cannot be before today !");
+    if (year == yyyy && month < mm){
+      alert("Month cannot be before today !");
       return false;
-  }
-    else if (day < dd){
+    }
+    if (year == yyyy && month == mm && day < dd){
         alert("Date cannot be before today !");
         return false;
-      }
+    }
    //check if user create a session for today
    if (year==yyyy && month==mm && day==dd){
      alert("You cannot create session for today !" + "\n" + "Session should be created one day before !");
