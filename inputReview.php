@@ -1,7 +1,20 @@
 <!-- inputReview.php -->
 
 <?php
-  session_start();
+     session_start();
+     if (!isset($_SESSION['fullName']))
+       $_SESSION['fullName'] = "Guest";
+     $fullName = $_SESSION['fullName'];
+
+     if ($fullName == "Guest"){
+?>
+     <script type="text/javascript">
+       alert("You are not logged in as a user.");
+     </script>
+<?php
+      header("Refresh:0; url=index.html");
+     }
+
   // Connect to database
   $servername = "localhost";
   $username = "root";
@@ -18,6 +31,7 @@
   $comments = $_POST['reviewComments'];
   $sessionID = $_POST['sessionID'];
   $sessionTrainer = $_POST['sessionTrainer'];
+
   $theMember = $_SESSION['user'];
 
   // Add record

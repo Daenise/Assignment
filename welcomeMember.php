@@ -10,7 +10,7 @@
        alert("You are not logged in as a user.");
      </script>
 <?php
-      header("url=index.html");
+      header("Refresh:0; url=index.html");
      }
 ?>
 <html>

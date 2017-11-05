@@ -17,6 +17,7 @@
    $sessionTimes=$_POST['sessionTime'];
    $sessionFee=$_POST['sessionFee'];
    $type=$_POST['type'];
+     
    $theTrainer = $_SESSION['user'];
    $status = "Available";
    $notes = "";

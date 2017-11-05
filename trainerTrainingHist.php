@@ -1,7 +1,20 @@
 <?php
-         session_start();
-         if (!isset($_SESSION['fullName']))
-           $_SESSION['fullName'] = "Guest";
+     session_start();
+     if (!isset($_SESSION['fullName']))
+       $_SESSION['fullName'] = "Guest";
+     $fullName = $_SESSION['fullName'];
+
+     if (!isset($_SESSION['user']))
+       $_SESSION['user'] = "Guest";
+
+     if ($fullName == "Guest" || $_SESSION['user'] == "Guest"){
+?>
+     <script type="text/javascript">
+       alert("You are not logged in as a user.");
+     </script>
+<?php
+      header("Refresh:0; url=index.html");
+     }
 ?>
 
 <html>
@@ -100,8 +113,6 @@
           die("Could not connect to database.");
         }
 
-        if (!isset($_SESSION ['user']))
-          $_SESSION['user'] = "Guest";
         $theTrainer = $_SESSION ['user'];
 
          // Queries
