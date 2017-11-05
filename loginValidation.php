@@ -32,7 +32,7 @@ if(isset($_POST['submit']))
 
    if (mysqli_num_rows($r_member) > 0)
    {
-    $_SESSION['theMember'] = $username;
+     $_SESSION['theMember'] = $username;
 
       while ($row = mysqli_fetch_assoc($r_member))
       {
@@ -43,7 +43,7 @@ if(isset($_POST['submit']))
    }
    else if (mysqli_num_rows($r_trainer) > 0)
    {
-     $_SESSION['theTrainer'] = $username;
+      $_SESSION['theTrainer'] = $username;
        while ($row = mysqli_fetch_assoc($r_trainer))
        {
          $_SESSION['fullName'] = $row["fullName"];
@@ -61,7 +61,7 @@ if(isset($_POST['submit']))
      <br>
      Redirecting back to home page...
 _END;
-     //echo '<br>Redirecting back to home page...'';
+     //echo '<br>Redirecting back to home page...';
      header("refresh: 3; url=index.html");
    }
  }

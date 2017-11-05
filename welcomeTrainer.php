@@ -1,17 +1,19 @@
 <?php
-         session_start();
+     session_start();
+     if (!isset($_SESSION['theTrainer'])){
+       $fullName = "Guest";
+     } else {
+       $fullName = $_SESSION['fullName'];
+     }
 
-         $fullName = $_SESSION['fullName'];
-         if (!isset($fullName)) {
+     if ($fullName == "Guest"){
 ?>
-
-         <script type="text/javascript">
-           alert("You are not logged in as a user.");
-         </script>
+     <script type="text/javascript">
+       alert("You are not logged in as a trainer.");
+     </script>
 <?php
-          header("url=index.html");
-        }
-
+      header("Refresh:0; url=index.html");
+     }
 ?>
 
 <html>

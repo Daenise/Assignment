@@ -94,6 +94,7 @@ function searchTrainingHist() {
     n.style.display = "none";
   }
 }
+
 function sortTrainingHist(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("searchTable");

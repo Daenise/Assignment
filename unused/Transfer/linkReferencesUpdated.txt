@@ -1,0 +1,52 @@
+https://stackoverflow.com/questions/27945601/store-image-path-in-mysql-with-php
+
+https://code.tutsplus.com/tutorials/how-to-paginate-data-with-php--net-2928
+
+
+1. Page: Edit & Display T & M profiles & glyphicons- Upload image/store db
+2. Member Training Hist / Review Trainer page:
+        + trainer averageRating (store T table, display when register)
+        + numPax -> check if class full (numPax == maxPax)
+        + registered sessions -> regID, sessionID, username(member)
+3. M & T training History pages: Pagination, search, sort by
+4. Mobile view
+
+5. REPORT docs
+
+6. GUEST/login as both M and T same time:
+<<<<<<< HEAD
+  TO CHECK GUEST:
+  <?php
+       session_start();
+       if (!isset($_SESSION['fullName']))
+         $_SESSION['fullName'] = "Guest";
+       $fullName = $_SESSION['fullName'];
+
+       if ($fullName == "Guest"){
+  ?>
+       <script type="text/javascript">
+         alert("You are not logged in as a user.");
+       </script>
+  <?php
+        header("Refresh:0; url=index.html");
+       }
+  ?>
+
+  OLD VERSION v2:
+  if (!isset($_SESSION['fullName']))
+    $_SESSION['fullName'] = "Guest";
+  if (!isset($_SESSION['user']))
+    $_SESSION['user'] = "Guest";
+
+
+  OLD VERSION:
+  if(!isset($_SESSION['fullName']))
+    $fullName = "Guest";
+  else
+    $fullName = $_SESSION['fullName'];
+=======
+if(!isset($_SESSION['fullName']))
+  $fullName = "Guest";
+else
+  $fullName = $_SESSION['fullName'];
+>>>>>>> parent of e9aa83c... !! COMPLETE reverting to correct version, guest updated

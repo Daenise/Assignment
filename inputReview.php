@@ -1,7 +1,22 @@
 <!-- inputReview.php -->
 
 <?php
-  session_start();
+     session_start();
+     if (!isset($_SESSION['theMember'])){
+       $fullName = "Guest";
+     } else {
+       $fullName = $_SESSION['fullName'];
+     }
+
+     if ($fullName == "Guest"){
+?>
+     <script type="text/javascript">
+       alert("You are not logged in as a member.");
+     </script>
+<?php
+      header("Refresh:0; url=index.html");
+     }
+
   // Connect to database
   $servername = "localhost";
   $username = "root";
@@ -18,7 +33,8 @@
   $comments = $_POST['reviewComments'];
   $sessionID = $_POST['sessionID'];
   $sessionTrainer = $_POST['sessionTrainer'];
-  $theMember = $_SESSION['theMember'];
+
+  $theMember = $_SESSION['user'];
 
   // Add record
   $sql_addReview = "INSERT INTO  reviews (rating, comments, sessionID, sessionTrainer, reviewedBy) VALUES ('$rating','$comments','$sessionID', '$sessionTrainer', '$theMember')";

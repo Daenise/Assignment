@@ -1,19 +1,19 @@
 <?php
      session_start();
-      if(!isset($_SESSION['fullName'])) {
-        if (!isset($fullName)) {
-          $fullName = "Guest";
-          $_SESSION['fullName'] = "Guest";
-?>
-       <script type="text/javascript">
-         alert("You are not logged in as a user.");
-       </script>
-<?php
-        header("url=index.html");
-      }
-     }
-     else
+     if (!isset($_SESSION['theMember'])){
+       $fullName = "Guest";
+     } else {
        $fullName = $_SESSION['fullName'];
+     }
+
+     if ($fullName == "Guest"){
+?>
+     <script type="text/javascript">
+       alert("You are not logged in as a member.");
+     </script>
+<?php
+      header("Refresh:0; url=index.html");
+     }
 ?>
 <html>
 <head>
