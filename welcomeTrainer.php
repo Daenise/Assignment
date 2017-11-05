@@ -1,17 +1,20 @@
 <?php
-     session_start();
-     if (!isset($_SESSION['fullName']))
-       $_SESSION['fullName'] = "Guest";
-     $fullName = $_SESSION['fullName'];
-
-     if ($fullName == "Guest"){
+         session_start();
+         $fullName = $_SESSION['fullName'];
+         if(!isset($fullName)) {
+           $fullName = "Guest";
 ?>
-     <script type="text/javascript">
-       alert("You are not logged in as a user.");
-     </script>
+         <script type="text/javascript">
+           alert("You are not logged in as a user.");
+         </script>
 <?php
+<<<<<<< HEAD
       header("Refresh:0; url=index.html");
      }
+=======
+          header("url=index.html");
+         }
+>>>>>>> parent of e9aa83c... !! COMPLETE reverting to correct version, guest updated
 ?>
 
 <html>

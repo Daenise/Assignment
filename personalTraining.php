@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
      session_start();
      if (!isset($_SESSION['fullName']))
        $_SESSION['fullName'] = "Guest";
@@ -12,6 +13,13 @@
 <?php
       header("Refresh:0; url=index.html");
      }
+=======
+         session_start();
+         $fullName = $_SESSION['fullName'];
+         if(!isset($fullName)) {
+           $fullName = "Guest";
+         }
+>>>>>>> parent of e9aa83c... !! COMPLETE reverting to correct version, guest updated
 ?>
 
 <html>
