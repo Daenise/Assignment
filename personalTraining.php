@@ -1,25 +1,19 @@
 <?php
-<<<<<<< HEAD
      session_start();
-     if (!isset($_SESSION['fullName']))
-       $_SESSION['fullName'] = "Guest";
-     $fullName = $_SESSION['fullName'];
+     if (!isset($_SESSION['theTrainer'])){
+       $fullName = "Guest";
+     } else {
+       $fullName = $_SESSION['fullName'];
+     }
 
      if ($fullName == "Guest"){
 ?>
      <script type="text/javascript">
-       alert("You are not logged in as a user.");
+       alert("You are not logged in as a trainer.");
      </script>
 <?php
       header("Refresh:0; url=index.html");
      }
-=======
-         session_start();
-         $fullName = $_SESSION['fullName'];
-         if(!isset($fullName)) {
-           $fullName = "Guest";
-         }
->>>>>>> parent of e9aa83c... !! COMPLETE reverting to correct version, guest updated
 ?>
 
 <html>
@@ -56,7 +50,7 @@
       <br>
         <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> <label><?php echo $_SESSION['fullName'] ?></label>
+              <span class="glyphicon glyphicon-user"></span> <label><?php echo $fullName ?></label>
               <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">

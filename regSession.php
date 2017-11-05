@@ -1,5 +1,20 @@
 <?php
-session_start();
+     session_start();
+     if (!isset($_SESSION['theMember'])){
+       $fullName = "Guest";
+     } else {
+       $fullName = $_SESSION['fullName'];
+     }
+
+     if ($fullName == "Guest"){
+?>
+     <script type="text/javascript">
+       alert("You are not logged in as a member.");
+     </script>
+<?php
+      header("Refresh:0; url=index.html");
+     }
+
 //connect to database
 $servername = "localhost";
 $username = "root";
