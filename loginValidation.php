@@ -7,10 +7,13 @@ $password = "";
 $dbname = "helpfit";
 $con = new mysqli($servername, $username, $password, $dbname);
 
+$_SESSION['fullName'] = "Guest";
+
 if(isset($_POST['submit']))
 {
 
- if (!$con) {
+ if (!$con)
+  {
   die("Could not connect to database.");
   }
 
@@ -29,36 +32,46 @@ if(isset($_POST['submit']))
 
    if (mysqli_num_rows($r_member) > 0)
    {
-    $_SESSION['user'] = $username;
+    $_SESSION['theMember'] = $username;
 
-    while ($row = mysqli_fetch_assoc($r_member))
-    {
-      $_SESSION['fullName'] = $row["fullName"];
-    }
+      while ($row = mysqli_fetch_assoc($r_member))
+      {
+        $_SESSION['fullName'] = $row["fullName"];
+      }
 
     header('Location: welcomeMember.php');
    }
    else if (mysqli_num_rows($r_trainer) > 0)
    {
-     $_SESSION['user'] = $username;
-     while ($row = mysqli_fetch_assoc($r_trainer))
-     {
-       $_SESSION['fullName'] = $row["fullName"];
-     }
+     $_SESSION['theTrainer'] = $username;
+       while ($row = mysqli_fetch_assoc($r_trainer))
+       {
+         $_SESSION['fullName'] = $row["fullName"];
+       }
 
      header('Location: welcomeTrainer.php');
    }
    else {
-     echo 'Your username or password is incorrect.';
+
+     echo
+<<<_END
+     You have either entered a wrong username or password
+
+     or you have not yet registered as a user.
+     <br>
+     Redirecting back to home page...
+_END;
+     //echo '<br>Redirecting back to home page...'';
+     header("refresh: 3; url=index.html");
    }
  }
- else
- {
-  echo 'Please enter both username and password.';
- }
- echo '<br>Redirecting back to home page...';
- header("refresh: 3; url=index.html");
-}
+  else
+  {
+   echo 'Please enter both username and password.';
 
+   echo '<br>Redirecting back to home page...';
+   header("refresh: 3; url=index.html");
+  }
+}
 mysqli_close($con);
 ?>

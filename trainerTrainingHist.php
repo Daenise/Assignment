@@ -1,6 +1,5 @@
 <?php
          session_start();
-         $fullName = $_SESSION['fullName'];
 ?>
 
 <html>
@@ -98,7 +97,7 @@
           die("Could not connect to database.");
         }
 
-        $theTrainer = $_SESSION ['user'];
+        $theTrainer = $_SESSION ['theTrainer'];
 
          // Queries
          $q_sessions = "SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer'";
