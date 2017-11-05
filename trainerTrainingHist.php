@@ -1,8 +1,4 @@
 <?php
- require_once(dirname(__FILE__) . '\Paginator.class.php');
-//require_once 'Paginator.class.php'
-?>
-<?php
      session_start();
      if (!isset($_SESSION['theTrainer'])){
        $fullName = "Guest";
@@ -20,11 +16,6 @@
       header("Refresh:0; url=index.html");
      }
 ?>
-
-<script type="text/javascript">
-
-
-</script>
 
 <html>
   <head>
@@ -47,9 +38,7 @@
       .session-group {border-bottom: 1px solid black;}
       .formContent{background-color:#fafafa;
                   color:#000000;}
-      #search-image{background-image: url('/images/searchicon.png');}
     </style>
-
 
   </head>
 
