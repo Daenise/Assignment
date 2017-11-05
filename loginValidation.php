@@ -61,7 +61,7 @@ if(isset($_POST['submit']))
      <br>
      Redirecting back to home page...
 _END;
-     //echo '<br>Redirecting back to home page...'';
+     //echo '<br>Redirecting back to home page...';
      header("refresh: 3; url=index.html");
    }
  }
