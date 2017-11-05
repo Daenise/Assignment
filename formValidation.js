@@ -62,42 +62,55 @@ function updateSession() {
     }
 }
 
-
 function searchTrainingHist() {
    // Declare variables
-  var input = document.getElementById("searchInput");
-  var table = document.getElementById("searchTable");
+  var input = document.getElementById("s");
+  var table = document.getElementById("tb");
   var filter = input.value.toUpperCase();
   var rows = table.getElementsByTagName("tr");
   var on = 0;
    // Loop through all table rows, and hide those who don't match the search query
-  for (var i = 0; i < rows.length; i++) {
-    var result = rows[i].getElementsByTagName("$")[1];
-    result = result.innerHTML.toUpperCase();
+   for (i = 0; i < rows.length; i++)
+     {
+       //don't initiate search unless user types at least 3 characters. This will greatly improve performance and usability especially with large tables.
+       if (filter.length >= 3)
+       {
+   	     var match = false;
+         var tdList = rows[i].getElementsByTagName("td");
 
-    //val.length == 0 || (val.length < 3 && result.indexOf(val) == 0) || (val.length >= 3 && result.indexOf(val) > -1 )
-    if (result) {
-        if ( result.indexOf(filter) > -1  ) {
-        rows[i].style.display = "";
-        on++;
-        } else {
-        rows[i].style.display = "none";
-        }
+   	  //loop through every td
+   	    for (j = 0; j < tdList.length; j++)
+   	    {
+   	       var td = tdList[j];
+
+           if (td)
+   	       {
+             if (td.innerText.toUpperCase().indexOf(filter) > -1) {
+   		    match = true;
+             }
+   	       }
+         }
+
+   	    if (match == true)
+     	  {
+             rows[i].style.display = "";
+     	  }
+   	    else
+     	  {
+     		rows[i].style.display = "none";
+     	  }
+   	  }
+       else
+       {
+         rows[i].style.display = "";
+       }
     }
-
-  }
-/*  var n = document.getElementById("noResults");
-  if ( on == 0 && n ) {
-    n.style.display = "";
-    document.getElementById("userInput").innerHTML = searchInput.value;
-  } else {
-    n.style.display = "none";
-  } */
 }
+
 
 function sortTrainingHist(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("searchTable");
+  table = document.getElementById("t");
   switching = true;
   // Set the sorting direction to ascending:
   dir = "asc";

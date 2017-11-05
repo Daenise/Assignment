@@ -1,4 +1,8 @@
 <?php
+ require_once(dirname(__FILE__) . '\Paginator.class.php');
+//require_once 'Paginator.class.php'
+?>
+<?php
      session_start();
      if (!isset($_SESSION['theTrainer'])){
        $fullName = "Guest";
@@ -10,11 +14,17 @@
 ?>
      <script type="text/javascript">
        alert("You are not logged in as a trainer.");
+
      </script>
 <?php
       header("Refresh:0; url=index.html");
      }
 ?>
+
+<script type="text/javascript">
+
+
+</script>
 
 <html>
   <head>
@@ -39,6 +49,8 @@
                   color:#000000;}
       #search-image{background-image: url('/images/searchicon.png');}
     </style>
+
+
   </head>
 
   <body class="main">
@@ -86,8 +98,11 @@
               <button class="btn btn-secondary glyphicon glyphicon-search" type="button">
               </button>
             </span>
-            <input type="text" id="searchInput" onkeyup="searchTrainingHist()"  class="form-control"  placeholder="Search for title..." >
 
+            <form action="#" method="get" onsubmit="return false;">
+
+              <input type="text" size="30" name="s" id="s" onkeyup="searchTrainingHist();" class="form-control"  placeholder="Search for title..." >
+            </form>
 
           </div>
         </div>
@@ -115,14 +130,44 @@
          // Results
          $r_sessions = mysqli_query($con, $q_sessions);
 
+         //pagination records
+
+         $offset = 0;
+         $page_result = 5;
+         if (isset($_GET['pageno'])) { // if there is anything set in $_GET['pageno']
+             $pageno = $_GET['pageno']; // $pageno whoult be the value in $_GET['pageno']
+          } else {
+             $pageno = 1; // nothing is set in $_GET['pageno'], so $pageno is 1
+          }
+           $pageno = 2;
+         if($pageno)
+         {
+          $page_value = $pageno;
+          if($page_value > 1)
+          {
+           $offset = ($page_value - 1) * $page_result;
+          }
+         }
+
+          $select_results = " SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer' limit $offset, $page_result ";
+
+
+/*         $limit      = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 25;
+           $page       = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 1;
+           $links      = ( isset( $_GET['links'] ) ) ? $_GET['links'] : 7;
+
+           $Paginator  = new Paginator( $con, $q_sessions );
+
+          $results    = $Paginator->getData(  $limit, $page );
+*/
          // initialize counter for pop-up/modal reference
          $trainingRecordNo = "1";
 
          if (mysqli_num_rows($r_sessions) > 0)
          {
            echo "<div class='table-responsive'>" .
-                   "<table id='searchTable' class='table table-hover table-condensed table-bordered table-striped'>" .
-                     "<tr class='success'>
+                   "<table id='t' class='table table-hover table-condensed table-bordered table-striped'>" .
+                     "<tr id='r' class='success'>
                        <th onclick='sortTrainingHist(0)'>Session ID <span class='glyphicon glyphicon-sort'></span></th>
                        <th onclick='sortTrainingHist(1)'>Title <span class='glyphicon glyphicon-sort'></span></th>
                        <th onclick='sortTrainingHist(2)'>Date <span class='glyphicon glyphicon-sort'></span></th>
@@ -143,13 +188,15 @@
               $timeStr = $row['sessionTime'];
               $timeDisplay = date('h:i A', strtotime($timeStr));
 
-                echo   "<tr>
-                          <td><a data-toggle='modal' data-target='#updateTRecord" . $trainingRecordNo . "'> S" . $row['sessionID'] . "</a></td>
+                echo   "<tbody id='tb'>
+                          <tr id='r'>
+                            <td><a data-toggle='modal' data-target='#updateTRecord" . $trainingRecordNo . "'> S" . $row['sessionID'] . "</a></td>
 
-                          <td>" . $row['title'] . "</td>
-                          <td>" . $row['sessionDate'] . "</td>
-                          <td>" . $timeDisplay . $displayType . "</td>
-                        </tr>";
+                            <td>" . $row['title'] . "</td>
+                            <td>" . $row['sessionDate'] . "</td>
+                            <td>" . $timeDisplay . $displayType . "</td>
+                          </tr>
+                        </tbody>";
 
                 /* Pop-up overlay to view and update record for each respective session */
                 echo '<div class="container2">
@@ -321,7 +368,7 @@
                 $trainingRecordNo++;
 
             }
-              echo "<tr>
+    /*          echo "<tr>
                       <td colspan='6' align='center'>
                         <ul class='pagination'>
                           <li><a href='#'>&laquo;</a></li>
@@ -338,32 +385,41 @@
                 </div>" .
 
                 "<br />
-              </div>";
+              </div>"; */
 
+                  echo "
+                    </table>
+                  </div>" .
+
+                  "<br />
+                </div>";
          }
          else
          {
            echo "No training history to show.";
          }
 
+// Display pagination result
+         $pagecount =13; // Total number of rows
+         $num = $pagecount / $page_result ;
+
+           if($pageno > 1)
+           {
+            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno - 1)." '> Prev </a></div>";
+           }
+           for($i = 1 ; $i <= $num ; $i++)
+           {
+            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ". $i ." >". $i ."</a></div>";
+           }
+           if($num != 1)
+           {
+            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno + 1)." '> Next </a></div>";
+           }
+
+
+
         mysqli_close($con);
       ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
