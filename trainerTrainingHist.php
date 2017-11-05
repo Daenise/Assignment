@@ -26,6 +26,8 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <title> Training History </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type = "text/javascript"  src = "formValidation.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
@@ -40,9 +42,6 @@
   </head>
 
   <body class="main">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    </script>
-
 
     <header>
       <div class="row">
@@ -87,7 +86,7 @@
               <button class="btn btn-secondary glyphicon glyphicon-search" type="button">
               </button>
             </span>
-            <input id="seachInput"  onkeyup="searchTrainingHist()" type="text" class="form-control"  placeholder="Search for title..." >
+            <input type="text" id="searchInput" onkeyup="searchTrainingHist()"  class="form-control"  placeholder="Search for title..." >
 
 
           </div>

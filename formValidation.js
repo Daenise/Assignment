@@ -72,27 +72,27 @@ function searchTrainingHist() {
   var on = 0;
    // Loop through all table rows, and hide those who don't match the search query
   for (var i = 0; i < rows.length; i++) {
-    var result = rows[i].getElementsByTagName("td")[1];
+    var result = rows[i].getElementsByTagName("$")[1];
     result = result.innerHTML.toUpperCase();
 
     //val.length == 0 || (val.length < 3 && result.indexOf(val) == 0) || (val.length >= 3 && result.indexOf(val) > -1 )
     if (result) {
         if ( result.indexOf(filter) > -1  ) {
         rows[i].style.display = "";
-        //on++;
-      } else {
+        on++;
+        } else {
         rows[i].style.display = "none";
-      }
+        }
     }
 
   }
-  var n = document.getElementById("noResults");
+/*  var n = document.getElementById("noResults");
   if ( on == 0 && n ) {
     n.style.display = "";
     document.getElementById("userInput").innerHTML = searchInput.value;
   } else {
     n.style.display = "none";
-  }
+  } */
 }
 
 function sortTrainingHist(n) {
