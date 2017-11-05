@@ -25,6 +25,8 @@
     <link href ="css/bootstrap-social.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+    <script type = "text/javascript"  src = "formValidation.js"></script>
     <title> Training History </title>
     <style>
       .pull-right {margin: 5px;}
@@ -42,8 +44,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </script>
     <script src="js/bootstrap.min.js"></script>
-    <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
-    <script type = "text/javascript"  src = "formValidation.js"></script>
+
 
     <header>
       <div class="row">
@@ -83,27 +84,359 @@
       <div class="row">
         <div class="col-xs-5 col-sm-3">
           <div class="input-group">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
               <button class="btn btn-secondary glyphicon glyphicon-search" type="button">
               </button>
             </span>
+
+            <form action="#" method="get" onsubmit="return false;">
+
+              <input type="text" size="30" name="s" id="s" onkeyup="searchTrainingHist();" class="form-control"  placeholder="Search for..." autofocus>
+            </form>
+
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="col-xs-5 col-sm-3 pull-right">
-            <select class="form-control">
-              <option value="Sort by" selected disabled>Sort by</option>
-              <option value="sessionID">Session ID</option>
-              <option value="Date">Date</option>
-              <option value="Class Type">Class Type</option>
-            </select>
-          </div>
-        </div>
       </div>
 
       <br />
+
+      <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "helpfit";
+        $con = new mysqli($servername, $username, $password, $dbname);
+
+        if (!$con) {
+          die("Could not connect to database.");
+        }
+
+        $theMember = $_SESSION ['theMember'];
+
+         // Queries
+         $q_sessions = "SELECT * FROM trainingsessions WHERE sessionID=1";
+
+         // Results
+         $r_sessions = mysqli_query($con, $q_sessions);
+
+
+/////
+         //pagination records
+/*
+         $offset = 0;
+         $page_result = 5;
+         if (isset($_GET['pageno'])) { // if there is anything set in $_GET['pageno']
+             $pageno = $_GET['pageno']; // $pageno whoult be the value in $_GET['pageno']
+          } else {
+             $pageno = 1; // nothing is set in $_GET['pageno'], so $pageno is 1
+          }
+           $pageno = 2;
+         if($pageno)
+         {
+          $page_value = $pageno;
+          if($page_value > 1)
+          {
+           $offset = ($page_value - 1) * $page_result;
+          }
+         }
+
+          $select_results = " SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer' limit $offset, $page_result ";
+*/
+
+/*         $limit      = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 25;
+           $page       = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 1;
+           $links      = ( isset( $_GET['links'] ) ) ? $_GET['links'] : 7;
+
+           $Paginator  = new Paginator( $con, $q_sessions );
+
+          $results    = $Paginator->getData(  $limit, $page );
+*/
+
+/////
+
+
+         // initialize counter for pop-up/modal reference
+         $trainingRecordNo = "1";
+
+         if (mysqli_num_rows($r_sessions) > 0)
+         {
+           echo "<div class='table-responsive'>" .
+                   "<table id='t' class='table table-hover table-condensed table-bordered table-striped'>" .
+                     "<tr id='r' class='success'>
+                       <th onclick='sortTrainingHist(0)'>Session ID <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(1)'>Title <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(2)'>Date <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(3)'>Time <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(4)'>Class Type <span class='glyphicon glyphicon-sort'></span></th>
+                     </tr>";
+            while ($row = mysqli_fetch_assoc($r_sessions))
+            {
+              if ($row['type'] == "Personal") {
+                $displayType = "<td class='info'>" . $row['type'];
+                $displayTypeRecord = $row['type'];
+              } else {
+                $displayType = "<td class='warning'>" . $row['type'] . " (" . $row['classType'] . ")";
+                $displayTypeRecord = $row['type'];
+              }
+
+              // Convert time to String to print AM/PM
+              $timeStr = $row['sessionTime'];
+              $timeDisplay = date('h:i A', strtotime($timeStr));
+
+                echo   "<tbody id='tb'>
+                          <tr id='r'>
+                            <td><a data-toggle='modal' data-target='#updateTRecord" . $trainingRecordNo . "'> S" . $row['sessionID'] . "</a></td>
+
+                            <td>" . $row['title'] . "</td>
+                            <td>" . $row['sessionDate'] . "</td>
+                            <td>" . $timeDisplay . $displayType . "</td>
+                          </tr>
+                        </tbody>";
+
+                /* Pop-up overlay to view and update record for each respective session */
+                echo '<div class="container2">
+                  <div class="modal fade" id="updateTRecord' . $trainingRecordNo . '" role="dialog">
+                    <div class="modal-dialog">
+
+                    <form method="post" action="updateRecord.php">
+
+                        <div class="FormContent">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h2 class="modal-title" align="center">' . $displayTypeRecord . ' Training Record</h2>
+                          </div>
+
+                          <input type="hidden" name="sID" value="' . $row['sessionID'] . '">
+
+                          <div class="modal-body" align="right">
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Title :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">' .
+                                  $row['title'] .
+                                '</div>
+                              </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Date :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                <input type="date" name="sessionDate" class="form-control input-md" id="sessionDate" placeholder="Enter Date (e.g. DD-MM-YYY)" value="' . $row['sessionDate'] . '" required>
+                                </div>
+                              </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Time :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                  <input type="time" name="sessionTime" class="form-control input-md" id="sessionTime"
+                                    placeholder="Enter Time (e.g. 10:00 AM)" value="' . $row['sessionTime'] . '" required>
+                                </div>
+                              </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Fee (RM):</label>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                  <input type="number" name="sessionFee" class="form-control input-md" id="sessionFee" min="0" placeholder="Enter fee" value="' . $row['sessionFee'] .'" required>
+                                </div>
+                              </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-xs-5 col-sm-4">Status :</label>
+                                <div class="col-xs-6 col-sm-6" align="left">
+                                  <select class="form-control" id="sessionStatus" name="sessionStatus" required>
+                                    <option value="Choose status" selected disabled>Choose status</option>
+                                    <option value="Cancelled" ';
+
+                                    if ($row['status'] == "Cancelled")
+                                      echo 'selected="selected" ';
+
+                                    echo '>Cancelled</option>
+
+                                    <option value="Completed" ';
+
+                                    if ($row['status'] == "Completed")
+                                      echo 'selected="selected" ';
+
+                                    echo '>Completed</option>
+                                    <option value="Available" ';
+
+                                    if ($row['status'] == "Available")
+                                      echo 'selected="selected" ';
+
+                                    echo '>Available</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>';
+
+                            if ($row['type'] == "Group") {
+                              echo '<br />
+                              <input type="hidden" name="typeOfClass" value="Group">
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-xs-5 col-sm-4">Class type :</label>
+                                  <div class="col-xs-6 col-sm-6" align="left">
+                                    <select class="form-control" id="sessionType" name="sessionType" required>
+                                      <option value="Choose class type" selected disabled>Choose class type</option>
+                                      <option value="Sport" ';
+
+                                      if ($row['classType'] == "Sport")
+                                        echo 'selected="selected" ';
+
+                                      echo '>Sport</option>
+
+                                      <option value="Dance" ';
+
+                                      if ($row['classType'] == "Dance")
+                                        echo 'selected="selected" ';
+
+                                      echo '>Dance</option>
+                                      <option value="MMA" ';
+
+                                      if ($row['classType'] == "MMA")
+                                        echo 'selected="selected" ';
+
+                                      echo '>MMA</option>
+                                    </select>' .
+
+                                  '</div>
+                                </div>
+                              </div>
+
+                              <br />
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-xs-5 col-sm-4">Max participants :</label>
+                                  <div class="col-xs-6 col-sm-6" align="left">' .
+                                    $row['maxPax'] .
+                                  '</div>
+                                </div>
+                              </div>
+
+                              <br />
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-xs-5 col-sm-4">Num participants :</label>
+                                  <div class="col-xs-6 col-sm-6" align="left">' .
+                                    $row['numPax'] .
+                                  '</div>
+                                </div>
+                              </div>';
+                            } else {
+                              echo '<br />
+                              <input type="hidden" name="typeOfClass" value="Personal">
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-xs-5 col-sm-4">Notes :</label>
+                                  <div class="col-xs-6 col-sm-6" align="left">
+                                    <input type="text" name="notes" class="form-control input-md" id="notes" placeholder="Enter notes" value="' . $row['notes'] . '">
+                                  </div>
+                                </div>
+                              </div>';
+                            }
+
+                            echo'<br />
+                            <div class="row">
+                              <div class="col-xs-12 col-md-12">
+                                <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
+                              </div>
+                            </div>';
+
+                          echo '</div>
+                        </div>
+
+                    </form>
+
+                    </div>
+                  </div>
+                </div>';
+
+                $trainingRecordNo++;
+
+            }
+    /*          echo "<tr>
+                      <td colspan='6' align='center'>
+                        <ul class='pagination'>
+                          <li><a href='#'>&laquo;</a></li>
+                          <li class='active'><a href='#'>1</a></li>
+                          <li><a href='#'>2</a></li>
+                          <li><a href='#'>3</a></li>
+                          <li><a href='#'>4</a></li>
+                          <li><a href='#'>5</a></li>
+                          <li><a href='#'>&raquo;</a></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </div>" .
+
+                "<br />
+              </div>"; */
+
+                  echo "
+                    </table>
+                  </div>" .
+
+                  "<br />
+                </div>";
+         }
+         else
+         {
+           echo "No training history to show.";
+         }
+
+/*
+         // Display pagination result
+         $pagecount =13; // Total number of rows
+         $num = $pagecount / $page_result ;
+
+           if($pageno > 1)
+           {
+            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno - 1)." '> Prev </a></div>";
+           }
+           for($i = 1 ; $i <= $num ; $i++)
+           {
+            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ". $i ." >". $i ."</a></div>";
+           }
+           if($num != 1)
+           {
+            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno + 1)." '> Next </a></div>";
+           }
+*/
+
+        mysqli_close($con);
+      ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <div class="table-responsive">
         <table id="trainingHistData" onkeyup="searchTrainingHist()" class="table table-hover table-condensed table-bordered">

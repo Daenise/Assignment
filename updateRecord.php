@@ -13,6 +13,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
   //to update training record
   $theTrainer = $_SESSION['theTrainer'];
+  $sessionID = $_POST['sID'];
   $sessionDate = $_POST['sessionDate'];
   $sessionTime = $_POST['sessionTime'];
   $sessionFee = $_POST['sessionFee'];
@@ -20,26 +21,31 @@ $con = new mysqli($servername, $username, $password, $dbname);
   $typeOfClass = $_POST['typeOfClass'];
 
   // personal session
-  $notes = $_POST['notes'];
-
-  // group session
-  $sessionType = $_POST['sessionType'];
-
-
+  $resultP = false;
+  $resultG = false;
+  
   if ($typeOfClass == "Personal") {
+    $notes = $_POST['notes'];
     $updatePRecord= "UPDATE trainingsessions SET sessionDate = '$sessionDate', sessionTime = '$sessionTime',
-    sessionFee = '$sessionFee', sessionStatus='$sessionStatus', notes = '$notes' WHERE sessionTrainer = '$theTrainer'" ;
-      $result = mysqli_query($con, $updatePRecord);
-  } else {
+    sessionFee = '$sessionFee', status='$sessionStatus', notes = '$notes' WHERE sessionTrainer = '$theTrainer' AND sessionID = '$sessionID'" ;
+      $resultP = mysqli_query($con, $updatePRecord);
+  }
+  // group session
+  else {
+    $sessionType = $_POST['sessionType'];
     $updateGRecord= "UPDATE trainingsessions SET sessionDate = '$sessionDate', sessionTime = '$sessionTime',
-    sessionFee = '$sessionFee', sessionStatus='$sessionStatus', classType = '$sessionType' WHERE sessionTrainer = '$theTrainer'" ;
-      $result = mysqli_query($con, $updateGRecord);
+    sessionFee = '$sessionFee', status='$sessionStatus', classType = '$sessionType' WHERE sessionTrainer = '$theTrainer' AND sessionID = '$sessionID'" ;
+      $resultG = mysqli_query($con, $updateGRecord);
   }
 
 
-
-  if ($result) {
-    echo "Training record is successfully updated.<br>";
+  if ($resultP) {
+    echo "Personal training record S" . $sessionID . " is successfully updated.<br>";
+    echo "Redirecting back to training history page...";
+    header("Refresh: 3; url= trainerTrainingHist.php");
+  }
+  else if ($resultG) {
+    echo "Group training record S" . $sessionID . " is successfully updated.<br>";
     echo "Redirecting back to training history page...";
     header("Refresh: 3; url= trainerTrainingHist.php");
   }

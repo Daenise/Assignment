@@ -90,7 +90,7 @@
 
             <form action="#" method="get" onsubmit="return false;">
 
-              <input type="text" size="30" name="s" id="s" onkeyup="searchTrainingHist();" class="form-control"  placeholder="Search for title..." >
+              <input type="text" size="30" name="s" id="s" onkeyup="searchTrainingHist();" class="form-control"  placeholder="Search for..." autofocus>
             </form>
 
           </div>
@@ -119,9 +119,10 @@
          // Results
          $r_sessions = mysqli_query($con, $q_sessions);
 
-         //pagination records
 
-         $offset = 0;
+/////
+         //pagination records
+/*         $offset = 0;
          $page_result = 5;
          if (isset($_GET['pageno'])) { // if there is anything set in $_GET['pageno']
              $pageno = $_GET['pageno']; // $pageno whoult be the value in $_GET['pageno']
@@ -139,7 +140,7 @@
          }
 
           $select_results = " SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer' limit $offset, $page_result ";
-
+*/
 
 /*         $limit      = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 25;
            $page       = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 1;
@@ -200,6 +201,8 @@
                             <h2 class="modal-title" align="center">' . $displayTypeRecord . ' Training Record</h2>
                           </div>
 
+                          <input type="hidden" name="sID" value="' . $row['sessionID'] . '">
+
                           <div class="modal-body" align="right">
                             <div class="row">
                               <div class="form-group">
@@ -250,25 +253,25 @@
                               <div class="form-group">
                                 <label class="col-xs-5 col-sm-4">Status :</label>
                                 <div class="col-xs-6 col-sm-6" align="left">
-                                  <select class="form-control" id="sessionStatus" required>
+                                  <select class="form-control" id="sessionStatus" name="sessionStatus" required>
                                     <option value="Choose status" selected disabled>Choose status</option>
                                     <option value="Cancelled" ';
 
                                     if ($row['status'] == "Cancelled")
-                                      echo 'selected ';
+                                      echo 'selected="selected" ';
 
                                     echo '>Cancelled</option>
 
                                     <option value="Completed" ';
 
                                     if ($row['status'] == "Completed")
-                                      echo 'selected ';
+                                      echo 'selected="selected" ';
 
                                     echo '>Completed</option>
                                     <option value="Available" ';
 
                                     if ($row['status'] == "Available")
-                                      echo 'selected ';
+                                      echo 'selected="selected" ';
 
                                     echo '>Available</option>
                                   </select>
@@ -283,25 +286,25 @@
                                 <div class="form-group">
                                   <label class="col-xs-5 col-sm-4">Class type :</label>
                                   <div class="col-xs-6 col-sm-6" align="left">
-                                    <select class="form-control" id="sessionType" required>
+                                    <select class="form-control" id="sessionType" name="sessionType" required>
                                       <option value="Choose class type" selected disabled>Choose class type</option>
-                                      <option value="Cancelled" ';
+                                      <option value="Sport" ';
 
                                       if ($row['classType'] == "Sport")
-                                        echo 'selected ';
+                                        echo 'selected="selected" ';
 
                                       echo '>Sport</option>
 
                                       <option value="Dance" ';
 
                                       if ($row['classType'] == "Dance")
-                                        echo 'selected ';
+                                        echo 'selected="selected" ';
 
-                                      echo '>Completed</option>
-                                      <option value="Available" ';
+                                      echo '>Dance</option>
+                                      <option value="MMA" ';
 
                                       if ($row['classType'] == "MMA")
-                                        echo 'selected ';
+                                        echo 'selected="selected" ';
 
                                       echo '>MMA</option>
                                     </select>' .
@@ -394,7 +397,8 @@
            echo "No training history to show.";
          }
 
-// Display pagination result
+/*
+         // Display pagination result
          $pagecount =13; // Total number of rows
          $num = $pagecount / $page_result ;
 
@@ -410,14 +414,10 @@
            {
             echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno + 1)." '> Next </a></div>";
            }
-
-
+*/
 
         mysqli_close($con);
       ?>
-
-
-
 
           </div>
         </div>
