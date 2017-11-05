@@ -27,7 +27,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
   die("Could not connect to database.");
   }
 
-  $theMember = $_SESSION['user'];
+  $theMember = $_SESSION['theMember'];
 
   $con = new mysqli($servername, $username, $password, $dbname);
 
