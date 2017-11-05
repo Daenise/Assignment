@@ -62,7 +62,7 @@ function updateSession() {
     }
 }
 
-
+/*
 function searchTrainingHist() {
   var searchInput = document.getElementById("searchInput");
   var val = searchInput.value.toLowerCase();
@@ -88,3 +88,4 @@ function searchTrainingHist() {
     n.style.display = "none";
   }
 }
+*/

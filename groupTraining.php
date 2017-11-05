@@ -1,5 +1,9 @@
 <?php
-          session_start();
+         session_start();
+         $fullName = $_SESSION['fullName'];
+         if(!isset($fullName)) {
+           $fullName = "Guest";
+         }
 ?>
 
 <html>

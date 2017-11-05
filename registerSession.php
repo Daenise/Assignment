@@ -19,7 +19,6 @@ if (!$con) {
   if(!$query){
     die("Error : " . mysqli_error($con));
   }
-
   ?>
 
 
@@ -77,9 +76,7 @@ if (!$con) {
       </div>
     </header>
 
-
     <div class="container">
-      <form name="M_registerSess" action="regSession.php" method="post">
       <h2 align="center">Available Training Sessions</h2>
 
       <div class="row">
@@ -122,8 +119,8 @@ if (!$con) {
               echo '
               <tr>
               <td align="center">
-              <input type="checkbox" class="checkbox" name="regSess[]"
-              value="'.$row['sessionID'].'"></td>';
+              <input type="checkbox" class="checkbox" name="regSess"
+              value="'.$regSess.'"></td>';
               echo '
               <td align="center"> '.$row['sessionID']. ' </td>
               <td> '.$row['title']. '</td>
@@ -146,6 +143,23 @@ if (!$con) {
 
       <div class="col-xs-12 col-md-11 pull-right">
           <button type="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
+          <?php
+          $theMember = $_SESSION['user'];
+          $regSession= "INSERT INTO members (title) VALUES ('$regSess')";
+          $query = mysqli_query($con, $regSession);
+
+            if ($query) {
+              echo "The Session : ".$sessionID. " is successfully registered.<br>";
+              echo "Redirecting back to training history page...";
+              header("Refresh: 5; url=  memberTrainingHist.php");
+            }
+            else {
+               echo "Error updating register a session : " . mysqli_error($con);
+               mysqli_error($con);
+             }
+
+            mysqli_close($con);
+          ?>
         </a>
       </div>
     </div>

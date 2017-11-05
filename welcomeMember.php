@@ -1,19 +1,15 @@
 <?php
      session_start();
-      if(!isset($_SESSION['fullName'])) {
-        $_SESSION['fullName'] = "Guest";
-        if (!isset($fullName)) {
-          $fullname = $_SESSION['fullName'];
+     $fullName = $_SESSION['fullName'];
+     if(!isset($fullName)) {
+       $fullName = "Guest";
 ?>
-       <script type="text/javascript">
-         alert("You are not logged in as a user.");
-       </script>
+     <script type="text/javascript">
+       alert("You are not logged in as a user.");
+     </script>
 <?php
-        header("url=index.html");
-      }
+      header("url=index.html");
      }
-     else
-       $fullName = $_SESSION['fullName'];
 ?>
 <html>
 <head>
@@ -58,7 +54,7 @@
       <br>
       <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
           <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $fullName ?></label>
+              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>
             <b class="caret"></b>
           </button>
           <ul class="dropdown-menu">

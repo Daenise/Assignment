@@ -18,7 +18,7 @@
    $sessionFee=$_POST['sessionFee'];
    $maxPax=$_POST['maxPax'];
    $classType= $_POST['classTypes'];
-   $theTrainer = $_SESSION['theTrainer'];
+   $theTrainer = $_SESSION['user'];
 
    //to convert the time from am/pm to 24hours time format to store in database
    $sessionTime= date("G:i", strtotime($sessionTime));
