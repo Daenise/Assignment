@@ -132,21 +132,30 @@ if (!$con) {
             {
               $timeStr = $row['sessionTime'];
               $timeDisplay = date('h:i A', strtotime($timeStr));
+              $sessionID = $row['sessionID'];
+              $title = $row['title'];
+              $sessionDate = $row['sessionDate'];
+              $sessionFee = $row['sessionFee'];
+              $type = $row['type'];
+              $status= $row['status'];
+              $fullName= $row['fullName'];
+              $specialty= $row['specialty'];
+
               echo '
               <tr>
               <td align="center">
               <input type="checkbox" class="checkbox" name="regSess[]"
-              value="'.$row['sessionID'].'"></td>';
+              value="'.$sessionID.'"></td>';
               echo '
-              <td align="center"> '.$row['sessionID']. ' </td>
-              <td> '.$row['title']. '</td>
-              <td align="center"> '.$row['sessionDate']. '</td>
+              <td align="center"> '.$sessionID.'</td>
+              <td> '.$title.'</td>
+              <td align="center"> '.$sessionDate.'</td>
               <td align="center"> '.$timeDisplay. '</td>
-              <td align="center"> '.$row['sessionFee']. '</td>
-              <td align="center"> '.$row['type']. '</td>
-              <td align="center"> '.$row['status']. '</td>
-              <td align="center"> '.$row['fullName']. '</td>
-              <td align="center"> '.$row['specialty']. '</td>
+              <td align="center"> '.$sessionFee.'</td>
+              <td align="center"> '.$type.'</td>
+              <td align="center"> '.$status.'</td>
+              <td align="center"> '.$fullName.'</td>
+              <td align="center"> '.$specialty.'</td>
               </tr>
               ';
             }
@@ -158,7 +167,7 @@ if (!$con) {
       <br />
 
       <div class="col-xs-12 col-md-11 pull-right">
-          <button type="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
+          <button type="submit" name="submit" value="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
         </a>
       </div>
     </div>
