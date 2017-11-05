@@ -26,20 +26,23 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <title> Training History </title>
+    <script type = "text/javascript"  src = "formValidation.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
     <style>
       .pull-right {margin: 5px;}
       .container {border: 1px solid black; margin-top: 30px; margin-bottom: 30px; padding: 10px}
       .session-group {border-bottom: 1px solid black;}
       .formContent{background-color:#fafafa;
                   color:#000000;}
+      #search-image{background-image: url('/images/searchicon.png');}
     </style>
   </head>
 
   <body class="main">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type = "text/javascript"  src = "logoutConfirmation.js"></script>
+
 
     <header>
       <div class="row">
@@ -80,24 +83,17 @@
       <div class="row">
         <div class="col-xs-5 col-sm-3">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
               <button class="btn btn-secondary glyphicon glyphicon-search" type="button">
               </button>
             </span>
+            <input id="seachInput"  onkeyup="searchTrainingHist()" type="text" class="form-control"  placeholder="Search for title..." >
+
+
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="col-xs-5 col-sm-3 pull-right">
-            <select class="form-control">
-              <option value="Sort by" selected disabled>Sort by</option>
-              <option value="sessionID">Session ID</option>
-              <option value="Date">Date</option>
-              <option value="Class Type">Class Type</option>
-            </select>
-          </div>
-        </div>
+
       </div>
 
       <br />
@@ -126,13 +122,13 @@
          if (mysqli_num_rows($r_sessions) > 0)
          {
            echo "<div class='table-responsive'>" .
-                   "<table class='table table-hover table-condensed table-bordered table-striped'>" .
+                   "<table id='searchTable' class='table table-hover table-condensed table-bordered table-striped'>" .
                      "<tr class='success'>
-                       <th>SessionID</th>
-                       <th>Title</th>
-                       <th>Date</th>
-                       <th>Time</th>
-                       <th>Class Type</th>
+                       <th onclick='sortTrainingHist(0)'>SessionID <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(1)'>Title <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(2)'>Date <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(3)'>Time <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(4)'>Class Type <span class='glyphicon glyphicon-sort'></span></th>
                      </tr>";
             while ($row = mysqli_fetch_assoc($r_sessions))
             {
@@ -153,7 +149,8 @@
 
                           <td>" . $row['title'] . "</td>
                           <td>" . $row['sessionDate'] . "</td>
-                          <td>" . $timeDisplay . "</td>" . $displayType . "</td>
+                          <td>" . $timeDisplay . "</td>"
+                           . $displayType . "</td>
                         </tr>";
 
                 /* Pop-up overlay to view and update record for each respective session */

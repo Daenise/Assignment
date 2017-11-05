@@ -62,23 +62,29 @@ function updateSession() {
     }
 }
 
-/*
+
 function searchTrainingHist() {
-  var searchInput = document.getElementById("searchInput");
-  var val = searchInput.value.toLowerCase();
-  var rows = document.getElementsByTagName("tr");
+   // Declare variables
+  var input = document.getElementById("searchInput");
+  var table = document.getElementById("searchTable");
+  var filter = input.value.toUpperCase();
+  var rows = table.getElementsByTagName("tr");
   var on = 0;
+   // Loop through all table rows, and hide those who don't match the search query
   for (var i = 0; i < rows.length; i++) {
-    var result = rows[i].getElementsByTagName("td");
-    result = result[0].innerHTML.toLowerCase();
+    var result = rows[i].getElementsByTagName("td")[1];
+    result = result.innerHTML.toUpperCase();
+
+    //val.length == 0 || (val.length < 3 && result.indexOf(val) == 0) || (val.length >= 3 && result.indexOf(val) > -1 )
     if (result) {
-        if (val.length == 0 || (val.length < 3 && result.indexOf(val) == 0) || (val.length >= 3 && result.indexOf(val) > -1 ) ) {
+        if ( result.indexOf(filter) > -1  ) {
         rows[i].style.display = "";
-        on++;
+        //on++;
       } else {
         rows[i].style.display = "none";
       }
     }
+
   }
   var n = document.getElementById("noResults");
   if ( on == 0 && n ) {
@@ -88,4 +94,58 @@ function searchTrainingHist() {
     n.style.display = "none";
   }
 }
-*/
+
+function sortTrainingHist(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("searchTable");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
