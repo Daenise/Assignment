@@ -10,6 +10,12 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
+
+  if (!isset($_SESSION['fullName']))
+    $_SESSION['fullName'] = "Guest";
+  if (!isset($_SESSION['user']))
+    $_SESSION['user'] = "Guest";
+    
   $theMember = $_SESSION['user'];
 
   $con = new mysqli($servername, $username, $password, $dbname);

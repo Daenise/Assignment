@@ -20,8 +20,10 @@ if (!$con) {
     die("Error : " . mysqli_error($con));
   }
 
-  ?>
+  if (!isset($_SESSION['fullName']))
+    $_SESSION['fullName'] = "Guest";
 
+  ?>
 
 <html>
   <head>

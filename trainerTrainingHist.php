@@ -1,6 +1,7 @@
 <?php
          session_start();
-         $fullName = $_SESSION['fullName'];
+         if (!isset($_SESSION['fullName']))
+           $_SESSION['fullName'] = "Guest";
 ?>
 
 <html>
@@ -39,7 +40,8 @@
 
           <div class="input-group-btn col-xs-4 col-md-3 col-lg-2 pull-right">
             <button type="button" class="btn btn-default btn-md dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>              <b class="caret"></b>
+              <span class="glyphicon glyphicon-user"></span> &nbsp;<label><?php echo $_SESSION['fullName'] ?></label>
+              <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="displayTrainerProfile.php">View profile</a></li>
@@ -98,6 +100,8 @@
           die("Could not connect to database.");
         }
 
+        if (!isset($_SESSION ['user']))
+          $_SESSION['user'] = "Guest";
         $theTrainer = $_SESSION ['user'];
 
          // Queries
