@@ -52,24 +52,20 @@ if(isset($_POST['submit']))
      header('Location: welcomeTrainer.php');
    }
    else {
-
      echo
 <<<_END
-     You have either entered a wrong username or password
-
-     or you have not yet registered as a user.
-     <br>
-     Redirecting back to home page...
+     Username or password is incorrect. <br>
+     No account yet? Register now as a member or a trainer! <br>
 _END;
-     //echo '<br>Redirecting back to home page...';
-     header("refresh: 3; url=index.html");
+     echo '<br>Redirecting back to home page...';
+     header("refresh: 5; url=index.html");
    }
  }
   else
   {
    echo 'Please enter both username and password.';
 
-   echo '<br>Redirecting back to home page...';
+   echo '<br> Redirecting back to home page...';
    header("refresh: 3; url=index.html");
   }
 }

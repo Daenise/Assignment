@@ -124,7 +124,7 @@
            echo "<div class='table-responsive'>" .
                    "<table id='searchTable' class='table table-hover table-condensed table-bordered table-striped'>" .
                      "<tr class='success'>
-                       <th onclick='sortTrainingHist(0)'>SessionID <span class='glyphicon glyphicon-sort'></span></th>
+                       <th onclick='sortTrainingHist(0)'>Session ID <span class='glyphicon glyphicon-sort'></span></th>
                        <th onclick='sortTrainingHist(1)'>Title <span class='glyphicon glyphicon-sort'></span></th>
                        <th onclick='sortTrainingHist(2)'>Date <span class='glyphicon glyphicon-sort'></span></th>
                        <th onclick='sortTrainingHist(3)'>Time <span class='glyphicon glyphicon-sort'></span></th>
@@ -149,8 +149,7 @@
 
                           <td>" . $row['title'] . "</td>
                           <td>" . $row['sessionDate'] . "</td>
-                          <td>" . $timeDisplay . "</td>"
-                           . $displayType . "</td>
+                          <td>" . $timeDisplay . $displayType . "</td>
                         </tr>";
 
                 /* Pop-up overlay to view and update record for each respective session */
