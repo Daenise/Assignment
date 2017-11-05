@@ -7,6 +7,8 @@ $password = "";
 $dbname = "helpfit";
 $con = new mysqli($servername, $username, $password, $dbname);
 
+$_SESSION['fullName'] = "Guest";
+
 if(isset($_POST['submit']))
 {
 
@@ -29,7 +31,7 @@ if(isset($_POST['submit']))
 
    if (mysqli_num_rows($r_member) > 0)
    {
-    $_SESSION['user'] = $username;
+    $_SESSION['theMember'] = $username;
 
     while ($row = mysqli_fetch_assoc($r_member))
     {
@@ -40,7 +42,7 @@ if(isset($_POST['submit']))
    }
    else if (mysqli_num_rows($r_trainer) > 0)
    {
-     $_SESSION['user'] = $username;
+     $_SESSION['theTrainer'] = $username;
      while ($row = mysqli_fetch_assoc($r_trainer))
      {
        $_SESSION['fullName'] = $row["fullName"];
@@ -56,6 +58,8 @@ if(isset($_POST['submit']))
  {
   echo 'Please enter both username and password.';
  }
+ echo '<br>Redirecting back to home page...';
+ header("refresh: 3; url=index.html");
 }
 
 mysqli_close($con);

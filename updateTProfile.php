@@ -12,7 +12,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
   }
 
 //to update member profile
-  $theTrainer = $_SESSION['user'];
+  $theTrainer = $_SESSION['theTrainer'];
   $pwd = $_POST['inputPswd'];
   $fullName = $_POST['fullName'];
   $email = $_POST['email'];
@@ -23,8 +23,8 @@ email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
   $result = mysqli_query($con, $updateT);
 
   if ($result) {
-    echo "Member Profile : ".$theTrainer. " is successfully updated.";
-    echo "Redirecting back to trainer profile page";
+    echo "Member Profile : ".$theTrainer. " is successfully updated.<br>";
+    echo "Redirecting back to trainer profile page...";
     header("Refresh: 5; url= displayTrainerProfile.php");
   }
   else {

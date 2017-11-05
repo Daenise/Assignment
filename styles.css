@@ -11,7 +11,7 @@ header{background-color:#ffffff;}
 .nav-pills a:hover{color:#000000;
                   background-color:#000000;}
 
-.nav-pills .active a:hover{color:#000000;}
+.nav-pills .active a:hover {color:#000000;}
 /* nav active color and background color */
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus {color: #000000;
                                                               background-color: #ff8a80;}

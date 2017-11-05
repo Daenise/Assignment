@@ -23,7 +23,7 @@ if(isset($_POST['regSess'])){
 }
 
 //to update member profile
-  $theMember = $_SESSION['user'];
+  $theMember = $_SESSION['theMember'];
 
 
   if ($value) {
