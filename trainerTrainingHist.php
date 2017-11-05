@@ -203,6 +203,8 @@
                   <div class="modal fade" id="updateTRecord' . $trainingRecordNo . '" role="dialog">
                     <div class="modal-dialog">
 
+                    <form method="post" action="updateRecord.php">
+
                         <div class="FormContent">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -287,6 +289,7 @@
 
                             if ($row['type'] == "Group") {
                               echo '<br />
+                              <input type="hidden" name="typeOfClass" value="Group">
                               <div class="row">
                                 <div class="form-group">
                                   <label class="col-xs-5 col-sm-4">Class type :</label>
@@ -341,6 +344,7 @@
                               </div>';
                             } else {
                               echo '<br />
+                              <input type="hidden" name="typeOfClass" value="Personal">
                               <div class="row">
                                 <div class="form-group">
                                   <label class="col-xs-5 col-sm-4">Notes :</label>
@@ -360,6 +364,8 @@
 
                           echo '</div>
                         </div>
+
+                    </form>
 
                     </div>
                   </div>
