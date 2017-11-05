@@ -146,26 +146,6 @@ if (!$con) {
 
       <div class="col-xs-12 col-md-11 pull-right">
           <button type="submit" class="btn btn-primary btn-lg pull-right">REGISTER</button>
-<<<<<<< HEAD
-=======
-          <?php
-          $theMember = $_SESSION['theMember'];
-          $regSession= "INSERT INTO members (title) VALUES ('$regSess')";
-          $query = mysqli_query($con, $regSession);
-
-            if ($query) {
-              echo "The Session : ".$sessionID. " is successfully registered.<br>";
-              echo "Redirecting back to training history page...";
-              header("Refresh: 5; url=  memberTrainingHist.php");
-            }
-            else {
-               echo "Error updating register a session : " . mysqli_error($con);
-               mysqli_error($con);
-             }
-
-            mysqli_close($con);
-          ?>
->>>>>>> d8c28530e360780e931a0835a59b92f1b7897e04
         </a>
       </div>
     </div>
