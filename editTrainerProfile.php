@@ -1,3 +1,5 @@
+<!--editTrainerProfile.php-->
+
 <?php
      session_start();
      if (!isset($_SESSION['theTrainer'])){
@@ -8,6 +10,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--script to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a trainer.");
      </script>
@@ -25,13 +28,13 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
-
+  //declaration
   $theTrainer = $_SESSION['theTrainer'];
 
   $con = new mysqli($servername, $username, $password, $dbname);
-
+  //query
   $sql_getTrainer = "SELECT * FROM trainers WHERE username='$theTrainer' ";
-
+  //result
   $query = mysqli_query($con, $sql_getTrainer);
   $row = mysqli_fetch_array($query);
 

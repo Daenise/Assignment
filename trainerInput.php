@@ -1,3 +1,4 @@
+<!--trainerInput.php-->
 <?php
    // Connect to database
    $servername = "localhost";
@@ -30,9 +31,9 @@
    else {
      // Add record
      $sql_registerT = "INSERT INTO  trainers (username,password,fullName,email,specialty) VALUES ('$username','$password','$fullName','$email','$specialty')";
-
+     //result
      $result_registerT = mysqli_query($con, $sql_registerT);
-
+     //print output
     if ($result_registerT) {
       echo "Trainer ".$username. " successfully registered.<br>";
       echo "Redirecting back to login page...";

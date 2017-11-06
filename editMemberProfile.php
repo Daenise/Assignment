@@ -1,3 +1,4 @@
+<!--editMemberProfile.php-->
 <?php
      session_start();
      if (!isset($_SESSION['theMember'])){
@@ -8,6 +9,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--script to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a member.");
      </script>
@@ -25,14 +27,15 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
-
+  //declaration
   $theMember = $_SESSION['theMember'];
 
   $con = new mysqli($servername, $username, $password, $dbname);
-
+  //query
   $sql_getMember = "SELECT * FROM members WHERE username='$theMember' ";
-
+  //result
   $query = mysqli_query($con, $sql_getMember);
+  //fetch data from database
   $row = mysqli_fetch_array($query);
 
 ?>

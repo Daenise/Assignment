@@ -1,3 +1,5 @@
+<!--trainingSessions.php-->
+
 <?php
   session_start();
    // Connect to database
@@ -34,11 +36,12 @@
      $maxPax=$_POST['maxPax'];
      $classType= $_POST['classTypes'];
    }
+   //query
    $sql_addTrainingSession = "INSERT INTO trainingsessions(title,sessionDate,sessionTime,sessionFee,maxPax,numPax,type,classType,status,notes,sessionTrainer)
    VALUES ('$title','$sessionDate','$sessionTime','$sessionFee','$maxPax','$numPax','$type','$classType','$status','$notes','$theTrainer')";
-
+   //result
    $result_addTrainingSession = mysqli_query($con, $sql_addTrainingSession);
-
+   //print output
   if ($result_addTrainingSession) {
     echo "Training session : ".$title. " successfully added.<br>";
     echo "Redirecting back to training session page...";

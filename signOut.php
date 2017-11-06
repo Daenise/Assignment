@@ -1,3 +1,4 @@
+<!--signOut.php-->
 <?php
   session_start();
 

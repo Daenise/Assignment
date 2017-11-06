@@ -1,3 +1,4 @@
+/*validateSession.js*/
 
 //check the user selected the class type
 function checkClassType(){

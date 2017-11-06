@@ -1,3 +1,4 @@
+<!--register session.php-->
 <?php
      session_start();
      if (!isset($_SESSION['theMember'])){
@@ -14,7 +15,7 @@
 <?php
       header("Refresh:0; url=index.html");
      }
-
+//connect to db
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -24,10 +25,11 @@ $con = new mysqli($servername, $username, $password, $dbname);
 if (!$con) {
   die("Could not connect to database.");
   }
-
+  //query
   $sql_getSession = "SELECT * FROM trainingSessions JOIN trainers
   ON sessionTrainer = username  WHERE status='Available'";
 
+  //result
   $query = mysqli_query($con, $sql_getSession);
 
   if(!$query){

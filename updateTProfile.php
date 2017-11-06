@@ -1,3 +1,4 @@
+<!--updateTProfile.php-->
 <?php
 session_start();
 //connect to database
@@ -17,11 +18,12 @@ $con = new mysqli($servername, $username, $password, $dbname);
   $fullName = $_POST['fullName'];
   $email = $_POST['email'];
   $specialty = $_POST['specialty'];
-
-$updateT= "UPDATE trainers SET password = '$pwd', fullName = '$fullName',
-email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
+  //query
+  $updateT= "UPDATE trainers SET password = '$pwd', fullName = '$fullName',
+  email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
+  //result
   $result = mysqli_query($con, $updateT);
-
+  //print output
   if ($result) {
     echo "Member Profile : ".$theTrainer. " is successfully updated.<br>";
     echo "Redirecting back to trainer profile page...";

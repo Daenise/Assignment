@@ -1,3 +1,4 @@
+<!--welcomeTrainer.php-->
 <?php
      session_start();
      if (!isset($_SESSION['theTrainer'])){
@@ -8,6 +9,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--script to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a trainer.");
      </script>
@@ -134,6 +136,8 @@
         </div>
       </footer>
   </body>
+
+  <!--Script to greet user based on time-->
     <script type="text/javascript">
         var myDate = new Date();
         var time = myDate.getHours();

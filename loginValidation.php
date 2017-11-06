@@ -1,14 +1,18 @@
+<!--loginValidation.php-->
+
 <?php
 session_start();
-
+//connect to databse
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "helpfit";
 $con = new mysqli($servername, $username, $password, $dbname);
 
+//declaration
 $_SESSION['fullName'] = "Guest";
 
+//to check user have enter the correct username and password
 if(isset($_POST['submit']))
 {
 
@@ -32,6 +36,7 @@ if(isset($_POST['submit']))
 
    if (mysqli_num_rows($r_member) > 0)
    {
+     //get member full name
      $_SESSION['theMember'] = $username;
 
       while ($row = mysqli_fetch_assoc($r_member))
@@ -43,6 +48,7 @@ if(isset($_POST['submit']))
    }
    else if (mysqli_num_rows($r_trainer) > 0)
    {
+     //get trainer full name
       $_SESSION['theTrainer'] = $username;
        while ($row = mysqli_fetch_assoc($r_trainer))
        {

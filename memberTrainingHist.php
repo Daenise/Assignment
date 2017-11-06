@@ -1,3 +1,5 @@
+<!--memberTrainingHist.php-->
+
 <?php
      session_start();
      if (!isset($_SESSION['theMember'])){
@@ -8,6 +10,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a member.");
      </script>
