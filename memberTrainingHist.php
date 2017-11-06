@@ -399,31 +399,30 @@
               //echo var_dump($regSessions);
 
             }
-    /*          echo "<tr>
-                      <td colspan='6' align='center'>
-                        <ul class='pagination'>
-                          <li><a href='#'>&laquo;</a></li>
-                          <li class='active'><a href='#'>1</a></li>
-                          <li><a href='#'>2</a></li>
-                          <li><a href='#'>3</a></li>
-                          <li><a href='#'>4</a></li>
-                          <li><a href='#'>5</a></li>
-                          <li><a href='#'>&raquo;</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                  </table>
-                </div>" .
+            echo "</table>
+                  <div align='center'>
+                    <ul class='pagination'>
+                      <li><a href='#'>&laquo;</a></li>
+                      <li class='active'><a href='#'>1</a></li>
+                      <li><a href='#'>2</a></li>
+                      <li><a href='#'>3</a></li>
+                      <li><a href='#'>4</a></li>
+                      <li><a href='#'>5</a></li>
+                      <li><a href='#'>&raquo;</a></li>
+                    </ul>
+                  </div>
 
-                "<br />
-              </div>"; */
+              </div>" .
 
-                  echo "
-                    </table>
-                  </div>" .
+              "<br />
+            </div>";
 
-                  "<br />
-                </div>";
+            echo "
+              </table>
+            </div>" .
+
+            "<br />
+          </div>";
          }
          else
          {
