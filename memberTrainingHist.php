@@ -115,10 +115,10 @@
         $theMember = $_SESSION ['theMember'];
 
          // Queries
-         $q_sessions = "SELECT * FROM trainingsessions WHERE sessionID=1";
+         $q_regSessions = "SELECT registeredSessions FROM members WHERE username = '$theMember'";
 
          // Results
-         $r_sessions = mysqli_query($con, $q_sessions);
+         $r_regSessions = mysqli_query($con, $q_regSessions);
 
 
 /////
@@ -157,9 +157,9 @@
 
 
          // initialize counter for pop-up/modal reference
-         $trainingRecordNo = "1";
+         $reviewTrainerSession = "1";
 
-         if (mysqli_num_rows($r_sessions) > 0)
+         if (mysqli_num_rows($r_regSessions) > 0)
          {
            echo "<div class='table-responsive'>" .
                    "<table id='t' class='table table-hover table-condensed table-bordered table-striped'>" .
@@ -170,233 +170,259 @@
                        <th onclick='sortTrainingHist(3)'>Time <span class='glyphicon glyphicon-sort'></span></th>
                        <th onclick='sortTrainingHist(4)'>Class Type <span class='glyphicon glyphicon-sort'></span></th>
                      </tr>";
-            while ($row = mysqli_fetch_assoc($r_sessions))
+            while ($row = mysqli_fetch_assoc($r_regSessions))
             {
-              if ($row['type'] == "Personal") {
-                $displayType = "<td class='info'>" . $row['type'];
-                $displayTypeRecord = $row['type'];
-              } else {
-                $displayType = "<td class='warning'>" . $row['type'] . " (" . $row['classType'] . ")";
-                $displayTypeRecord = $row['type'];
-              }
+              // fetching all member's registered sessions
+              $regSessions = explode(',', $row['registeredSessions']);
 
-              // Convert time to String to print AM/PM
-              $timeStr = $row['sessionTime'];
-              $timeDisplay = date('h:i A', strtotime($timeStr));
+              // for each registered session
+              foreach ($regSessions as $sID) {
+                // Query to print out details for session
+                $q_regSessDetails = "SELECT * FROM trainingsessions WHERE sessionID = '$sID'";
+                // Result of query
+                $r_regSessDetails = mysqli_query($con, $q_regSessDetails);
 
-                echo   "<tbody id='tb'>
-                          <tr id='r'>
-                            <td><a data-toggle='modal' data-target='#updateTRecord" . $trainingRecordNo . "'> S" . $row['sessionID'] . "</a></td>
+                if (mysqli_num_rows($r_regSessDetails) > 0) {
 
-                            <td>" . $row['title'] . "</td>
-                            <td>" . $row['sessionDate'] . "</td>
-                            <td>" . $timeDisplay . $displayType . "</td>
-                          </tr>
-                        </tbody>";
+                  while ($row = mysqli_fetch_assoc($r_regSessDetails))
+                  {
 
-                /* Pop-up overlay to view and update record for each respective session */
-                echo '<div class="container2">
-                  <div class="modal fade" id="updateTRecord' . $trainingRecordNo . '" role="dialog">
-                    <div class="modal-dialog">
+                    if ($row['type'] == "Personal") {
+                      $displayType = "<td class='info'>" . $row['type'];
+                      $displayTypeRecord = $row['type'];
+                    } else {
+                      $displayType = "<td class='warning'>" . $row['type'] . " (" . $row['classType'] . ")";
+                      $displayTypeRecord = $row['type'];
+                    }
 
-                    <form method="post" action="updateRecord.php">
 
-                        <div class="FormContent">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h2 class="modal-title" align="center">' . $displayTypeRecord . ' Training Record</h2>
-                          </div>
+                    // Convert time to String to print AM/PM
+                    $timeStr = $row['sessionTime'];
+                    $timeDisplay = date('h:i A', strtotime($timeStr));
 
-                          <input type="hidden" name="sID" value="' . $row['sessionID'] . '">
+                    echo   "<tbody id='tb'>
+                              <tr id='r'>
+                                <td><a data-toggle='modal' data-target='#reviewTrainer_" . $reviewTrainerSession . "'> S" . $row['sessionID'] . "</a></td>
 
-                          <div class="modal-body" align="right">
-                            <div class="row">
-                              <div class="form-group">
-                                <label class="col-xs-5 col-sm-4">Title :</label>
-                                <div class="col-xs-6 col-sm-6" align="left">' .
-                                  $row['title'] .
-                                '</div>
-                              </div>
-                            </div>
+                                <td>" . $row['title'] . "</td>
+                                <td>" . $row['sessionDate'] . "</td>
+                                <td>" . $timeDisplay . $displayType . "</td>
+                              </tr>
+                            </tbody>";
 
-                            <br />
+                    /* Pop-up overlay to view session details and review trainer for each respective session */
+                    echo '<div class="container2">
+                      <div class="modal fade" id="reviewTrainer_' . $reviewTrainerSession . '" role="dialog">
+                        <div class="modal-dialog">
 
-                            <div class="row">
-                              <div class="form-group">
-                                <label class="col-xs-5 col-sm-4">Date :</label>
-                                <div class="col-xs-6 col-sm-6" align="left">
-                                <input type="date" name="sessionDate" class="form-control input-md" id="sessionDate" placeholder="Enter Date (e.g. DD-MM-YYY)" value="' . $row['sessionDate'] . '" required>
-                                </div>
-                              </div>
-                            </div>
+                        <form method="post" action="reviewTrainer.php">
 
-                            <br />
-
-                            <div class="row">
-                              <div class="form-group">
-                                <label class="col-xs-5 col-sm-4">Time :</label>
-                                <div class="col-xs-6 col-sm-6" align="left">
-                                  <input type="time" name="sessionTime" class="form-control input-md" id="sessionTime"
-                                    placeholder="Enter Time (e.g. 10:00 AM)" value="' . $row['sessionTime'] . '" required>
-                                </div>
-                              </div>
-                            </div>
-
-                            <br />
-
-                            <div class="row">
-                              <div class="form-group">
-                                <label class="col-xs-5 col-sm-4">Fee (RM):</label>
-                                <div class="col-xs-6 col-sm-6" align="left">
-                                  <input type="number" name="sessionFee" class="form-control input-md" id="sessionFee" min="0" placeholder="Enter fee" value="' . $row['sessionFee'] .'" required>
-                                </div>
-                              </div>
-                            </div>
-
-                            <br />
-
-                            <div class="row">
-                              <div class="form-group">
-                                <label class="col-xs-5 col-sm-4">Status :</label>
-                                <div class="col-xs-6 col-sm-6" align="left">
-                                  <select class="form-control" id="sessionStatus" name="sessionStatus" required>
-                                    <option value="Choose status" selected disabled>Choose status</option>
-                                    <option value="Cancelled" ';
-
-                                    if ($row['status'] == "Cancelled")
-                                      echo 'selected="selected" ';
-
-                                    echo '>Cancelled</option>
-
-                                    <option value="Completed" ';
-
-                                    if ($row['status'] == "Completed")
-                                      echo 'selected="selected" ';
-
-                                    echo '>Completed</option>
-                                    <option value="Available" ';
-
-                                    if ($row['status'] == "Available")
-                                      echo 'selected="selected" ';
-
-                                    echo '>Available</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>';
-
-                            if ($row['type'] == "Group") {
-                              echo '<br />
-                              <input type="hidden" name="typeOfClass" value="Group">
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-xs-5 col-sm-4">Class type :</label>
-                                  <div class="col-xs-6 col-sm-6" align="left">
-                                    <select class="form-control" id="sessionType" name="sessionType" required>
-                                      <option value="Choose class type" selected disabled>Choose class type</option>
-                                      <option value="Sport" ';
-
-                                      if ($row['classType'] == "Sport")
-                                        echo 'selected="selected" ';
-
-                                      echo '>Sport</option>
-
-                                      <option value="Dance" ';
-
-                                      if ($row['classType'] == "Dance")
-                                        echo 'selected="selected" ';
-
-                                      echo '>Dance</option>
-                                      <option value="MMA" ';
-
-                                      if ($row['classType'] == "MMA")
-                                        echo 'selected="selected" ';
-
-                                      echo '>MMA</option>
-                                    </select>' .
-
-                                  '</div>
-                                </div>
+                            <div class="FormContent">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h2 class="modal-title" align="center">' . 'Write a Review</h2>
                               </div>
 
-                              <br />
+                              <input type="hidden" name="sID" value="' . $row['sessionID'] . '">
 
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-xs-5 col-sm-4">Max participants :</label>
-                                  <div class="col-xs-6 col-sm-6" align="left">' .
-                                    $row['maxPax'] .
-                                  '</div>
-                                </div>
-                              </div>
-
-                              <br />
-
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-xs-5 col-sm-4">Num participants :</label>
-                                  <div class="col-xs-6 col-sm-6" align="left">' .
-                                    $row['numPax'] .
-                                  '</div>
-                                </div>
-                              </div>';
-                            } else {
-                              echo '<br />
-                              <input type="hidden" name="typeOfClass" value="Personal">
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-xs-5 col-sm-4">Notes :</label>
-                                  <div class="col-xs-6 col-sm-6" align="left">
-                                    <input type="text" name="notes" class="form-control input-md" id="notes" placeholder="Enter notes" value="' . $row['notes'] . '">
+                              <div class="modal-body" align="right">
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label class="col-xs-5 col-sm-4">Title :</label>
+                                    <div class="col-xs-6 col-sm-6" align="left">' .
+                                      $row['title'] .
+                                    '</div>
                                   </div>
                                 </div>
-                              </div>';
-                            }
 
-                            echo'<br />
-                            <div class="row">
-                              <div class="col-xs-12 col-md-12">
-                                <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
-                              </div>
-                            </div>';
+                                <br />
 
-                          echo '</div>
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label class="col-xs-5 col-sm-4">Date :</label>
+                                    <div class="col-xs-6 col-sm-6" align="left">' . $row['sessionDate'] . '
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label class="col-xs-5 col-sm-4">Time :</label>
+                                    <div class="col-xs-6 col-sm-6" align="left">' . $row['sessionTime'] . '
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label class="col-xs-5 col-sm-4">Fee (RM):</label>
+                                    <div class="col-xs-6 col-sm-6" align="left">' . $row['sessionFee'] .'
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label class="col-xs-5 col-sm-4">Status :</label>
+                                    <div class="col-xs-6 col-sm-6" align="left">' . $row['status'] .
+                                    '</div>
+                                  </div>
+                                </div>';
+
+                                if ($row['type'] == "Group") {
+                                  echo '<br />
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Class type :</label>
+                                      <div class="col-xs-6 col-sm-6" align="left">'. $row['classType'] . '</div>
+                                    </div>
+                                  </div>
+
+                                  <br />
+
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Max participants :</label>
+                                      <div class="col-xs-6 col-sm-6" align="left">' .
+                                        $row['maxPax'] .
+                                      '</div>
+                                    </div>
+                                  </div>
+
+                                  <br />
+
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Num participants :</label>
+                                      <div class="col-xs-6 col-sm-6" align="left">' .
+                                        $row['numPax'] .
+                                      '</div>
+                                    </div>
+                                  </div>';
+
+                                  echo '<br />
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Trainer\'s name :</label>
+                                      <div class="col-xs-6 col-sm-6" align="left">
+                                        Ben Lee
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <br />
+
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Trainer\'s specialty :</label>
+                                      <div class="col-xs-6 col-sm-6" align="left">
+                                        Sport
+                                      </div>
+                                    </div>
+                                  </div>';
+
+                                } else {
+                                  echo '<br />
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Notes :</label>
+                                      <div class="col-xs-6 col-sm-6" align="left">' . $row['notes'] .
+                                      '</div>
+                                    </div>
+                                  </div>';
+                                }
+
+                                echo'<div class="formDivider"></div>
+                                <br />
+                                <input type="hidden" name="sessionTrainer" value="' . $row['sessionTrainer'] . '">
+
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label class="col-xs-5 col-sm-4">Rating :</label>
+                                    <div class="col-xs-6 col-sm-8" align="left">
+                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
+                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
+                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
+                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
+                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5" required>
+                                      <br />
+                                      &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label class="col-xs-5 col-sm-4">Comments :</label>
+                                    <div class="col-xs-6 col-sm-6">
+                                      <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                  <div class="col-xs-12 col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
+                                  </div>
+                                </div>
+                                ';
+
+                              echo '</div>
+                            </div>
+
+                        </form>
+
                         </div>
+                      </div>
+                    </div>';
 
-                    </form>
+                    $reviewTrainerSession++;
 
-                    </div>
-                  </div>
-                </div>';
 
-                $trainingRecordNo++;
+
+                  }
+
+                }
+
+              }
+
+              //echo var_dump($regSessions);
 
             }
-    /*          echo "<tr>
-                      <td colspan='6' align='center'>
-                        <ul class='pagination'>
-                          <li><a href='#'>&laquo;</a></li>
-                          <li class='active'><a href='#'>1</a></li>
-                          <li><a href='#'>2</a></li>
-                          <li><a href='#'>3</a></li>
-                          <li><a href='#'>4</a></li>
-                          <li><a href='#'>5</a></li>
-                          <li><a href='#'>&raquo;</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                  </table>
-                </div>" .
+            echo "</table>
+                  <div align='center'>
+                    <ul class='pagination'>
+                      <li><a href='#'>&laquo;</a></li>
+                      <li class='active'><a href='#'>1</a></li>
+                      <li><a href='#'>2</a></li>
+                      <li><a href='#'>3</a></li>
+                      <li><a href='#'>4</a></li>
+                      <li><a href='#'>5</a></li>
+                      <li><a href='#'>&raquo;</a></li>
+                    </ul>
+                  </div>
 
-                "<br />
-              </div>"; */
+              </div>" .
 
-                  echo "
-                    </table>
-                  </div>" .
+              "<br />
+            </div>";
 
-                  "<br />
-                </div>";
+            echo "
+              </table>
+            </div>" .
+
+            "<br />
+          </div>";
          }
          else
          {
@@ -425,272 +451,7 @@
         mysqli_close($con);
       ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <div class="table-responsive">
-        <table id="trainingHistData" onkeyup="searchTrainingHist()" class="table table-hover table-condensed table-bordered">
-          <tr class="success">
-            <th>SessionID</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Class Type</th>
-            <th>Review Trainer</th>
-          </tr>
-          <tr>
-            <td class="info">S100</td>
-            <td>Be a Good Sport with Cross Country!</td>
-            <td>2017-09-30</td>
-            <td>6:00 PM</td>
-            <td class="warning">Group (Sport)</td>
-            <td align="center"><a data-toggle="modal" data-target="#session1">Review</a></td>
-          </tr>
-          <tr>
-            <td class="info">S101</td>
-            <td>Build Up Your Skills with Trainer Ben</td>
-            <td>2017-10-05</td>
-            <td>10:00 AM</td>
-            <td class="danger">Personal</td>
-
-          </tr>
-          <tr>
-            <td class="info">S102</td>
-            <td>Personal Zumba + Yoga Session</td>
-            <td>2017-10-07</td>
-            <td>4:00 PM</td>
-            <td class="danger">Personal</td>
-          </tr>
-          <tr>
-            <td class="info">S103</td>
-            <td>Light Exercise with Trainer Tina</td>
-            <td>2017-11-01</td>
-            <td>2:00 PM</td>
-            <td class="danger">Personal</td>
-          </tr>
-        </table>
-        <div align="center">
-          <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li class='active'><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-          </ul>
-        </div>
-      </div>
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Pop-up overlay to write a review for session S100 -->
-    <div class="container2">
-      <div class="modal fade" id="session1" role="dialog">
-        <div class="modal-dialog">
-          <div class="reviewTrainer_1">
-
-            <div class="FormContent">
-              <form name="review1" action="inputReview.php" method="post">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h3 class="modal-title" align="center">Write a Review</h3>
-                </div>
-
-                <div class="modal-body" align="right">
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Session ID :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        S100
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Title :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Be a Good Sport with Cross Country!
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Date :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        2017-09-30
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Time :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        6:00 PM
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Fee (RM):</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        RM 10
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Status :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Completed
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Class type :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Group (Sport)
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Max participants :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        10
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Num participants :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        8
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's name :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Ben Lee
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Trainer's specialty :</label>
-                      <div class="col-xs-6 col-sm-6" align="left">
-                        Sport
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="formDivider"></div>
-
-                  <br />
-
-                  <input type="hidden" name="sessionID" value="100">
-                  <input type="hidden" name="sessionTrainer" value="trainer123">
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Rating :</label>
-                      <div class="col-xs-6 col-sm-8" align="left">
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5" required>
-                        <br />
-                        &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="form-group">
-                      <label class="col-xs-5 col-sm-4">Comments :</label>
-                      <div class="col-xs-6 col-sm-6">
-                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments" required></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <br />
-
-                  <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                      <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
 
     <footer>
       <div align="center">

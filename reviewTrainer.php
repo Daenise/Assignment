@@ -31,7 +31,7 @@
   // Store values from user input in review form
   $rating = $_POST['trainerRating'];
   $comments = $_POST['reviewComments'];
-  $sessionID = $_POST['sessionID'];
+  $sessionID = $_POST['sID'];
   $sessionTrainer = $_POST['sessionTrainer'];
 
   $theMember = $_SESSION['theMember'];
@@ -44,7 +44,7 @@
  if ($result_addReview) {
    echo "Review successfully added. <br>";
    echo "Redirecting back to training history page...";
-   header("Refresh: 5; url=  memberTrainingHist.php");
+   header("Refresh: 3; url=  memberTrainingHist.php");
  }
  else {
     echo "Error submitting a review : " . mysqli_error($con);
