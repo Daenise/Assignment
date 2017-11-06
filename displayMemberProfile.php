@@ -1,3 +1,4 @@
+<!--displayMemberProfile.php-->
 <?php
 session_start();
 
@@ -9,6 +10,7 @@ session_start();
 
      if ($fullName == "Guest"){
 ?>
+    <!--script to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a member.");
      </script>
@@ -26,14 +28,15 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
-
+  //declaration
   $theMember = $_SESSION['theMember'];
 
   $con = new mysqli($servername, $username, $password, $dbname);
-
+  //query
   $sql_getMember = "SELECT * FROM members WHERE username='$theMember'";
-
+  //result
   $query = mysqli_query($con, $sql_getMember);
+  //fetch data from database
   $row = mysqli_fetch_array($query);
 
 ?>
@@ -104,7 +107,12 @@ $con = new mysqli($servername, $username, $password, $dbname);
             <h4>&nbsp;&nbsp; My Profile Picture</h4>
             <br />
             &nbsp; &nbsp;
-            <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">
+            <?php
+
+        //      $select_path="SELECT * FROM image_table WHERE username='$theMember'";
+              include 'displayMemberImage.php';
+            ?>
+          <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
             <br />
             <br />
             <br />

@@ -1,3 +1,4 @@
+<!--displayTrainerProfile.php-->
 <?php
      session_start();
      if (!isset($_SESSION['theTrainer'])){
@@ -8,6 +9,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--script to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a trainer.");
      </script>
@@ -25,15 +27,19 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
-
+  //declaration
   $theTrainer = $_SESSION['theTrainer'];
 
   $con = new mysqli($servername, $username, $password, $dbname);
-
+  //query
   $sql_getTrainer = "SELECT * FROM trainers WHERE username='$theTrainer' ";
-
+  //result
   $query = mysqli_query($con, $sql_getTrainer);
+  //fetch data from databse
   $row = mysqli_fetch_array($query);
+
+
+
 
 ?>
 
@@ -104,7 +110,16 @@ $con = new mysqli($servername, $username, $password, $dbname);
             <h4>&nbsp;&nbsp; My Profile Picture</h4>
             <br />
             &nbsp; &nbsp;
-            <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">
+
+            <?php
+
+            //  $select_path="SELECT * FROM image_table WHERE username='$theTrainer'";
+              include 'displayTrainerImage.php';
+            ?>
+
+        <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
+
+
             <br />
             <br />
             <br />
@@ -138,6 +153,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
             </div>
           </div>
         </div><br />
+
+
 
         <div class="col-xs-12 col-md-11">
           <a href="editTrainerProfile.php">

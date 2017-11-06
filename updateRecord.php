@@ -1,3 +1,4 @@
+<!--updateRecord.php-->
 <?php
 session_start();
 //connect to database
@@ -23,7 +24,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
   // personal session
   $resultP = false;
   $resultG = false;
-  
+
   if ($typeOfClass == "Personal") {
     $notes = $_POST['notes'];
     $updatePRecord= "UPDATE trainingsessions SET sessionDate = '$sessionDate', sessionTime = '$sessionTime',

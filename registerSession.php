@@ -1,3 +1,4 @@
+<!--register session.php-->
 <?php
      session_start();
      if (!isset($_SESSION['theMember'])){
@@ -14,7 +15,7 @@
 <?php
       header("Refresh:0; url=index.html");
      }
-
+//connect to db
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -24,10 +25,11 @@ $con = new mysqli($servername, $username, $password, $dbname);
 if (!$con) {
   die("Could not connect to database.");
   }
-
+  //query
   $sql_getSession = "SELECT * FROM trainingSessions JOIN trainers
   ON sessionTrainer = username  WHERE status='Available'";
 
+  //result
   $query = mysqli_query($con, $sql_getSession);
 
   if(!$query){
@@ -114,9 +116,10 @@ if (!$con) {
           </tr>
 
             <?php
-
+            //fetch data from database
             while($row = mysqli_fetch_array($query) )
             {
+              //declaration
               $timeStr = $row['sessionTime'];
               $timeDisplay = date('h:i A', strtotime($timeStr));
               $sessionID = $row['sessionID'];
@@ -133,6 +136,7 @@ if (!$con) {
                 $avgRating = "No ratings yet";
               }
 
+              //print out the output
               echo '
               <tr>
               <td align="center">

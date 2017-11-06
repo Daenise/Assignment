@@ -7,6 +7,7 @@ function registerAccount() {
   var pwd3 = document.forms["registerTrainer"]["inputPswd"].value;
   var pwd4 = document.forms["registerTrainer"]["confirmPswd"].value;
 
+  //to confirm the password entries are the same
   if ((pwd != pwd2) || (pwd3 != pwd4)) {
     alert("Your two password entries are not the same.");
     document.forms["registerMember"]["confirmPswd"].focus();
@@ -15,7 +16,7 @@ function registerAccount() {
     document.forms["registerTrainer"]["confirmPswd"].select();
     return false
   }
-
+  //to confirm user choose a level
   if (document.activeElement.id == 'registerMBtn'){
     var level = document.forms["registerMember"]["level"].value;
     if (level === "Choose your level"){
@@ -32,6 +33,7 @@ function updateSession() {
     var fee = document.forms["updateSession"]["sessionFee"].value;
     var status = document.forms["updateSession"]["sessionStatus"].value;
     var classType = document.forms["updateSession"]["sessionType"].value;
+    //to check user have enter every field of the form
     if (date === ""){
       alert("Date cannot be blank.");
       document.forms["updateSession"]["sessionDate"].focus();
@@ -47,11 +49,13 @@ function updateSession() {
       document.forms["updateSession"]["sessionFee"].focus();
       return false;
     }
+    //to confirm user have choose a status
     else if (status === "Choose status"){
       alert("Status must be either Cancelled, Completed, or Available.");
       document.forms["updateSession"]["sessionStatus"].focus();
       return false;
     }
+    //to check user have choose a class type
     else if (classType === "Choose class type"){
       alert("Class type must be either Sport, Dance, or MMA.");
       document.forms["updateSession"]["sessionType"].focus();

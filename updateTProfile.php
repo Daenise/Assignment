@@ -1,3 +1,4 @@
+<!--updateTProfile.php-->
 <?php
 session_start();
 //connect to database
@@ -17,13 +18,22 @@ $con = new mysqli($servername, $username, $password, $dbname);
   $fullName = $_POST['fullName'];
   $email = $_POST['email'];
   $specialty = $_POST['specialty'];
-
-$updateT= "UPDATE trainers SET password = '$pwd', fullName = '$fullName',
-email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
+  //query
+  $updateT= "UPDATE trainers SET password = '$pwd', fullName = '$fullName',
+  email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
+  //result
   $result = mysqli_query($con, $updateT);
 
+
+  include 'storeTrainerimage.php';
+
+
+
+
+  //print output
+
   if ($result) {
-    echo "Member Profile : ".$theTrainer. " is successfully updated.<br>";
+    echo "Trainer Profile : ".$theTrainer. " is successfully updated.<br>";
     echo "Redirecting back to trainer profile page...";
     header("Refresh: 5; url= displayTrainerProfile.php");
   }
@@ -31,6 +41,10 @@ email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
      echo "Error updating trainer profile : " . mysqli_error($con);
      mysqli_error($con);
    }
+
+
+
+
 
   mysqli_close($con);
  ?>

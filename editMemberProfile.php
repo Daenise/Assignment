@@ -1,3 +1,4 @@
+<!--editMemberProfile.php-->
 <?php
      session_start();
      if (!isset($_SESSION['theMember'])){
@@ -8,6 +9,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--script to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a member.");
      </script>
@@ -25,14 +27,15 @@ $con = new mysqli($servername, $username, $password, $dbname);
  if (!$con) {
   die("Could not connect to database.");
   }
-
+  //declaration
   $theMember = $_SESSION['theMember'];
 
   $con = new mysqli($servername, $username, $password, $dbname);
-
+  //query
   $sql_getMember = "SELECT * FROM members WHERE username='$theMember' ";
-
+  //result
   $query = mysqli_query($con, $sql_getMember);
+  //fetch data from database
   $row = mysqli_fetch_array($query);
 
 ?>
@@ -96,16 +99,22 @@ $con = new mysqli($servername, $username, $password, $dbname);
     </header>
 
     <div class="container">
+      <form name = "updateMProfile" onsubmit="return editMProfile()" enctype="multipart/form-data" method="post" action="updateMProfile.php">
       <h2 align="center">Member Profile</h2>
         <br />
-        <form name = "updateMProfile" onsubmit="return editMProfile()" method="post" action="updateMProfile.php">
+
         <div class="row">
           <div class="col-xs-12 col-sm-5 col-md-2 col-md-offset-1 col-lg-4" align="center">
             <br />
             <h4>&nbsp;&nbsp; My Profile Picture</h4>
             <br />
             &nbsp; &nbsp;
-            <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">
+
+            <?php
+
+              include 'displayMemberImage.php';
+            ?>
+          <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
             <br />
             <br />
             <div align="right">
