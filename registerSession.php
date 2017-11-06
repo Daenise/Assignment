@@ -127,9 +127,10 @@ if (!$con) {
           </tr>
 
             <?php
-
+            //fetch data from database
             while($row = mysqli_fetch_array($query) )
             {
+              //declaration
               $timeStr = $row['sessionTime'];
               $timeDisplay = date('h:i A', strtotime($timeStr));
               $sessionID = $row['sessionID'];
@@ -141,6 +142,7 @@ if (!$con) {
               $fullName= $row['fullName'];
               $specialty= $row['specialty'];
 
+              //print out the output
               echo '
               <tr>
               <td align="center">
