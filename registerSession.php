@@ -9,6 +9,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--if user did not log in -->
      <script type="text/javascript">
        alert("You are not logged in as a member.");
      </script>
