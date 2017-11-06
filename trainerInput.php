@@ -17,6 +17,7 @@
    $fullName=$_POST['fullName'];
    $email=$_POST['email'];
    $specialty=$_POST['specialty'];
+   $avgRating = 0;
 
    // Check if username already exists in members and trainers table
    $sql_existsInM = "SELECT * FROM members WHERE username='$username'";
@@ -30,7 +31,8 @@
    }
    else {
      // Add record
-     $sql_registerT = "INSERT INTO  trainers (username,password,fullName,email,specialty) VALUES ('$username','$password','$fullName','$email','$specialty')";
+     $sql_registerT = "INSERT INTO  trainers (username,password,fullName,email,specialty, averageRating) VALUES ('$username','$password','$fullName','$email','$specialty, $avgRating')";
+
      //result
      $result_registerT = mysqli_query($con, $sql_registerT);
      //print output

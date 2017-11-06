@@ -98,23 +98,10 @@ if (!$con) {
       <form name="M_registerSess" action="regSession.php" method="post">
       <h2 align="center">Available Training Sessions</h2>
 
-      <div class="row">
-        <div class="form-group">
-          <div class="col-xs-5 col-sm-3 pull-right">
-            <select class="form-control">
-              <option value="Sort by" selected disabled>Sort by</option>
-              <option value="sessionID">Session ID</option>
-              <option value="Date">Date</option>
-              <option value="Class Type">Class Type</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
       <br />
 
       <div class="table-responsive">
-        <table class="table table-hover table-condensed table-bordered">
+        <table class="table table-hover table-condensed table-bordered table-striped">
           <tr class="success">
             <th>Choose <br />Session(s)</th>
             <th>SessionID</th>
@@ -126,7 +113,7 @@ if (!$con) {
             <th>Status</th>
             <th>Trainer's Name </th>
             <th>Trainer's Specialty </th>
-            <th>Trainer's Review </th>
+            <th>Trainer's Average Rating </th>
           </tr>
 
             <?php
@@ -144,6 +131,11 @@ if (!$con) {
               $status= $row['status'];
               $fullName= $row['fullName'];
               $specialty= $row['specialty'];
+              $avgRating = round($row['averageRating'], 1);
+
+              if ($avgRating == 0) {
+                $avgRating = "No ratings yet";
+              }
 
               //print out the output
               echo '
@@ -161,6 +153,7 @@ if (!$con) {
               <td align="center"> '.$status.'</td>
               <td align="center"> '.$fullName.'</td>
               <td align="center"> '.$specialty.'</td>
+              <td align="center"> '.$avgRating.'</td>
               </tr>
               ';
             }

@@ -24,7 +24,11 @@ $con = new mysqli($servername, $username, $password, $dbname);
   email = '$email', level='$level' WHERE username = '$theMember'" ;
   //result
   $result = mysqli_query($con, $updateM);
+
+  include 'storeMemberImage.php';
+
   //print output
+
   if ($result) {
     echo "Member Profile : ".$theMember. " is successfully updated.<br>";
     echo "Redirecting back to member profile page...";
