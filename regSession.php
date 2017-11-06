@@ -33,11 +33,13 @@ $con = new mysqli($servername, $username, $password, $dbname);
   if(isset($_POST['submit'])){
     if (isset($_POST['regSess'])){
       // $regSession= "INSERT INTO members (regID) VALUES ('".$regCB."')";
-      $regSession= "UPDATE members SET regID = '$regCB' WHERE username='$theMember'";
+      $regSession= "UPDATE members SET registeredSessions = '$regCB' WHERE username='$theMember'";
       $result = mysqli_query($con, $regSession);
 
-      if ($result)
-        echo "The Session : ".$regCB. " is successfully registered.<br>";
+      if ($result){
+        echo "Session(s) : ".$regCB. " successfully registered.<br>";
+        header("Refresh: 3; url=  memberTrainingHist.php");
+      }
     }
     else {
       echo "Error register a session : " . mysqli_error($con);
