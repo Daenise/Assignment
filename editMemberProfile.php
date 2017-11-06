@@ -114,7 +114,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
               include 'displayMemberImage.php';
             ?>
-          <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
+
             <br />
             <br />
             <div align="right">

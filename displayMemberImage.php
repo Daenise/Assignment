@@ -16,7 +16,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
  if($num2 == '0'){
 
-    while($row3=mysqli_fetch_array($var))
+    while($row3=mysqli_fetch_array($var2))
     {
            $image_name=$row3["upload_image"];
          //$image_path=$row2["folder"];

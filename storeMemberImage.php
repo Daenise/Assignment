@@ -6,7 +6,7 @@ $dbname = "helpfit";
 $con = new mysqli($servername, $username, $password, $dbname);
 
 $upload_image = $_FILES["pic"]["name"];
-$folder="/xampp/htdocs/Assignment/images/";
+$folder="images/";
 
 move_uploaded_file($_FILES["pic"]["tmp_name"], "$folder".$_FILES["pic"]["name"]);
 
