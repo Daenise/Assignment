@@ -113,47 +113,44 @@
 
         $theTrainer = $_SESSION ['theTrainer'];
 
-         // Queries
-         $q_sessions = "SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer'";
+        // Pagination logic
+        /* Initial value of page is 1
+           If page variable is set, get page number
+        */
+        if (isset($_GET["page"])) {
+          $page = $_GET["page"];
+        }
+        else {
+          $page = 1;
+        }
 
-         // Results
+        // if current page is empty or 1, set the firstElement to 0
+        if ($page == "" || $page == "1") {
+          $firstElement = 0;
+          $_SESSION['prev'] = $page;
+          $_SESSION['next'] = $page + 1;
+        }
+        // else, set the firstElement to (current page * 5) - 5
+        else {
+          $firstElement = ($page * 5) - 5;
+          $_SESSION['page'] = $firstElement;
+          $_SESSION['prev'] = $page - 1;
+          $_SESSION['next'] = $page + 1;
+        }
+
+         // Query for all sessions created by theTrainer, limiting to 5 per page
+         $q_sessions = "SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer' LIMIT $firstElement, 5";
+
+         // Result of the query
          $r_sessions = mysqli_query($con, $q_sessions);
 
-
-/////
-         //pagination records
-/*         $offset = 0;
-         $page_result = 5;
-         if (isset($_GET['pageno'])) { // if there is anything set in $_GET['pageno']
-             $pageno = $_GET['pageno']; // $pageno whoult be the value in $_GET['pageno']
-          } else {
-             $pageno = 1; // nothing is set in $_GET['pageno'], so $pageno is 1
-          }
-           $pageno = 2;
-         if($pageno)
-         {
-          $page_value = $pageno;
-          if($page_value > 1)
-          {
-           $offset = ($page_value - 1) * $page_result;
-          }
-         }
-
-          $select_results = " SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer' limit $offset, $page_result ";
-*/
-
-/*         $limit      = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 25;
-           $page       = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 1;
-           $links      = ( isset( $_GET['links'] ) ) ? $_GET['links'] : 7;
-
-           $Paginator  = new Paginator( $con, $q_sessions );
-
-          $results    = $Paginator->getData(  $limit, $page );
-*/
          // initialize counter for pop-up/modal reference
          $trainingRecordNo = "1";
 
-         if (mysqli_num_rows($r_sessions) > 0)
+         // Number of rows (sessions) from query result
+         $numOfSess = mysqli_num_rows($r_sessions);
+
+         if ($numOfSess > 0)
          {
            echo "<div class='table-responsive'>" .
                    "<table id='t' class='table table-hover table-condensed table-bordered table-striped'>" .
@@ -166,6 +163,7 @@
                      </tr>";
             while ($row = mysqli_fetch_assoc($r_sessions))
             {
+              // Output the table data
               if ($row['type'] == "Personal") {
                 $displayType = "<td class='info'>" . $row['type'];
                 $displayTypeRecord = $row['type'];
@@ -366,55 +364,62 @@
                 $trainingRecordNo++;
 
             }
-    /*          echo "<tr>
-                      <td colspan='6' align='center'>
-                        <ul class='pagination'>
-                          <li><a href='#'>&laquo;</a></li>
-                          <li class='active'><a href='#'>1</a></li>
-                          <li><a href='#'>2</a></li>
-                          <li><a href='#'>3</a></li>
-                          <li><a href='#'>4</a></li>
-                          <li><a href='#'>5</a></li>
-                          <li><a href='#'>&raquo;</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                  </table>
-                </div>" .
 
-                "<br />
-              </div>"; */
+            echo "</table>
+                  </div>
+                  <div align='center'>
+                    <ul class='pagination'>";
+                    /* Pagination */
+                    $q_sessions = "SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer'";
 
-                  echo "
-                    </table>
-                  </div>" .
+                    // Result of the query
+                    $r_sessions = mysqli_query($con, $q_sessions);
 
-                  "<br />
+                    // Number of rows (sessions) from query result
+                    $numOfSess = mysqli_num_rows($r_sessions);
+
+                    // divide total number of sessions by 5 to display on each page
+                    $totPages = $numOfSess / 5;
+                    $totPages = round($totPages);
+
+                    // if current page is the last, set next (pagination button) to current page
+                    if ($_SESSION['next'] > $totPages) {
+                      $_SESSION['next'] = $page;
+                    }
+
+                    // loop to print the pagination
+                    for ($n = 1; $n <= $totPages; $n++) {
+                      // print the prev (<<) pagination button
+                      if ($n == 1) {
+                        echo "<li><a href='trainerTrainingHist.php?page=" . $_SESSION['prev'] . "'>&laquo;</a></li>";
+                      }
+
+                      // if current page, set to active
+                      if ($n == $page) {
+                        echo "<li class='active'><a href='trainerTrainingHist.php?page=" . $page . "'> $page </a></li>";
+                      }
+                      else {
+                        echo "<li><a href='trainerTrainingHist.php?page=" . $n . "'> $n </a></li>";
+                      }
+
+                      // print the next (>>) pagination button
+                      if ($n == $totPages) {
+                        echo "<li><a href = 'trainerTrainingHist.php?page=" . $_SESSION['next'] .
+                        "'>&raquo;</a></li>";
+                      }
+
+                    }
+
+                    echo "
+                    </ul>
+                  </div>
+                  <br />
                 </div>";
          }
          else
          {
            echo "No training history to show.";
          }
-
-/*
-         // Display pagination result
-         $pagecount =13; // Total number of rows
-         $num = $pagecount / $page_result ;
-
-           if($pageno > 1)
-           {
-            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno - 1)." '> Prev </a></div>";
-           }
-           for($i = 1 ; $i <= $num ; $i++)
-           {
-            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ". $i ." >". $i ."</a></div>";
-           }
-           if($num != 1)
-           {
-            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno + 1)." '> Next </a></div>";
-           }
-*/
 
         mysqli_close($con);
       ?>

@@ -114,47 +114,37 @@
 
         $theMember = $_SESSION ['theMember'];
 
-         // Queries
+
+        // Pagination logic
+        /* Initial value of page is 1
+           If page variable is set, get page number
+        */
+        if (isset($_GET["page"])) {
+          $page = $_GET["page"];
+        }
+        else {
+          $page = 1;
+        }
+
+        // if current page is empty or 1, set the firstElement to 0
+        if ($page == "" || $page == "1") {
+          $firstElement = 0;
+          $_SESSION['prev'] = $page;
+          $_SESSION['next'] = $page + 1;
+        }
+        // else, set the firstElement to (current page * 5) - 5
+        else {
+          $firstElement = ($page * 5) - 5;
+          $_SESSION['page'] = $firstElement;
+          $_SESSION['prev'] = $page - 1;
+          $_SESSION['next'] = $page + 1;
+        }
+
+         // Query for all sessions registered by theMember
          $q_regSessions = "SELECT registeredSessions FROM members WHERE username = '$theMember'";
 
-         // Results
+         // Result of the query
          $r_regSessions = mysqli_query($con, $q_regSessions);
-
-
-/////
-         //pagination records
-/*
-         $offset = 0;
-         $page_result = 5;
-         if (isset($_GET['pageno'])) { // if there is anything set in $_GET['pageno']
-             $pageno = $_GET['pageno']; // $pageno whoult be the value in $_GET['pageno']
-          } else {
-             $pageno = 1; // nothing is set in $_GET['pageno'], so $pageno is 1
-          }
-           $pageno = 2;
-         if($pageno)
-         {
-          $page_value = $pageno;
-          if($page_value > 1)
-          {
-           $offset = ($page_value - 1) * $page_result;
-          }
-         }
-
-          $select_results = " SELECT * FROM trainingsessions WHERE sessionTrainer='$theTrainer' limit $offset, $page_result ";
-*/
-
-/*         $limit      = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 25;
-           $page       = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 1;
-           $links      = ( isset( $_GET['links'] ) ) ? $_GET['links'] : 7;
-
-           $Paginator  = new Paginator( $con, $q_sessions );
-
-          $results    = $Paginator->getData(  $limit, $page );
-*/
-
-/////
-
 
          // initialize counter for pop-up/modal reference
          $reviewTrainerSession = "1";
@@ -178,7 +168,7 @@
               // for each registered session
               foreach ($regSessions as $sID) {
                 // Query to print out details for session
-                $q_regSessDetails = "SELECT * FROM trainingsessions WHERE sessionID = '$sID'";
+                $q_regSessDetails = "SELECT * FROM trainingsessions WHERE sessionID = '$sID' LIMIT $firstElement, 5";
                 // Result of query
                 $r_regSessDetails = mysqli_query($con, $q_regSessDetails);
 
@@ -186,7 +176,7 @@
 
                   while ($row = mysqli_fetch_assoc($r_regSessDetails))
                   {
-
+                    // Output the table data
                     if ($row['type'] == "Personal") {
                       $displayType = "<td class='info'>" . $row['type'];
                       $displayTypeRecord = $row['type'];
@@ -339,43 +329,56 @@
                                 }
 
                                 echo'<div class="formDivider"></div>
-                                <br />
-                                <input type="hidden" name="sessionTrainer" value="' . $row['sessionTrainer'] . '">
+                                <br />';
 
-                                <div class="row">
-                                  <div class="form-group">
-                                    <label class="col-xs-5 col-sm-4">Rating :</label>
-                                    <div class="col-xs-6 col-sm-8" align="left">
-                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
-                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
-                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
-                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
-                                      <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5" required>
-                                      <br />
-                                      &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
+                                $today = date("Y-m-d");
+
+                                if ($row['sessionDate'] > $today) {
+
+                                  echo '
+                                  <div class="row">
+                                      <label class="col-xs-12 col-sm-11 col-lg-10">Unable to submit review as date of training hasn\'t passed yet.</label>
+                                  </div>';
+
+                                }
+                                else {
+                                  echo '<input type="hidden" name="sessionTrainer" value="' . $row['sessionTrainer'] . '">
+
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Rating :</label>
+                                      <div class="col-xs-6 col-sm-8" align="left">
+                                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="1">&nbsp;
+                                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="2">&nbsp;
+                                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="3">&nbsp;
+                                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="4">&nbsp;
+                                        <input type="radio" name="trainerRating" class="input-md" id="trainerRating" value="5" required>
+                                        <br />
+                                        &nbsp;1 &nbsp; 2  &nbsp; 3 &nbsp; 4 &nbsp; 5
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
 
-                                <br />
+                                  <br />
 
-                                <div class="row">
-                                  <div class="form-group">
-                                    <label class="col-xs-5 col-sm-4">Comments :</label>
-                                    <div class="col-xs-6 col-sm-6">
-                                      <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
+                                  <div class="row">
+                                    <div class="form-group">
+                                      <label class="col-xs-5 col-sm-4">Comments :</label>
+                                      <div class="col-xs-6 col-sm-6">
+                                        <textarea name="reviewComments" class="form-control input-md" rows="2" id="reviewComments"></textarea>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
 
-                                <br />
+                                  <br />
 
-                                <div class="row">
-                                  <div class="col-xs-12 col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
+                                  <div class="row">
+                                    <div class="col-xs-12 col-md-12">
+                                      <button type="submit" class="btn btn-primary btn-md pull-right">Submit</button>
+                                    </div>
                                   </div>
-                                </div>
-                                ';
+                                  ';
+                                }
 
                               echo '</div>
                             </div>
@@ -388,27 +391,61 @@
 
                     $reviewTrainerSession++;
 
-
-
                   }
-
                 }
-
               }
 
-              //echo var_dump($regSessions);
 
             }
             echo "</table>
+                  </div>
                   <div align='center'>
-                    <ul class='pagination'>
-                      <li><a href='#'>&laquo;</a></li>
-                      <li class='active'><a href='#'>1</a></li>
-                      <li><a href='#'>2</a></li>
-                      <li><a href='#'>3</a></li>
-                      <li><a href='#'>4</a></li>
-                      <li><a href='#'>5</a></li>
-                      <li><a href='#'>&raquo;</a></li>
+                    <ul class='pagination'>";
+                    /*  Pagination */
+                    // for each registered session
+                    foreach ($regSessions as $sID) {
+                      $q_regSessDetails = "SELECT * FROM trainingsessions WHERE sessionID = '$sID'";
+
+                      // Result of query
+                      $r_regSessDetails = mysqli_query($con, $q_regSessDetails);
+                    }
+
+                    // Number of registered sessions
+                    $numOfSess = count($regSessions);
+
+                    // divide total number of sessions by 5 to display on each page
+                    $totPages = $numOfSess / 5;
+                    $totPages = round($totPages);
+
+                    // if current page is the last, set next (pagination button) to current page
+                    if ($_SESSION['next'] > $totPages) {
+                      $_SESSION['next'] = $page;
+                    }
+
+                    // loop to print the pagination
+                    for ($n = 1; $n <= $totPages; $n++) {
+                      // print the prev (<<) pagination button
+                      if ($n == 1) {
+                        echo "<li><a href='memberTrainingHist.php?page=" . $_SESSION['prev'] . "'>&laquo;</a></li>";
+                      }
+
+                      // if current page, set to active
+                      if ($n == $page) {
+                        echo "<li class='active'><a href='memberTrainingHist.php?page=" . $page . "'> $page </a></li>";
+                      }
+                      else {
+                        echo "<li><a href='memberTrainingHist.php?page=" . $n . "'> $n </a></li>";
+                      }
+
+                      // print the next (>>) pagination button
+                      if ($n == $totPages) {
+                        echo "<li><a href = 'memberTrainingHist.php?page=" . $_SESSION['next'] .
+                        "'>&raquo;</a></li>";
+                      }
+
+                    }
+
+                    echo "
                     </ul>
                   </div>
 
@@ -418,7 +455,6 @@
             </div>";
 
             echo "
-              </table>
             </div>" .
 
             "<br />
@@ -428,25 +464,6 @@
          {
            echo "No training history to show.";
          }
-
-/*
-         // Display pagination result
-         $pagecount =13; // Total number of rows
-         $num = $pagecount / $page_result ;
-
-           if($pageno > 1)
-           {
-            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno - 1)." '> Prev </a></div>";
-           }
-           for($i = 1 ; $i <= $num ; $i++)
-           {
-            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ". $i ." >". $i ."</a></div>";
-           }
-           if($num != 1)
-           {
-            echo "<div align='center'><a href = 'trainerTrainingHist.php?pageno = ".($pageno + 1)." '> Next </a></div>";
-           }
-*/
 
         mysqli_close($con);
       ?>
