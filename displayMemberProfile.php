@@ -10,7 +10,7 @@ session_start();
 
      if ($fullName == "Guest"){
 ?>
-    <!--script to confirm logout-->
+    <!--if user did not log in -->
      <script type="text/javascript">
        alert("You are not logged in as a member.");
      </script>
