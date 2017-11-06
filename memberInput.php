@@ -1,3 +1,5 @@
+<!--memberInput.php-->
+
 <?php
    // Connect to database
    $servername = "localhost";
@@ -23,6 +25,7 @@
    $result = mysqli_query($con, $sql_existsInM);
    $result2 = mysqli_query($con, $sql_existsInT);
 
+   //check if username is unique
    if (mysqli_num_rows($result) > 0 || mysqli_num_rows($result2) > 0)
    {
      echo "This username has been taken. Please choose another username.";
@@ -30,9 +33,9 @@
    else {
       // Add record
       $sql_registerM = "INSERT INTO  members (username,password,fullName,email,level) VALUES ('$username','$password','$fullName','$email','$level')";
-
+      //result
       $result_registerM = mysqli_query($con, $sql_registerM);
-
+      //print output
       if ($result_registerM) {
         echo "Member ".$username. " successfully registered.<br>";
         echo "Redirecting back to login page...";

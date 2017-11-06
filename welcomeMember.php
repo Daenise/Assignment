@@ -1,3 +1,4 @@
+<!--welcomeMember.php-->
 <?php
      session_start();
      if (!isset($_SESSION['theMember'])){
@@ -8,6 +9,7 @@
 
      if ($fullName == "Guest"){
 ?>
+    <!--script to confirm logout-->
      <script type="text/javascript">
        alert("You are not logged in as a member.");
      </script>
@@ -153,6 +155,7 @@
         </div>
       </footer>
   </body>
+  <!--script to greet user based on time  -->
   <script type="text/javascript">
       var myDate = new Date();
       var time = myDate.getHours();
