@@ -97,6 +97,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
     </header>
 
     <div class="container">
+      <form name = "updateTProfile" onsubmit="return editTProfile()" enctype="multipart/form-data" method="post" action="updateTProfile.php">
       <h2 align="center">Trainer Profile</h2>
         <br />
         <div class="row">
@@ -105,9 +106,14 @@ $con = new mysqli($servername, $username, $password, $dbname);
             <h4>&nbsp;&nbsp; My Profile Picture</h4>
             <br />
             &nbsp; &nbsp;
-            <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">
+            <?php
+
+            include 'displayTrainerImage.php';
+            ?>
+          <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
             <br />
             <br />
+
             <div align="right">
               <input type="file" name="pic" accept="image/*">
             </div>
@@ -117,7 +123,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
           <br />
 
-          <form name = "updateTProfile" onsubmit="return editTProfile()" method="post" action="updateTProfile.php">
           <div align="center">
             <div class="form-group col-xs-12 col-sm-5 col-md-offset-1 col-lg-4 col-lg-offset-0">
               <label class="col-xs-12 col-sm-5 col-lg-4">Username :</label>

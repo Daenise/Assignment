@@ -22,6 +22,8 @@ $updateM= "UPDATE members SET password = '$pwd', fullName = '$fullName',
 email = '$email', level='$level' WHERE username = '$theMember'" ;
   $result = mysqli_query($con, $updateM);
 
+  include 'storeMemberImage.php';
+
   if ($result) {
     echo "Member Profile : ".$theMember. " is successfully updated.<br>";
     echo "Redirecting back to member profile page...";

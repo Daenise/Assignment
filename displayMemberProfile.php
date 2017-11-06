@@ -104,7 +104,12 @@ $con = new mysqli($servername, $username, $password, $dbname);
             <h4>&nbsp;&nbsp; My Profile Picture</h4>
             <br />
             &nbsp; &nbsp;
-            <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">
+            <?php
+
+        //      $select_path="SELECT * FROM image_table WHERE username='$theMember'";
+              include 'displayMemberImage.php';
+            ?>
+          <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
             <br />
             <br />
             <br />

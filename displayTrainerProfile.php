@@ -35,6 +35,9 @@ $con = new mysqli($servername, $username, $password, $dbname);
   $query = mysqli_query($con, $sql_getTrainer);
   $row = mysqli_fetch_array($query);
 
+
+
+
 ?>
 
 <html>
@@ -104,7 +107,16 @@ $con = new mysqli($servername, $username, $password, $dbname);
             <h4>&nbsp;&nbsp; My Profile Picture</h4>
             <br />
             &nbsp; &nbsp;
-            <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">
+
+            <?php
+
+            //  $select_path="SELECT * FROM image_table WHERE username='$theTrainer'";
+              include 'displayTrainerImage.php';
+            ?>
+
+        <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
+
+
             <br />
             <br />
             <br />
@@ -138,6 +150,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
             </div>
           </div>
         </div><br />
+
+
 
         <div class="col-xs-12 col-md-11">
           <a href="editTrainerProfile.php">

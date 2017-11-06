@@ -22,8 +22,12 @@ $updateT= "UPDATE trainers SET password = '$pwd', fullName = '$fullName',
 email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
   $result = mysqli_query($con, $updateT);
 
+  include 'storeTrainerimage.php';
+
+
+
   if ($result) {
-    echo "Member Profile : ".$theTrainer. " is successfully updated.<br>";
+    echo "Trainer Profile : ".$theTrainer. " is successfully updated.<br>";
     echo "Redirecting back to trainer profile page...";
     header("Refresh: 5; url= displayTrainerProfile.php");
   }
@@ -31,6 +35,10 @@ email = '$email', specialty='$specialty' WHERE username = '$theTrainer'" ;
      echo "Error updating trainer profile : " . mysqli_error($con);
      mysqli_error($con);
    }
+
+
+
+
 
   mysqli_close($con);
  ?>
