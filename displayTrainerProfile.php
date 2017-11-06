@@ -112,9 +112,11 @@ $con = new mysqli($servername, $username, $password, $dbname);
             &nbsp; &nbsp;
 
             <?php
-
-            //  $select_path="SELECT * FROM image_table WHERE username='$theTrainer'";
+            if (!isset($_SESSION['profilePic'])) {
+              echo '<img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">';
+            } else {
               include 'displayTrainerImage.php';
+            }
             ?>
 
         <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->

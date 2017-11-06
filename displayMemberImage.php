@@ -18,13 +18,14 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
     while($row3=mysqli_fetch_array($var2))
     {
-           $image_name=$row3["upload_image"];
+         $image_name=$row3["upload_image"];
          //$image_path=$row2["folder"];
          echo '<img src="images/'.$image_name.'" alt="Profile Picture" class="img-circle" width="180" height="180">';
+         $_SESSION['profilePic'] = true;
     }
 
   }else{
-      echo '<img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">';
+      $_SESSION['profilePic'] = false;
   }
 
 

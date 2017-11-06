@@ -1,6 +1,7 @@
 <!--editMemberProfile.php-->
 <?php
      session_start();
+
      if (!isset($_SESSION['theMember'])){
        $fullName = "Guest";
      } else {
@@ -111,8 +112,11 @@ $con = new mysqli($servername, $username, $password, $dbname);
             &nbsp; &nbsp;
 
             <?php
-
-              include 'displayMemberImage.php';
+              if (!isset($_SESSION['profilePic'])) {
+                echo '<img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">';
+              } else {
+                include 'displayMemberImage.php';
+              }
             ?>
 
             <br />
