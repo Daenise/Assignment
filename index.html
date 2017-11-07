@@ -21,7 +21,7 @@
 
     <header>
       <div class="row">
-        <div class="col-xs-8 col-md-5 col-lg-7">
+        <div class="col-xs-12 col-md-5 col-lg-6">
           <a href="index.html">
             <img src="images/helpfitLogo.png" alt="HELPFit Logo" width="350" height="90">
           </a>
@@ -29,24 +29,27 @@
 
         <br/>
 
-        <div class="col-xs-4 col-md-7 col-lg-5">
+        <div class="col-xs-12 col-md-7 col-lg-6">
           <div class="row">
             <form name="loginForm" onsubmit="return validateLogin()" action="loginValidation.php" method="post">
               <div class="form-group">
-                <label>Username : </label>
-                <input type="text" name="username" id="username" placeholder="Enter username" size="17" autofocus>
+                <label class="col-xs-12 col-md-7 col-lg-2">Username : </label>
+                <input type="text" name="username" id="username"  class="col-xs-6 col-md-7 col-lg-3" placeholder="Enter username" size="17" autofocus>
+                <label class="col-xs-12 col-md-7 col-lg-2"> Password : </label>
+                <input type="password" name="password" id="password" class="col-xs-6 col-md-7 col-lg-3" placeholder="Enter password" size="17">
                 &nbsp;
-                <label> Password : </label>
-                <input type="password" name="password" id="password" placeholder="Enter password" size="17">
-                &nbsp;
-                <button type="submit" name="submit" class="btn btn-primary button-style">Login</button>
+                <div class="col-xs-6 col-md-7 col-lg-1">
+                  <button type="submit" name="submit" class="btn btn-primary button-style">Login</button>
                   &nbsp;
+                </div>
               </div>
             </form>
         </div>
 
         <div class="row">
-          <label id="loginFeedback"></label>
+          <div class="col-xs-6 col-md-7 col-lg-5">
+            <label id="loginFeedback"></label>
+          </div>
         </div>
       </div>
     </header>
