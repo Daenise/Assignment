@@ -39,7 +39,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
       // fetch individual sessions from database
       $regSessions = explode(',', $row['registeredSessions']);
 
-      //foreach($regSessions as $index => $sID){
       /* check if sessions exist in database */
       foreach ($regSessions as $sID) {
         // for each session registered by user
@@ -80,7 +79,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
               if (mysqli_num_rows($r_getSessions) > 0){
                 while ($row = mysqli_fetch_assoc($r_getSessions)){
-                  //if ($row['numPax'] == $row['maxPax']) {
                     $q_updateStatus = "UPDATE trainingsessions SET status='Full',
                      numPax= numPax WHERE numPax = '$row[maxPax]'";
                     $r_updateStatus = mysqli_query($con, $q_updateStatus);
