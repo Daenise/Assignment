@@ -46,17 +46,18 @@ $con = new mysqli($servername, $username, $password, $dbname);
         foreach ($memberRegistration as $aSession){
           // check if user registered session exists in database
           if ($aSession == $sID){
-            echo "You already registered for this session (" . $sID . "). <br>";
-            break;
+            echo "You already registered for this session (" . $sID . "). Please re-select.<br>";
             echo"Directing back to register session page";
             header("Refresh:5; url=registerSession.php");
+            break;
           }
           else {
             echo "hello2";
             // implode to store in database
             $storeRegistrations = implode(',', $memberRegistration);
             // add session
-            $addSession = "UPDATE members SET registeredSessions = CONCAT(registeredSessions, '$storeRegistrations') WHERE username='$theMember'";
+            $addSession = "UPDATE members SET registeredSessions =
+            CONCAT(registeredSessions, '$storeRegistrations') WHERE username='$theMember'";
 
             // result
             $registerResult = mysqli_query($con, $addSession);
