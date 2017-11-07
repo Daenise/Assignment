@@ -90,21 +90,27 @@ $con = new mysqli($servername, $username, $password, $dbname);
       // fetch individual sessions from database
       $regSessions = explode(',', $row['registeredSessions']);
 
-
+      //foreach($regSessions as $index => $sID){
       /* check if sessions exist in database */
       foreach ($regSessions as $sID) {
         // for each session registered by user
         foreach ($memberRegistration as $aSession){
           // check if user registered session exists in database
+          echo "What is this: " . $sID . "<br>";
+          echo "What is this: " . $aSession . "<br>";
           if ($aSession == $sID){
             echo "You already registered for this session (" . $sID . "). <br>";
             break;
+            echo "hello";
+            echo"Directing back to register session page";
+            //header("Refresh:5; url=registerSession.php");
           }
           else {
+            echo "hello2";
             // implode to store in database
             $storeRegistrations = implode(',', $memberRegistration);
             // add session
-            $addSession = "UPDATE members SET registeredSessions = CONCAT(registeredSessions, ',' , '$storeRegistrations') WHERE username='$theMember'";
+            $addSession = "UPDATE members SET registeredSessions = CONCAT(registeredSessions, '$storeRegistrations') WHERE username='$theMember'";
 
             // result
             $registerResult = mysqli_query($con, $addSession);
@@ -112,6 +118,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
             if ($registerResult) {
               echo "The session " . $storeRegistrations . " is successfully registered. <br>";
+              echo"Directing back to register session page";
+              //header("Refresh:5; url=registerSession.php");
 
               // increment numPax
               $increaseNumPax = "UPDATE trainingsessions SET numPax = numPax+1 WHERE sessionID = '$aSession'";
@@ -135,6 +143,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
             else {
               echo "Error register a session : " . mysqli_error($con);
               mysqli_error($con);
+              echo"Directing back to register session page";
+              //header("Refresh:5; url=registerSession.php");
             }
           }
         }
