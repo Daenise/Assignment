@@ -33,8 +33,11 @@ $con = new mysqli($servername, $username, $password, $dbname);
   $con = new mysqli($servername, $username, $password, $dbname);
   //query
   $sql_getTrainer = "SELECT * FROM trainers WHERE username='$theTrainer' ";
+
   //result
   $query = mysqli_query($con, $sql_getTrainer);
+
+
   //fetch data from databse
   $row = mysqli_fetch_array($query);
 
@@ -112,15 +115,10 @@ $con = new mysqli($servername, $username, $password, $dbname);
             &nbsp; &nbsp;
 
             <?php
-            if (!isset($_SESSION['profilePic'])) {
-              echo '<img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180">';
-            } else {
+
               include 'displayTrainerImage.php';
-            }
+
             ?>
-
-        <!--  <img src="images/userProfilePic.png"  alt="Profile Picture" class="img-circle" width="180" height="180"> -->
-
 
             <br />
             <br />
