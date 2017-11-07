@@ -78,6 +78,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
     $status="Full";
   }
   */
+
   $memberRegistration = $_POST['regSess'];
 
   $q_regSessions = "SELECT registeredSessions FROM members WHERE username='$theMember'";
@@ -98,7 +99,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
           // check if user registered session exists in database
           if ($memberRegistration[$index] == $sID){
             echo "You already registered for this session (" . $sID . "). <br>";
-            break;
           }
           else {
             // implode to store in database
