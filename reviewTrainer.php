@@ -61,13 +61,6 @@
    $q_updateAvgRating = "UPDATE trainers SET averageRating='$avgRating' WHERE username='$sessionTrainer'";
    $r_updateAvgRating = mysqli_query($con, $q_updateAvgRating);
 
-   ////// debug
-     echo $allRatings;
-     print mysqli_num_rows($r_trainerReviews);
-     print $avgRating;
-
-
-
    echo "Review successfully added. <br>";
    echo "Redirecting back to training history page...";
    header("Refresh: 3; url=  memberTrainingHist.php");

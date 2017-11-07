@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2017 at 06:30 PM
+-- Generation Time: Nov 07, 2017 at 07:03 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -25,24 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groupsessions`
---
-
-CREATE TABLE `groupsessions` (
-  `sessionID` int(30) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `sessionDate` date NOT NULL,
-  `sessionTime` time NOT NULL,
-  `sessionFee` double NOT NULL,
-  `maxPax` int(100) NOT NULL,
-  `classType` varchar(50) NOT NULL,
-  `sessionTrainer` varchar(20) NOT NULL,
-  `sessionMember` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `image_table`
 --
 
@@ -57,7 +39,8 @@ CREATE TABLE `image_table` (
 --
 
 INSERT INTO `image_table` (`username`, `folder`, `upload_image`) VALUES
-('klt', '/xampp/htdocs/Assignment/images/', 'meal.jpeg');
+('klt', '/xampp/htdocs/Assignment/images/', 'meal.jpeg'),
+('trainer', '/xampp/htdocs/Assignment/images/', '');
 
 -- --------------------------------------------------------
 
@@ -79,31 +62,9 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`username`, `password`, `fullName`, `email`, `level`, `registeredSessions`) VALUES
-('a', 'a', 'Aaron', 'a@gmail.com', 'Beginner', '1,3,4,13,14,15'),
-('kl', 'kokleong', 'TKL', 'tkl@gmail.com', 'Beginner', ''),
-('z', 'z', 'Zara', 'zara@gmail.com', 'Beginner', '2,3,6,9');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `personalsessions`
---
-
-CREATE TABLE `personalsessions` (
-  `sessionID` int(30) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `sessionDate` date NOT NULL,
-  `sessionTime` time NOT NULL,
-  `sessionFee` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `personalsessions`
---
-
-INSERT INTO `personalsessions` (`sessionID`, `title`, `sessionDate`, `sessionTime`, `sessionFee`) VALUES
-(100, 'Be a Good Sport with Cross Country!', '2017-11-21', '13:00:00', 10),
-(101, '4', '2017-10-24', '02:22:00', 3);
+('AA', 'AA', 'Aaron', 'a@gmail.com', 'Beginner', '1,3,4,13,14,15'),
+('kl', 'kl', 'Kary Lim', 'kl@gmail.com', 'Advanced', ''),
+('zara', 'zara', 'Zara', 'zara@gmail.com', 'Beginner', '2,3,6,9');
 
 -- --------------------------------------------------------
 
@@ -169,31 +130,25 @@ CREATE TABLE `trainingsessions` (
 --
 
 INSERT INTO `trainingsessions` (`sessionID`, `title`, `sessionDate`, `sessionTime`, `sessionFee`, `maxPax`, `numPax`, `type`, `classType`, `status`, `notes`, `sessionTrainer`) VALUES
-(1, 'Get Personal with Trainer Tina', '2017-12-12', '22:00:00', 20, 1, 0, 'Personal', '-', 'Available', '', 'trainer'),
-(2, 'Dance Your Heart Out with Zumba', '2017-11-01', '13:00:00', 0, 10, 0, 'Group', 'Dance', 'Completed', '', 'trainer'),
-(3, 'Fighting Spirit', '2017-12-27', '09:00:00', 5, 1, 0, 'Personal', '-', 'Available', '', 'trainer'),
-(4, 'MMA Special Workshop', '2017-12-30', '20:30:00', 8, 30, 0, 'Group', 'MMA', 'Available', '', 'trainer'),
+(1, 'Get Personal with Trainer Tina', '2017-12-12', '22:00:00', 20, 1, 1, 'Personal', '-', 'Available', '', 'trainer'),
+(2, 'Dance Your Heart Out with Zumba', '2017-11-01', '13:00:00', 0, 10, 1, 'Group', 'Dance', 'Completed', '', 'trainer'),
+(3, 'Fighting Spirit', '2017-12-27', '09:00:00', 5, 1, 2, 'Personal', '-', 'Available', '', 'trainer'),
+(4, 'MMA Special Workshop', '2017-12-30', '20:30:00', 8, 30, 1, 'Group', 'MMA', 'Available', '', 'trainer'),
 (5, 'Fancy Football Footworks For Fun', '2017-12-06', '14:02:00', 2, 9, 0, 'Group', 'Sport', 'Cancelled', '', 'klt'),
-(6, 'Kung fu', '2018-02-07', '14:00:00', 2, 1, 0, 'Personal', '', 'Cancelled', 'Had to be cancelled.', 'klt'),
+(6, 'Kung fu', '2018-02-07', '14:00:00', 2, 1, 1, 'Personal', '', 'Cancelled', 'Had to be cancelled.', 'klt'),
 (7, 'Zumba', '2018-04-14', '04:00:00', 2, 10, 0, 'Group', 'Dance', 'Available', '', 'klt'),
 (8, 'Badminton', '2017-11-06', '18:00:00', 2, 1, 0, 'Personal', 'Sport', 'Completed', '', 'klt'),
-(9, 'Taichi', '2017-10-03', '09:02:00', 2, 20, 0, 'Group', 'Sport', 'Completed', '', 'klt'),
+(9, 'Taichi', '2017-10-03', '09:02:00', 2, 20, 1, 'Group', 'Sport', 'Completed', '', 'klt'),
 (10, 'Fitness', '2018-02-05', '15:00:00', 2, 1, 0, 'Personal', 'Sport', 'Available', '', 'klt'),
 (11, 'Yoga', '2018-02-05', '17:30:00', 2, 1, 0, 'Personal', 'Dance', 'Available', '', 'klt'),
 (12, 'Qi Gong', '2018-04-17', '11:00:00', 2, 20, 0, 'Group', 'MMA', 'Available', '', 'klt'),
-(13, 'Kali', '2018-02-05', '02:02:00', 2, 1, 0, 'Personal', 'MMA', 'Available', '', 'klt'),
-(14, 'Tango', '2018-03-21', '10:30:00', 5, 1, 0, 'Personal', 'Dance', 'Available', 'work more on footwork', 'klt'),
-(15, 'Salsa', '2018-02-05', '02:02:00', 2, 1, 0, 'Personal', 'Dance', 'Available', '', 'klt');
+(13, 'Kali', '2018-02-05', '02:02:00', 2, 1, 1, 'Personal', 'MMA', 'Available', '', 'klt'),
+(14, 'Tango', '2018-03-21', '10:30:00', 5, 1, 1, 'Personal', 'Dance', 'Available', 'work more on footwork', 'klt'),
+(15, 'Salsa', '2018-02-05', '02:02:00', 2, 1, 1, 'Personal', 'Dance', 'Available', '', 'klt');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `groupsessions`
---
-ALTER TABLE `groupsessions`
-  ADD PRIMARY KEY (`sessionID`);
 
 --
 -- Indexes for table `image_table`
@@ -206,12 +161,6 @@ ALTER TABLE `image_table`
 --
 ALTER TABLE `members`
   ADD PRIMARY KEY (`username`) USING BTREE;
-
---
--- Indexes for table `personalsessions`
---
-ALTER TABLE `personalsessions`
-  ADD PRIMARY KEY (`sessionID`);
 
 --
 -- Indexes for table `reviews`
@@ -236,18 +185,6 @@ ALTER TABLE `trainingsessions`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `groupsessions`
---
-ALTER TABLE `groupsessions`
-  MODIFY `sessionID` int(30) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `personalsessions`
---
-ALTER TABLE `personalsessions`
-  MODIFY `sessionID` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `trainingsessions`

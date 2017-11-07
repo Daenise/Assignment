@@ -27,58 +27,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
   //to check the value that user selected and store into database
   $theMember = $_SESSION['theMember'];
 
-  /*
-  $regCB= implode(',', $_POST['regSess']);
-  //query
-  $getRegSess = "SELECT registeredSessions FROM members WHERE username='$theMember'";
-  //result
-  $regSession = mysqli_query($con,$getRegSess);
-
-  if(isset($_POST['submit'])){
-    if (isset($_POST['regSess'])){
-      //check user already registered the session
-      foreach($)
-      //add session that user registered
-      $registerSession= "UPDATE members SET registeredSessions =CONCAT(registeredSessions,',' ,'$regCB') WHERE username='$theMember'";
-      //result
-      $result = mysqli_query($con, $registerSession);
-      if ($result){
-        echo "The Session : ".$regCB. " is successfully registered.<br>";
-
-      //add numPax by one when member registered
-      while($row = mysqli_fetch_assoc($regSession)){
-        $sess = explode(',',$row['registeredSessions']);
-        foreach ($sess as $session){
-          $countNumPax = "UPDATE trainingsessions SET numPax = numPax+1 WHERE sessionID = '$session'";
-          $count= mysqli_query($con,$countNumPax);
-        }
-
-        if (isset($_POST['regSess'])){
-          //check user already registered the session
-          foreach($sess as ){
-            $checkSess =
-          }
-          //add session that user registered
-          $registerSession= "UPDATE members SET registeredSessions =CONCAT(registeredSessions,',' ,'$regCB') WHERE username='$theMember'";
-          //result
-          $result = mysqli_query($con, $registerSession);
-          if ($result){
-            echo "The Session : ".$regCB. " is successfully registered.<br>";
-            header("Refresh: 3; url=  memberTrainingHist.php");
-        }
-        else {
-          echo "Error register a session : " . mysqli_error($con);
-          mysqli_error($con);
-        }
-      }
-    }
-  }
-  $numPax = 0;
-  if($numPax == $maxPax){
-    $status="Full";
-  }
-  */
-
   $memberRegistration = $_POST['regSess'];
 
   $q_regSessions = "SELECT registeredSessions FROM members WHERE username='$theMember'";
@@ -97,13 +45,18 @@ $con = new mysqli($servername, $username, $password, $dbname);
         foreach ($memberRegistration as $aSession){
           // check if user registered session exists in database
           if ($aSession == $sID){
-            echo "You already registered for this session (" . $sID . "). <br>";
+            echo "You already registered for this session (" . $sID . "). Please re-select.<br>";
+            echo"Directing back to register session page";
+            header("Refresh:5; url=registerSession.php");
+            break;
           }
           else {
+            echo "hello2";
             // implode to store in database
             $storeRegistrations = implode(',', $memberRegistration);
             // add session
-            $addSession = "UPDATE members SET registeredSessions = CONCAT(registeredSessions, ',' , '$storeRegistrations') WHERE username='$theMember'";
+            $addSession = "UPDATE members SET registeredSessions =
+            CONCAT(registeredSessions, '$storeRegistrations') WHERE username='$theMember'";
 
             // result
             $registerResult = mysqli_query($con, $addSession);
@@ -111,6 +64,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
             if ($registerResult) {
               echo "The session " . $storeRegistrations . " is successfully registered. <br>";
+              echo"Directing back to register session page";
+              header("Refresh:5; url=registerSession.php");
 
               // increment numPax
               $increaseNumPax = "UPDATE trainingsessions SET numPax = numPax+1 WHERE sessionID = '$aSession'";
@@ -125,7 +80,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
 
               if (mysqli_num_rows($r_getSessions) > 0){
                 while ($row = mysqli_fetch_assoc($r_getSessions)){
-                  //if ($row['numPax'] == $row['maxPax']) {
                     $q_updateStatus = "UPDATE trainingsessions SET status='Full',
                      numPax= numPax WHERE numPax = '$row[maxPax]'";
                     $r_updateStatus = mysqli_query($con, $q_updateStatus);
@@ -134,6 +88,8 @@ $con = new mysqli($servername, $username, $password, $dbname);
             else {
               echo "Error register a session : " . mysqli_error($con);
               mysqli_error($con);
+              echo"Directing back to register session page";
+              header("Refresh:5; url=registerSession.php");
             }
           }
         }
