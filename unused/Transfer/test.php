@@ -90,13 +90,13 @@ $con = new mysqli($servername, $username, $password, $dbname);
       // fetch individual sessions from database
       $regSessions = explode(',', $row['registeredSessions']);
 
-      foreach($regSessions as $index => $sID){
+
       /* check if sessions exist in database */
-      //foreach ($regSessions as $sID) {
+      foreach ($regSessions as $sID) {
         // for each session registered by user
-        //foreach ($memberRegistration as $aSession){
+        foreach ($memberRegistration as $aSession){
           // check if user registered session exists in database
-          if ($memberRegistration[$index] == $sID){
+          if ($aSession == $sID){
             echo "You already registered for this session (" . $sID . "). <br>";
             break;
           }
@@ -114,12 +114,12 @@ $con = new mysqli($servername, $username, $password, $dbname);
               echo "The session " . $storeRegistrations . " is successfully registered. <br>";
 
               // increment numPax
-              $increaseNumPax = "UPDATE trainingsessions SET numPax = numPax+1 WHERE sessionID = '$memberRegistration[$index]'";
+              $increaseNumPax = "UPDATE trainingsessions SET numPax = numPax+1 WHERE sessionID = '$aSession'";
 
               $numPaxResult = mysqli_query($con, $increaseNumPax);
 
               // if numPax == maxPax, set session status to FULL (retrieve from database)
-              $q_getSessions = "SELECT * FROM trainingsessions WHERE sessionID = '$memberRegistration[$index]'";
+              $q_getSessions = "SELECT * FROM trainingsessions WHERE sessionID = '$aSession'";
 
               $r_getSessions = mysqli_query($con, $q_getSessions);
 
@@ -141,5 +141,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
       }
     }
   }
+}
   mysqli_close($con);
  ?>
