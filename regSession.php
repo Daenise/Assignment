@@ -51,7 +51,6 @@ $con = new mysqli($servername, $username, $password, $dbname);
             break;
           }
           else {
-            echo "hello2";
             // implode to store in database
             $storeRegistrations = implode(',', $memberRegistration);
             // add session
